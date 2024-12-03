@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile-->
+        <scene sceneID="IsY-Wp-MaS">
+            <objects>
+                <viewController storyboardIdentifier="Profile" id="bsg-LB-UnW" userLabel="Profile" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IGa-kE-OoF">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bz2-NC-RnR" customClass="AnimatedBlobView" customModule="Hirevolution" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="215" width="393" height="637"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </view>
+                            <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sIG-tZ-n2H" userLabel="UpperBar">
+                                <rect key="frame" x="20" y="64" width="353" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kF-iN-xf1">
+                                        <rect key="frame" x="0.0" y="0.0" width="134.33333333333334" height="54"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                        <color key="textColor" name="BackgroundBase"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zH7-yZ-ReD">
+                                        <rect key="frame" x="258" y="7" width="95" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ER6-j1-V0u" userLabel="BorowsButton" customClass="SearchButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="bOb-Ns-7qU"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="settButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3lF-G6-4ZU" userLabel="SettingsButton" customClass="SettingsButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="55" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="0qn-5W-key"/>
+                                                    <constraint firstAttribute="width" constant="40" id="MS8-PC-pB9"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
+                                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large" variableValue="5.5511151231257827e-17"/>
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1t7-vO-vAe"/>
+                        <color key="backgroundColor" name="BaseApp"/>
+                        <constraints>
+                            <constraint firstItem="1t7-vO-vAe" firstAttribute="trailing" secondItem="sIG-tZ-n2H" secondAttribute="trailing" constant="20" id="IOe-of-eDo"/>
+                            <constraint firstItem="sIG-tZ-n2H" firstAttribute="top" secondItem="1t7-vO-vAe" secondAttribute="top" constant="5" id="JI7-rN-DT1"/>
+                            <constraint firstItem="sIG-tZ-n2H" firstAttribute="leading" secondItem="1t7-vO-vAe" secondAttribute="leading" constant="20" id="yD2-Jm-chG"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" id="JLW-qN-v7a" userLabel="NavBarMain">
+                        <imageReference key="image" image="person" catalog="system"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LHG-AP-JRO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2964" y="108"/>
+        </scene>
+        <!--Company-->
+        <scene sceneID="yIK-vB-gkU">
+            <objects>
+                <viewController storyboardIdentifier="Company" id="t4r-0i-U93" userLabel="Company" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5JQ-Ok-99f">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kd6-Nm-a1j" customClass="AnimatedBlobView" customModule="Hirevolution" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="215" width="393" height="637"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </view>
+                            <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4NI-vD-vSl" userLabel="UpperBar">
+                                <rect key="frame" x="20" y="64" width="353" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comopany" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrY-a4-2a8">
+                                        <rect key="frame" x="0.0" y="0.0" width="226.66666666666666" height="54"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                        <color key="textColor" name="BackgroundBase"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pe0-8j-bsG">
+                                        <rect key="frame" x="258" y="7" width="95" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tku-7l-0uW" userLabel="BorowsButton" customClass="SearchButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="ApB-8s-9WT"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="settButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSB-MU-0xc" userLabel="SettingsButton" customClass="SettingsButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="55" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="73J-EY-j3j"/>
+                                                    <constraint firstAttribute="width" constant="40" id="gm2-aU-Kpf"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
+                                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large" variableValue="5.5511151231257827e-17"/>
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="etZ-Wk-R6u"/>
+                        <color key="backgroundColor" name="BaseApp"/>
+                        <constraints>
+                            <constraint firstItem="etZ-Wk-R6u" firstAttribute="trailing" secondItem="4NI-vD-vSl" secondAttribute="trailing" constant="20" id="Fbu-3x-hI1"/>
+                            <constraint firstItem="4NI-vD-vSl" firstAttribute="top" secondItem="etZ-Wk-R6u" secondAttribute="top" constant="5" id="KPU-Lq-B4t"/>
+                            <constraint firstItem="4NI-vD-vSl" firstAttribute="leading" secondItem="etZ-Wk-R6u" secondAttribute="leading" constant="20" id="LWb-su-U8Z"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" id="wlM-GV-Ii2" userLabel="NavBarMain">
+                        <string key="title" base64-UTF8="YES">
+EENvbXBhbnk
+</string>
+                        <imageReference key="image" image="person.3.fill" catalog="system"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qYO-c5-8L7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2303" y="108"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="person" catalog="system" width="128" height="121"/>
+        <image name="person.3.fill" catalog="system" width="128" height="66"/>
+        <namedColor name="BackgroundBase">
+            <color red="0.12156862745098039" green="0.12156862745098039" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BaseApp">
+            <color red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Blue">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -10,7 +10,8 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-struct JobList: Codable{
+struct JobList: Codable {
+    let jobID: String // Updated from previous field name
     let CompanyID: String
     let companyProfile: CompanyProfile // Associated company profile
     var jobTitle: String
@@ -25,11 +26,14 @@ struct JobList: Codable{
     var jobRejectedApplicaintsCount: Int
     var jobInterViewedApplicaintsCount: Int
     var jobScheduledForInterviewCount: Int
-    let jobHiredUser: UserProfile // Hired user details
+    let jobHiredUser: UserProfile? // Optional hired user details
     var jobViewsCount: Int
     let jobDatePublished: Date
-    var ApplyedUsersApplications: [UserApplicationsList] = []
+    var ApplyedUsersApplications: [UserApplicationsStuff] = []
+    var jobStatus: String
 }
+
+// Existing code continues below
 
 struct CompanyProfile: Codable {
     var companyName: String
@@ -41,11 +45,15 @@ struct UserProfile: Codable {
     var userNotes: String
 }
 
-struct UserApplicationsList: Codable {
-    var appliedJobIDLink: [String]
+struct UserApplicationsStuff: Codable {
+    var applicantProfile: UserProfile
+    var isCandidate: Bool
 }
 
-// MARK: - User Model
+struct UserApplicationsList: Codable {
+    var appliedJobIDLink: [JobList]
+}
+
 struct User: Identifiable, Codable {
     let id: String
     let fullName: String
@@ -60,39 +68,33 @@ struct User: Identifiable, Codable {
 
 class AuthManager {
     static let shared = AuthManager()
-
+    
     var userSession: FirebaseAuth.User? {
         return Auth.auth().currentUser
     }
     
     var currentUser: User?
-
-    // MARK: - Initialization
+    
     private init() {}
-
-    // MARK: - Firebase Initialization
+    
     func initialize() {
         loadSavedSession()
     }
-
-    // MARK: - Session Management
+    
     func loadSavedSession() {
-        // This should only be called after Firebase has been configured
         if let savedUID = UserDefaults.standard.string(forKey: "userSessionUID") {
-
             fetchUserData(uid: savedUID)
         }
     }
-
+    
     func saveUserSession(user: FirebaseAuth.User) {
         UserDefaults.standard.set(user.uid, forKey: "userSessionUID")
     }
-
+    
     func removeUserSession() {
         UserDefaults.standard.removeObject(forKey: "userSessionUID")
     }
-
-    // MARK: - User Actions
+    
     func createUser(withEmail email: String, password: String, fullName: String, option: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
@@ -127,32 +129,32 @@ class AuthManager {
             }
             
             self.fetchUserData(uid: authResult.user.uid)
-            
         }
     }
-
+    
     func signInUser(withEmail email: String, password: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
                 completion(error)
                 return
             }
-
+            
             guard let authResult = authResult else { return }
             self.saveUserSession(user: authResult.user)
             self.fetchUserData(uid: authResult.user.uid)
             completion(nil)
         }
     }
-
+    
     func signOutUser() {
         try? Auth.auth().signOut()
         removeUserSession()
         currentUser = nil
         
         UserDefaults.standard.set(false, forKey: "SignInUser")
+        UserDefaults.standard.set("user", forKey: "userType")
     }
-
+    
     func fetchUserData(uid: String) {
         Firestore.firestore().collection("users").document(uid).getDocument { (document, error) in
             if let error = error {
@@ -184,7 +186,6 @@ class AuthManager {
                 self.currentUser = user
                 UserDefaults.standard.set(true, forKey: "SignInUser")
                 
-                // Update UserDefaults for user type
                 if user.option == "company" {
                     UserDefaults.standard.set("company", forKey: "userType")
                     self.fetchCompanyJobs{ error in
@@ -204,22 +205,26 @@ class AuthManager {
     }
     
     func createJob(
-            jobTitle: String,
-            jobDescription: String,
-            jobNotes: String,
-            jobPotentialSalary: String,
-            jobType: String,
-            jobSkills: [String],
-            jobFields: [String],
-            completion: @escaping (Error?) -> Void
+        jobTitle: String,
+        jobDescription: String,
+        jobNotes: String,
+        jobPotentialSalary: String,
+        jobType: String,
+        jobSkills: [String],
+        jobFields: [String],
+        completion: @escaping (Error?) -> Void
     ) {
         guard let currentUser = AuthManager.shared.currentUser else {
             completion(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No current user logged in"]))
             return
         }
         
-        // Create a job object
+        // Create a new reference for the job document (Firestore will generate an ID automatically)
+        let jobRef = Firestore.firestore().collection("jobs").document() // Firestore will auto-generate the document ID
+        
+        // Create a new job object
         let job = JobList(
+            jobID: jobRef.documentID, // Set the jobID to the Firestore generated document ID
             CompanyID: currentUser.id,
             companyProfile: currentUser.companyProfile ?? CompanyProfile(companyName: "Unknown", companyDescription: "No description"),
             jobTitle: jobTitle,
@@ -234,18 +239,17 @@ class AuthManager {
             jobRejectedApplicaintsCount: 0,
             jobInterViewedApplicaintsCount: 0,
             jobScheduledForInterviewCount: 0,
-            jobHiredUser: UserProfile(userName: "No user", userNotes: "No notes"),
+            jobHiredUser: nil,
             jobViewsCount: 0,
             jobDatePublished: Date(),
-            ApplyedUsersApplications: []
+            ApplyedUsersApplications: [],
+            jobStatus: "On-going"
         )
         
-        // Convert job to a dictionary
+        // Now save the job data to Firestore
         do {
             let jobData = try Firestore.Encoder().encode(job)
-            
-            // Save job to Firestore
-            Firestore.firestore().collection("jobs").document().setData(jobData) { error in
+            jobRef.setData(jobData) { error in
                 completion(error)
             }
         } catch {
@@ -272,43 +276,39 @@ class AuthManager {
             // Decode the documents into JobList objects
             for document in snapshot.documents {
                 do {
-                    let data = document.data()
-                    let job = try Firestore.Decoder().decode(JobList.self, from: data)
+                    let job = try document.data(as: JobList.self)
                     jobs.append(job)
                 } catch {
-                    print("Error decoding job data: \(error.localizedDescription)")
+                    print("Error decoding job data: \(error)")
                 }
             }
             
-            // Check if we successfully decoded any jobs
-            if jobs.isEmpty {
-                completion(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No jobs could be decoded"]))
-                return
-            }
-            
-            // Save the decoded jobs into UserDefaults
-            let encoder = JSONEncoder()
-            do {
-                let encodedJobs = try encoder.encode(jobs)
-                
-                // Try to convert the Data to a String (just for debugging)
-                if let jsonString = String(data: encodedJobs, encoding: .utf8) {
-                    print("Encoded Jobs as String: \(jsonString)")
-                } else {
-                    print("Unable to convert encoded jobs to a string.")
-                }
-                
-                // Save to UserDefaults
-                UserDefaults.standard.set(encodedJobs, forKey: "ApplicationJobsList")
-                print("Jobs successfully saved to UserDefaults.")
-                completion(nil)
-            } catch {
-                completion(error)
-            }
-
+            print("Fetched jobs: \(jobs)")
+            completion(nil)
         }
     }
-    
+
+    func loadAllJobsFromUserDefaults() -> [JobList]? {
+        // Retrieve the Data from UserDefaults
+        if let savedJobsData = UserDefaults.standard.data(forKey: "ApplicationJobsList") {
+            print("Retrieved jobs data: \(savedJobsData)") // For debugging
+            
+            // Decode the Data into an array of JobList objects
+            let decoder = JSONDecoder()
+            do {
+                let decodedJobs = try decoder.decode([JobList].self, from: savedJobsData)
+                print("Successfully decoded jobs from UserDefaults.")
+                return decodedJobs
+            } catch {
+                print("Error decoding jobs from UserDefaults: \(error)")
+                return nil
+            }
+        } else {
+            print("No jobs data found in UserDefaults.")
+            return nil
+        }
+    }
+
     func fetchCompanyJobs(completion: @escaping (Error?) -> Void) {
         guard let currentUser = AuthManager.shared.currentUser else {
             completion(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No current user logged in"]))
@@ -348,18 +348,126 @@ class AuthManager {
                 }
             }
             
-            // Encode the jobs to store in UserDefaults
+            // Save fetched jobs to UserDefaults
+            let encoder = JSONEncoder()
             do {
-                let encoder = JSONEncoder()
                 let encodedJobs = try encoder.encode(fetchedJobs)
-                
-                // Save the encoded jobs to UserDefaults
-                UserDefaults.standard.set(encodedJobs, forKey: "companyListedJobs")
-                print("Company jobs successfully saved to UserDefaults.")
+                UserDefaults.standard.set(encodedJobs, forKey: "ApplicationJobsList")
+                print("Jobs successfully saved to UserDefaults.")
                 completion(nil)
             } catch {
+                print("Error encoding jobs to UserDefaults: \(error)")
                 completion(error)
             }
         }
     }
+
+    // MARK: - Reinstated Function: Load Jobs from UserDefaults
+    func loadCompanyJobsFromUserDefaults() -> [JobList]? {
+        // Retrieve the Data from UserDefaults
+        if let savedJobsData = UserDefaults.standard.data(forKey: "ApplicationJobsList") {
+            print("Retrieved jobs data: \(savedJobsData)") // For debugging
+            
+            // Decode the Data into an array of JobList objects
+            let decoder = JSONDecoder()
+            do {
+                let decodedJobs = try decoder.decode([JobList].self, from: savedJobsData)
+                print("Successfully decoded jobs from UserDefaults.")
+                return decodedJobs
+            } catch {
+                print("Error decoding jobs from UserDefaults: \(error)")
+                return nil
+            }
+        } else {
+            print("No jobs data found in UserDefaults.")
+            return nil
+        }
+    }
+
+    func updateJobInDatabase(updatedJob: JobList, completion: @escaping (Error?) -> Void) {
+        
+        let jobID = updatedJob.jobID
+        
+        // Firestore reference to the 'jobs' collection
+        let jobRef = Firestore.firestore().collection("jobs").document(jobID)
+        
+        // Prepare the updated job data
+        let updatedData: [String: Any] = [
+            "jobTitle": updatedJob.jobTitle,
+            "jobDescription": updatedJob.jobDescription,
+            "jobNotes": updatedJob.jobNotes,
+            "jobPotentialSalary": updatedJob.jobPotentialSalary,
+            "jobType": updatedJob.jobType,
+            "jobSkills": updatedJob.jobSkills,
+            "jobFields": updatedJob.jobFields,
+            "jobApplyedApplicationsCount": updatedJob.jobApplyedApplicationsCount,
+            "jobApplicationsCanceledCount": updatedJob.jobApplicationsCanceledCount,
+            "jobRejectedApplicaintsCount": updatedJob.jobRejectedApplicaintsCount,
+            "jobInterViewedApplicaintsCount": updatedJob.jobInterViewedApplicaintsCount,
+            "jobScheduledForInterviewCount": updatedJob.jobScheduledForInterviewCount,
+            "jobHiredUser": updatedJob.jobHiredUser ?? NSNull(),
+            "jobViewsCount": updatedJob.jobViewsCount,
+            "jobDatePublished": updatedJob.jobDatePublished,
+            "ApplyedUsersApplications": updatedJob.ApplyedUsersApplications,
+            "jobStatus": updatedJob.jobStatus
+        ]
+        
+        // Update the job document in Firestore
+        jobRef.updateData(updatedData) { error in
+            if let error = error {
+                print("Error updating job in Firestore: \(error)")
+                completion(error)
+            } else {
+                print("Job successfully updated in Firestore.")
+                completion(nil)
+            }
+        }
+    }
+
+    func incrementJobViewsCount(jobID: String, completion: @escaping (Error?) -> Void) {
+        // Firestore reference to the 'jobs' collection and the document with the given jobID
+        let jobRef = Firestore.firestore().collection("jobs").document(jobID)
+        
+        // First, check if the document exists
+        jobRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                completion(error)
+                return
+            }
+            
+            // If the document exists, increment the view count
+            if document?.exists == true {
+                // Increment the jobViewsCount field by 1
+                jobRef.updateData([
+                    "jobViewsCount": FieldValue.increment(Int64(1))  // Increment by 1
+                ]) { error in
+                    if let error = error {
+                        print("Error incrementing job views: \(error)")
+                        completion(error)
+                    } else {
+                        print("Job views count successfully incremented.")
+                        completion(nil)
+                    }
+                }
+            } else {
+                // If the document does not exist, create it with an initial view count of 1
+                jobRef.setData([
+                    "jobViewsCount": 1
+                ]) { error in
+                    if let error = error {
+                        print("Error creating document: \(error)")
+                        completion(error)
+                    } else {
+                        print("Job document created with initial view count.")
+                        completion(nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
+
+

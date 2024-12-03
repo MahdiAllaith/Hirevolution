@@ -44,7 +44,7 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
 
     // MARK: - IBActions
     @IBAction func BackButton(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func AddSkillsPopupButton(_ sender: Any) {
@@ -107,6 +107,16 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
                 // Show success alert
                 self?.showAlert(message: "Job successfully created!") {
                     // Reload the data and navigate back after the success alert
+                    
+                    // Get the new data
+                    self?.authManager.fetchAllJobs { error in
+                        if let error = error {
+                            print("Error fetching jobs: \(error.localizedDescription)")
+                        } else {
+                            print("AppDelegate: Jobs fetched and stored in UserDefaults successfully.")
+                        }
+                    }
+                    
                     self?.delegate?.reload()
                     self?.navigationController?.popToRootViewController(animated: true)
                 }
@@ -144,7 +154,7 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
     }
     
     private func presentSkillsPopup() {
-        if let popupSkills = storyboard?.instantiateViewController(withIdentifier: "SkillsPopup") as? SkillsPopup {
+        if let popupSkills = UIStoryboard(name: "Mahdi", bundle: nil).instantiateViewController(withIdentifier: "SkillsPopup") as? SkillsPopup {
             popupSkills.modalPresentationStyle = .pageSheet
             popupSkills.sheetPresentationController?.detents = [.medium()]
             popupSkills.sheetPresentationController?.prefersGrabberVisible = true
@@ -155,7 +165,7 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
     }
     
     private func presentJobFiledPopup() {
-        if let popupFiled = storyboard?.instantiateViewController(withIdentifier: "JobFiledPopup") as? JobFiledPopup {
+        if let popupFiled = UIStoryboard(name: "Mahdi", bundle: nil).instantiateViewController(withIdentifier: "JobFiledPopup") as? JobFiledPopup {
             popupFiled.modalPresentationStyle = .pageSheet
             popupFiled.sheetPresentationController?.detents = [.medium()]
             popupFiled.sheetPresentationController?.prefersGrabberVisible = true

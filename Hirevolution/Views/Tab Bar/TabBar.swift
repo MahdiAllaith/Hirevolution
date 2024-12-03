@@ -22,21 +22,25 @@ class TabBar: UITabBarController {
     }
     
     func updateViewControllers() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mahdi = UIStoryboard(name: "Mahdi", bundle: nil)
+        let yhya = UIStoryboard(name: "Yhya", bundle: nil)
+        let hussain = UIStoryboard(name: "Hussain", bundle: nil)
+        let mohamed = UIStoryboard(name: "Mohamed", bundle: nil)
+        let motader = UIStoryboard(name: "Montader", bundle: nil)
         
         // Get the type of user
         let userType = UserDefaults.standard.string(forKey: "userType")
         
         // Getting the views
-        let MainV1 = storyboard.instantiateViewController(withIdentifier: "MainV1")
-        let Brows = storyboard.instantiateViewController(withIdentifier: "Browse")
-        let Library = storyboard.instantiateViewController(withIdentifier: "Library")
-        let ApplicationList = storyboard.instantiateViewController(withIdentifier: "JobsList")
-        let Profile = storyboard.instantiateViewController(withIdentifier: "Profile")
+        let MainV1 = hussain.instantiateViewController(withIdentifier: "MainV1")
+        let Brows = mohamed.instantiateViewController(withIdentifier: "Browse")
+        let Library = hussain.instantiateViewController(withIdentifier: "Library")
+        let ApplicationList = motader.instantiateViewController(withIdentifier: "JobsList")
+        let Profile = yhya.instantiateViewController(withIdentifier: "Profile")
         
-        let MainV2 = storyboard.instantiateViewController(withIdentifier: "MainV2")
-        let ManageJobs = storyboard.instantiateViewController(withIdentifier: "ManageJobs")
-        let Company = storyboard.instantiateViewController(withIdentifier: "Company")
+        let MainV2 = hussain.instantiateViewController(withIdentifier: "MainV2")
+        let ManageJobs = mahdi.instantiateViewController(withIdentifier: "ManageJobs")
+        let Company = yhya.instantiateViewController(withIdentifier: "Company")
         
         if userType == "company" {
             self.viewControllers = [MainV2, Brows, Library, ManageJobs, Company]

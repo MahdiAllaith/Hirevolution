@@ -92,29 +92,24 @@ class AccountCell: UITableViewCell {
     
     // this will sereach for the main view controller in witch its called from and will dismiss sewttings and present reg view
     @objc private func didTapSignInButton() {
-        if let tableView = self.superview as? UITableView,
-           let viewController = tableView.dataSource as? UIViewController {
-            
+        // Find the parent view controller using the responder chain
+        if let viewController = self.findViewController() {
             // Dismiss the current view controller
             viewController.dismiss(animated: true) {
-                
-                // Find the window for the active scene
+                // Find the active UIWindowScene and rootViewController
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                    let rootVC = windowScene.windows.first?.rootViewController {
                     
                     // Access the storyboard and instantiate RegistrationViewController
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let registrationVC = storyboard.instantiateViewController(withIdentifier: "RegistrationController") as? RegistrationController {
-                        
-                        // Present RegistrationViewController from the root view controller
+                    let RegisterView = UIStoryboard(name: "Mahdi", bundle: nil)
+                    if let registrationVC = RegisterView.instantiateViewController(withIdentifier: "RegistrationController") as? RegistrationController {
+                        // Present RegistrationViewController
                         rootVC.present(registrationVC, animated: true, completion: nil)
                     }
                 }
             }
         }
     }
-
-
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -208,5 +203,16 @@ class AccountCell: UITableViewCell {
     }
 
 
+}
+extension UIView {
+    func findViewController() -> UIViewController? {
+        if let nextResponder = self.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = self.next as? UIView {
+            return nextResponder.findViewController()
+        } else {
+            return nil
+        }
+    }
 }
 
