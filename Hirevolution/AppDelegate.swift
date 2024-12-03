@@ -25,11 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         authManager.initialize()
+        // Fetch all jobs
         authManager.fetchAllJobs { error in
             if let error = error {
                 print("Error fetching jobs: \(error.localizedDescription)")
             } else {
-                print("Jobs fetched and stored in UserDefaults successfully.")
+                print("AppDelegate: Jobs fetched and stored in UserDefaults successfully.")
             }
         }
 
