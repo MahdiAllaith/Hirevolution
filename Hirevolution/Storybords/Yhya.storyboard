@@ -12,7 +12,7 @@
         <!--Profile-->
         <scene sceneID="IsY-Wp-MaS">
             <objects>
-                <viewController storyboardIdentifier="Profile" id="bsg-LB-UnW" userLabel="Profile" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Profile" id="bsg-LB-UnW" userLabel="Profile" customClass="User_Profile" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IGa-kE-OoF">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,7 +89,7 @@
         <!--Company-->
         <scene sceneID="yIK-vB-gkU">
             <objects>
-                <viewController storyboardIdentifier="Company" id="t4r-0i-U93" userLabel="Company" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Company" id="t4r-0i-U93" userLabel="Company" customClass="Company_Profile" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5JQ-Ok-99f">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -102,8 +102,8 @@
                             <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4NI-vD-vSl" userLabel="UpperBar">
                                 <rect key="frame" x="20" y="64" width="353" height="54"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comopany" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrY-a4-2a8">
-                                        <rect key="frame" x="0.0" y="0.0" width="226.66666666666666" height="54"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrY-a4-2a8">
+                                        <rect key="frame" x="0.0" y="0.0" width="200.66666666666666" height="54"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                         <color key="textColor" name="BackgroundBase"/>
                                         <nil key="highlightedColor"/>

@@ -42,9 +42,18 @@ class TabBar: UITabBarController {
         let ManageJobs = mahdi.instantiateViewController(withIdentifier: "ManageJobs")
         let Company = yhya.instantiateViewController(withIdentifier: "Company")
         
+        //admin
+        let MainV3 = motader.instantiateViewController(withIdentifier: "A_Main")
+        let BrowseV3 = motader.instantiateViewController(withIdentifier: "A_Browse")
+        let CompanyV3 = motader.instantiateViewController(withIdentifier: "A_Library")
+        
+        
         if userType == "company" {
             self.viewControllers = [MainV2, Brows, Library, ManageJobs, Company]
-        } else {
+        }else if userType == "admin"{
+            self.viewControllers = [MainV3, BrowseV3, CompanyV3]
+        }
+        else {
             self.viewControllers = [MainV1, Brows, Library, ApplicationList, Profile]
         }
     }
