@@ -43,6 +43,11 @@
 		68D86F8B2CED11650084A32D /* SkillsPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D86F892CED11650084A32D /* SkillsPopup.swift */; };
 		68E0E8C92CF6D8F7001E491F /* EditJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E0E8C82CF6D8F7001E491F /* EditJobView.swift */; };
 		68E405D32CED156700E9540E /* CustomStyleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E405D22CED156700E9540E /* CustomStyleTabBar.swift */; };
+		C3F6A36E2D0036DD00F40FED /* A_Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F6A36D2D0036DD00F40FED /* A_Main.swift */; };
+		C3F6A3702D0036EA00F40FED /* A_Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F6A36F2D0036EA00F40FED /* A_Browse.swift */; };
+		C3F6A3722D0036FE00F40FED /* A_Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F6A3712D0036FE00F40FED /* A_Library.swift */; };
+		C3F6A3762D003D2500F40FED /* User_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F6A3752D003D2500F40FED /* User_Profile.swift */; };
+		C3F6A3782D003D3700F40FED /* Company_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F6A3772D003D3700F40FED /* Company_Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +84,11 @@
 		68D86F892CED11650084A32D /* SkillsPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsPopup.swift; sourceTree = "<group>"; };
 		68E0E8C82CF6D8F7001E491F /* EditJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJobView.swift; sourceTree = "<group>"; };
 		68E405D22CED156700E9540E /* CustomStyleTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStyleTabBar.swift; sourceTree = "<group>"; };
+		C3F6A36D2D0036DD00F40FED /* A_Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Main.swift; sourceTree = "<group>"; };
+		C3F6A36F2D0036EA00F40FED /* A_Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Browse.swift; sourceTree = "<group>"; };
+		C3F6A3712D0036FE00F40FED /* A_Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Library.swift; sourceTree = "<group>"; };
+		C3F6A3752D003D2500F40FED /* User_Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User_Profile.swift; sourceTree = "<group>"; };
+		C3F6A3772D003D3700F40FED /* Company_Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company_Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +144,7 @@
 		68046F2C2CEAC21A00DB29CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C3F6A3742D003D1200F40FED /* Profile */,
 				68D86F7D2CEAFBF40084A32D /* UpperBar */,
 				68D86F722CEAED1B0084A32D /* Regstration */,
 				68046F322CEAE9B800DB29CF /* Browse */,
@@ -223,6 +234,7 @@
 		68D86F7D2CEAFBF40084A32D /* UpperBar */ = {
 			isa = PBXGroup;
 			children = (
+				C3F6A36C2D0036C100F40FED /* Admin */,
 				68D86F7B2CEAFBDD0084A32D /* SearchButton.swift */,
 				68A7DEBF2CF72B0E00584086 /* SettingsButton.swift */,
 			);
@@ -254,6 +266,25 @@
 				68E0E8C82CF6D8F7001E491F /* EditJobView.swift */,
 			);
 			path = "Edit Job";
+			sourceTree = "<group>";
+		};
+		C3F6A36C2D0036C100F40FED /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				C3F6A36D2D0036DD00F40FED /* A_Main.swift */,
+				C3F6A36F2D0036EA00F40FED /* A_Browse.swift */,
+				C3F6A3712D0036FE00F40FED /* A_Library.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		C3F6A3742D003D1200F40FED /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C3F6A3752D003D2500F40FED /* User_Profile.swift */,
+				C3F6A3772D003D3700F40FED /* Company_Profile.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +385,7 @@
 				68D86F6F2CEAEC1C0084A32D /* Account CellTableViewCell.swift in Sources */,
 				68D86F782CEAF7E10084A32D /* SettingsTableView.swift in Sources */,
 				68D86F8B2CED11650084A32D /* SkillsPopup.swift in Sources */,
+				C3F6A3782D003D3700F40FED /* Company_Profile.swift in Sources */,
 				68A7DEC02CF72B0E00584086 /* SettingsButton.swift in Sources */,
 				68D86F762CEAF0B20084A32D /* RegistrationController.swift in Sources */,
 				68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */,
@@ -362,8 +394,12 @@
 				68E0E8C92CF6D8F7001E491F /* EditJobView.swift in Sources */,
 				68BFC7D82CEFE5CD00F13DA1 /* JobCell.swift in Sources */,
 				68D86F8A2CED11650084A32D /* JobFiledPopup.swift in Sources */,
+				C3F6A3722D0036FE00F40FED /* A_Library.swift in Sources */,
+				C3F6A3702D0036EA00F40FED /* A_Browse.swift in Sources */,
+				C3F6A36E2D0036DD00F40FED /* A_Main.swift in Sources */,
 				68BFC7DA2CF073CC00F13DA1 /* JobsDetailsView.swift in Sources */,
 				68D86F7A2CEAFACC0084A32D /* AnimatedBlobView.swift in Sources */,
+				C3F6A3762D003D2500F40FED /* User_Profile.swift in Sources */,
 				68D86F7C2CEAFBDD0084A32D /* SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
