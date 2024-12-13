@@ -1,11 +1,69 @@
 import UIKit
 
-class JobsDetailsView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class JobsDetailsView: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    // MARK: - UICollectionView DataSource Methods
+        
+    // Return the number of items in the section for both collection views
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == AllApplicantsCollectionTable {
+            return applicaintsProfiles.count // Return number of applicants
+        } else if collectionView == AllCandidateCollectionTable {
+            return CandidatesProfiles.count // Return number of candidates
+        }
+        return 0
+    }
+
+    // Configure the cell for each collection view
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // Check which collection view is being used
+        if collectionView == AllApplicantsCollectionTable {
+            // Dequeue ApplicantCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ApplicantCell", for: indexPath) as! ApplicantCell
+            
+            // Get the applicant profile and configure the cell
+            let userApplication = applicaintsProfiles[indexPath.row]
+            cell.configer(UserApplican: userApplication)
+            
+            return cell
+        } else if collectionView == AllCandidateCollectionTable {
+            // Dequeue CandidateCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CandidateCell", for: indexPath) as! CandidateCell
+            
+            // Get the candidate profile and configure the cell
+            let userApplication = CandidatesProfiles[indexPath.row]
+            cell.configer(UserApplican: userApplication)
+            
+            return cell
+        }
+        
+        // Return a default cell if collectionView doesn't match
+        return UICollectionViewCell()
+    }
+
+    // Handle cell selection and print selected profile
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == AllApplicantsCollectionTable {
+            let selectedProfile = applicaintsProfiles[indexPath.row]
+            
+            
+            print("Selected Applicant Profile: \(selectedProfile)")
+        } else if collectionView == AllCandidateCollectionTable {
+            let selectedProfile = CandidatesProfiles[indexPath.row]
+            
+            
+            print("Selected Candidate Profile: \(selectedProfile)")
+        }
+    }
+
 
     var selectedJob: JobList? // Holds the selected job details
     var jobRequirements: [String] = [] // Data for requirements table
     var jobSkills: [String] = [] // Data for skills table
 
+    var applicaintsProfiles: [UserApplicationsStuff] = []
+    var CandidatesProfiles: [UserApplicationsStuff] = []
+    
     @IBAction func BackButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -19,6 +77,19 @@ class JobsDetailsView: UIViewController, UITableViewDelegate, UITableViewDataSou
         anotherVC.selectedJob = selectedJob
         // Push onto the same navigation stack
         navigationController?.pushViewController(anotherVC, animated: true)
+    }
+    
+    func setApplicaints(){
+        for UsersApplications in selectedJob!.ApplyedUsersApplications {
+            if UsersApplications.isCandidate == true {
+                CandidatesProfiles.append(UsersApplications)
+            }else{
+                applicaintsProfiles.append(UsersApplications)
+            }
+        }
+        // Reload both collection views after data is set
+        AllApplicantsCollectionTable.reloadData()
+        AllCandidateCollectionTable.reloadData()
     }
 
     
@@ -52,6 +123,14 @@ class JobsDetailsView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
         D_JobReguirementsTable.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         D_JobSkillsReguirementsTable.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        //Set delegates and data sources
+        AllApplicantsCollectionTable.delegate = self
+        AllApplicantsCollectionTable.dataSource = self
+        AllCandidateCollectionTable.delegate = self
+        AllCandidateCollectionTable.dataSource = self
+        
+        setApplicaints()
         
         applyStyling()
         

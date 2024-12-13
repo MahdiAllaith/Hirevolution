@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let _ = authManager.userSession {
             UserDefaults.standard.set(true, forKey: "SignInUser")
         }
-        
+                
         authManager.initialize()
         // Fetch all jobs
         authManager.fetchAllJobs { error in

@@ -86,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="-2250" y="137"/>
         </scene>
-        <!--Library-->
+        <!--Admin Browse-->
         <scene sceneID="aWw-KA-t1A">
             <objects>
-                <viewController id="1Ly-D8-17r" userLabel="Library" customClass="A_Browse" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1Ly-D8-17r" userLabel="Admin Browse" customClass="A_Browse" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XN9-gY-GL6">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -161,10 +161,10 @@
             </objects>
             <point key="canvasLocation" x="-595" y="125"/>
         </scene>
-        <!--Library-->
+        <!--Admin Library-->
         <scene sceneID="iaD-cd-3Ub">
             <objects>
-                <viewController storyboardIdentifier="A_Library" id="GGW-TC-yo8" userLabel="Library" customClass="A_Library" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="A_Library" id="GGW-TC-yo8" userLabel="Admin Library" customClass="A_Library" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="06J-oC-xbs">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -238,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="808.39694656488541" y="137.32394366197184"/>
         </scene>
-        <!--Library-->
+        <!--Admin Main-->
         <scene sceneID="H91-1d-Gc5">
             <objects>
-                <viewController storyboardIdentifier="A_Main" id="7YL-mt-hVh" userLabel="Library" customClass="A_Main" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="A_Main" id="7YL-mt-hVh" userLabel="Admin Main" customClass="A_Main" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4wx-tD-fXh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -298,6 +298,21 @@
                                 </subviews>
                                 <color key="backgroundColor" name="BaseApp"/>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vut-tS-Ju2">
+                                <rect key="frame" x="46" y="164" width="300" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Create Accounts">
+                                    <backgroundConfiguration key="background" cornerRadius="8">
+                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="CreateAccountButton:" destination="7YL-mt-hVh" eventType="touchUpInside" id="xvQ-4S-E5P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hc4-z1-wjG"/>
                         <color key="backgroundColor" name="BaseApp"/>

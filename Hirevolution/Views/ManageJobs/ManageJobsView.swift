@@ -7,7 +7,13 @@
 
 import UIKit
 
-class ManageJobsView: UIViewController {
+class ManageJobsView: UIViewController, ReloadTableJobsForCompanyUser {
+    
+    
+    func reload() {
+        viewDidLoad()
+    }
+
     
     // MARK: - Properties
     private let authManager = AuthManager.shared
@@ -26,6 +32,26 @@ class ManageJobsView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func showAlert(message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            completion?()
+        }))
+        present(alert, animated: true)
+    }
+    
+    @IBAction func AddNewJob(_ sender: Any) {
+        if authManager.currentUser?.companyProfile?.companyName != ""{
+            let CreateAccountView = UIStoryboard(name: "Mahdi", bundle: nil).instantiateViewController(withIdentifier: "AddJobView")
+            
+            self.navigationController?.pushViewController(CreateAccountView, animated: true)
+        }else{
+            showAlert(message: "Yor didn't create you profile pleas!, to add new job list you must have company profile")
+        }
+        
+        
     }
     
     // MARK: - Setup Methods
@@ -81,6 +107,7 @@ extension ManageJobsView: UITableViewDelegate {
         
         // Push JobsDetailsView onto the navigation stack
         navigationController?.pushViewController(jobsDetailsVC, animated: true)
+        
     }
 }
 

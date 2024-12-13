@@ -89,7 +89,7 @@
         <!--Main-->
         <scene sceneID="Sgu-st-cgB">
             <objects>
-                <viewController storyboardIdentifier="MainV1" id="5g0-Ua-Y9N" customClass="test" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainV1" id="5g0-Ua-Y9N" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6H6-fc-kSB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -97,19 +97,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25Z-Xh-nv4" customClass="AnimatedBlobView" customModule="Hirevolution" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="215" width="393" height="637"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5s-te-l2F">
-                                        <rect key="frame" x="159" y="8" width="75" height="39"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                        <connections>
-                                            <action selector="change:" destination="535-Z9-721" eventType="touchUpInside" id="FJJ-Fp-6Gj"/>
-                                            <action selector="change:" destination="5g0-Ua-Y9N" eventType="touchUpInside" id="jHL-o4-4B0"/>
-                                            <action selector="cjange:" destination="535-Z9-721" eventType="touchUpInside" id="Sm8-Hw-zYi"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" name="BaseApp"/>
                             </view>
                             <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vE6-Dt-CV6" userLabel="UpperBar">
@@ -173,7 +160,6 @@
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIg-Hw-3fU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="535-Z9-721" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1222" y="151"/>
         </scene>

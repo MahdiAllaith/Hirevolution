@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import FirebaseStorage
+
+
 
 protocol BrowseCellDelegate: AnyObject {
     func didTapViewJobButton(in cell: BrowseCell)
 }
+
 
 class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -22,14 +26,13 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
     @IBOutlet weak var B_JobDiscription: UITextView!
     @IBOutlet weak var b_JobCompanyName: UILabel!
     @IBOutlet weak var B_JobViewedCount: UILabel!
-    
+    // wating for yhya work, updated yhaya wont finsh hia work
+    @IBOutlet weak var CompanyLogo: UIImageView!
     
     @IBAction func B_ViewJobButton(_ sender: Any) {
         delegate?.didTapViewJobButton(in: self)
-        
     }
-    // wating for yhya work
-    @IBOutlet weak var CompanyLogo: UIImageView!
+    
     
     private var jobFields: [String] = [] // Store job fields locally for the collection view
 
@@ -44,8 +47,17 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
 
     }
 
+    func resizeImage(_ image: UIImage, to newSize: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
+    
+    
     // Configure the cell with job data
     func configureCollectionCells(jobList: JobList) {
+        print(jobList.jobViewsCount)
         // Set the job title
         B_JobTitle.text = jobList.jobTitle
         B_JobDiscription.text = jobList.jobDescription
@@ -54,6 +66,33 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
         
         // Update the job fields array and reload the collection view
         jobFields = jobList.jobFields
+        
+        if jobList.companyProfile.companyProfileLogo.isEmpty {
+            CompanyLogo.image = UIImage(systemName: "suitcase.fill")
+        } else {
+            let imageURL = jobList.companyProfile.companyProfileLogo
+            
+            let storage = Storage.storage()
+            let reference = storage.reference(forURL: imageURL)
+            
+            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print("Error downloading image: \(error)")
+                    return
+                }
+                
+                if let data = data {
+                    let imagee = UIImage(data: data)
+                    let newSize = CGSize(width: 80, height: 80)
+                    let resizedImage = self.resizeImage(imagee!, to: newSize)
+                    
+                    // Set the resized image to the UIImageView
+                    self.CompanyLogo.image = resizedImage
+                }
+            }
+        }
+          
+        
         B_JobFiledCollection.reloadData()
     }
 
@@ -106,4 +145,5 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
     }
 
 }
+
 

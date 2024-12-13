@@ -40,6 +40,11 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         // Reload the table to display the data
         AppAllJobsTable.reloadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
 
     // MARK: - UITableViewDataSource
     

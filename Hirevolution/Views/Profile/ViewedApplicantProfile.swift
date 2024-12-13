@@ -1,13 +1,13 @@
 //
-//  A_Main.swift
+//  ViewedApplicantProfile.swift
 //  Hirevolution
 //
-//  Created by BP-36-201-22 on 04/12/2024.
+//  Created by Mac 14 on 13/12/2024.
 //
 
 import UIKit
 
-class A_Main: UIViewController {
+class ViewedApplicantProfile: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

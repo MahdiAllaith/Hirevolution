@@ -7,10 +7,12 @@
 
 import UIKit
 
-class TabBar: UITabBarController {
-
+class TabBar: UITabBarController, UITabBarControllerDelegate {
+    let authManager = AuthManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         updateViewControllers()
         // Do any additional setup after loading the view.
     }
@@ -19,6 +21,31 @@ class TabBar: UITabBarController {
     // to change the nav bar to brows call for button
     func didTapBrowseButton() {
         self.selectedIndex = 1
+    }
+    
+    private func showAlert(message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: "Notification", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            completion?()
+        }))
+        present(alert, animated: true)
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        
+        if authManager.userSession == nil{
+            if tabBarController.selectedIndex == 4  {
+                tabBarController.selectedIndex = 0
+                showAlert(message: "Your are not signed in, pleas signin or signup to view your profile")
+            }else if tabBarController.selectedIndex == 3 {
+                tabBarController.selectedIndex = 0
+                showAlert(message: "Your are not signed in, pleas signin or signup to view job applications")
+            }
+                
+            
+        }
+        
     }
     
     func updateViewControllers() {
