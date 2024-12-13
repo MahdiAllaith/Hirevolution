@@ -686,6 +686,94 @@ class AuthManager {
             }
         }
     }
+    func fetchUsers(withOption option: String, completion: @escaping ([User]?, Error?) -> Void) {
+        let usersRef = Firestore.firestore().collection("users")
+
+        // Create a query that filters documents where the "option" field is equal to the provided option
+        usersRef.whereField("option", isEqualTo: option).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+
+            guard let querySnapshot = querySnapshot else {
+                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No users found"]))
+                return
+            }
+
+            var users: [User] = []
+
+            for document in querySnapshot.documents {
+                do {
+                    let user = try document.data(as: User.self)
+                    users.append(user)
+                } catch {
+                    print("Error decoding user data: \(error)")
+                }
+            }
+
+            completion(users, nil)
+        }
+    }
+    func fetchJobs(withCompanyID companyID: String, completion: @escaping ([JobList]?, Error?) -> Void) {
+        let jobsRef = Firestore.firestore().collection("jobs")
+
+        // Create a query that filters documents where the "CompanyID" field is equal to the provided companyID
+        jobsRef.whereField("CompanyID", isEqualTo: companyID).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+
+            guard let querySnapshot = querySnapshot else {
+                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No jobs found for this company"]))
+                return
+            }
+
+            var jobs: [JobList] = []
+
+            for document in querySnapshot.documents {
+                do {
+                    let job = try document.data(as: JobList.self)
+                    jobs.append(job)
+                } catch {
+                    print("Error decoding job data: \(error)")
+                }
+            }
+
+            completion(jobs, nil)
+        }
+    }
+
+    func fetchCompanies(completion: @escaping ([User]?, Error?) -> Void) {
+        let usersRef = Firestore.firestore().collection("users")
+
+        // Create a query that filters documents where the "option" field is equal to "company"
+        usersRef.whereField("option", isEqualTo: "company").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+
+            guard let querySnapshot = querySnapshot else {
+                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No companies found"]))
+                return
+            }
+
+            var companies: [User] = []
+
+            for document in querySnapshot.documents {
+                do {
+                    let company = try document.data(as: User.self)
+                    companies.append(company)
+                } catch {
+                    print("Error decoding company data: \(error)")
+                }
+            }
+
+            completion(companies, nil)
+        }
+    }
 }
 
 

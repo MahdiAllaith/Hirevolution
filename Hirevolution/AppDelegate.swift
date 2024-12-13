@@ -36,7 +36,7 @@ import Firebase
 
         
         
-        UserDefaults.standard.set("user", forKey: "userType")
+        UserDefaults.standard.set("admin", forKey: "userType")
         UserDefaults.standard.set(false, forKey: "SignInUser")
         
         updateMainViewController(for: currentUserType())
