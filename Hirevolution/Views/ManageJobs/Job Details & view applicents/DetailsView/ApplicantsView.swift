@@ -9,6 +9,8 @@ import UIKit
 
 class ApplicantsView: UIViewController, UITableViewDelegate, UITableViewDataSource, goToMessageView {
     
+    
+    
     // MARK: - Protocol Method Implementation
     // Navigate to the message view
     func gotoMassageView() {
