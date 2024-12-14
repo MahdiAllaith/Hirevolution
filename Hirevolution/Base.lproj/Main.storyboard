@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iX0-2u-tnr">
-    <device id="retina6_12" orientation="portrait" appearance="dark"/>
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -28,83 +28,6 @@
             </objects>
             <point key="canvasLocation" x="-1989" y="-706"/>
         </scene>
-        <!--Admin Main-->
-        <scene sceneID="VRr-mh-Qgk">
-            <objects>
-                <viewController storyboardIdentifier="MainV3" id="MxS-Pt-bIv" userLabel="Admin Main" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TcK-12-YTU">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xhz-02-9KB" customClass="AnimatedBlobView" customModule="Hirevolution" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="215" width="393" height="637"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="BaseApp"/>
-                            </view>
-                            <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="lastBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="efA-2d-aHu" userLabel="UpperBar">
-                                <rect key="frame" x="20" y="64" width="353" height="54"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A.Main" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6L-ky-jdY">
-                                        <rect key="frame" x="0.0" y="0.0" width="144" height="54"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vER-gu-5cS">
-                                        <rect key="frame" x="258" y="14" width="95" height="40"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQ3-08-1Kx" userLabel="BorowsButton" customClass="SearchButton" customModule="Hirevolution" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="oU4-ae-ZI5"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
-                                                    <backgroundConfiguration key="background" cornerRadius="15">
-                                                        <color key="backgroundColor" name="BackgroundBase"/>
-                                                    </backgroundConfiguration>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
-                                                    <color key="baseForegroundColor" name="Blue"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="settButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTG-9Q-1Rv" userLabel="SettingsButton">
-                                                <rect key="frame" x="55" y="0.0" width="40" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="DNv-nH-lw0"/>
-                                                    <constraint firstAttribute="height" constant="40" id="YHX-Yg-pdu"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
-                                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large" variableValue="5.5511151231257827e-17"/>
-                                                    <backgroundConfiguration key="background" cornerRadius="15">
-                                                        <color key="backgroundColor" name="BackgroundBase"/>
-                                                    </backgroundConfiguration>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
-                                                    <color key="baseForegroundColor" name="Blue"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" name="BaseApp"/>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Vjc-N1-MIm"/>
-                        <color key="backgroundColor" name="BaseApp"/>
-                        <constraints>
-                            <constraint firstItem="efA-2d-aHu" firstAttribute="top" secondItem="Vjc-N1-MIm" secondAttribute="top" constant="5" id="07Q-mz-n2G"/>
-                            <constraint firstItem="efA-2d-aHu" firstAttribute="leading" secondItem="Vjc-N1-MIm" secondAttribute="leading" constant="20" id="Iee-yr-CGS"/>
-                            <constraint firstItem="Vjc-N1-MIm" firstAttribute="trailing" secondItem="efA-2d-aHu" secondAttribute="trailing" constant="20" id="t6M-Xr-jcN"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Main" id="gHp-3y-Khs" userLabel="NavBarMain">
-                        <imageReference key="image" image="house.fill" catalog="system"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FNU-iK-rf9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1802" y="218"/>
-        </scene>
         <!--Settings.About-->
         <scene sceneID="Z5y-gC-vGF">
             <objects>
@@ -113,9 +36,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6n1-bQ-Ukv">
-                                <rect key="frame" x="175" y="131" width="128" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6n1-bQ-Ukv">
+                                <rect key="frame" x="15" y="118" width="129" height="54"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -123,6 +45,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VY0-hf-n09"/>
                         <color key="backgroundColor" name="BaseApp"/>
+                        <constraints>
+                            <constraint firstItem="6n1-bQ-Ukv" firstAttribute="leading" secondItem="VY0-hf-n09" secondAttribute="leading" constant="15" id="AeB-d5-ZMs"/>
+                            <constraint firstItem="6n1-bQ-Ukv" firstAttribute="top" secondItem="VY0-hf-n09" secondAttribute="top" constant="15" id="PfM-EJ-ejO"/>
+                            <constraint firstItem="VY0-hf-n09" firstAttribute="trailing" secondItem="6n1-bQ-Ukv" secondAttribute="trailing" constant="249" id="acx-Tu-zIn"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HbP-7F-ia1"/>
                 </viewController>
@@ -285,9 +212,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Policies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sf-eP-P98">
-                                <rect key="frame" x="175" y="131" width="161" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Policies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sf-eP-P98">
+                                <rect key="frame" x="15" y="118" width="162" height="54"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -295,6 +221,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="saC-KP-jaT"/>
                         <color key="backgroundColor" name="BaseApp"/>
+                        <constraints>
+                            <constraint firstItem="saC-KP-jaT" firstAttribute="trailing" secondItem="2sf-eP-P98" secondAttribute="trailing" constant="216" id="36I-MU-KWQ"/>
+                            <constraint firstItem="2sf-eP-P98" firstAttribute="leading" secondItem="saC-KP-jaT" secondAttribute="leading" constant="15" id="Yzr-6E-JHN"/>
+                            <constraint firstItem="2sf-eP-P98" firstAttribute="top" secondItem="saC-KP-jaT" secondAttribute="top" constant="15" id="w5T-gf-ceg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="G7b-6u-l6z"/>
                 </viewController>
@@ -310,9 +241,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHP-V3-syy">
-                                <rect key="frame" x="175" y="131" width="97" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHP-V3-syy">
+                                <rect key="frame" x="15" y="118" width="98" height="54"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -320,6 +250,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LeY-vV-ozl"/>
                         <color key="backgroundColor" name="BaseApp"/>
+                        <constraints>
+                            <constraint firstItem="LeY-vV-ozl" firstAttribute="trailing" secondItem="aHP-V3-syy" secondAttribute="trailing" constant="280" id="MYl-us-tWd"/>
+                            <constraint firstItem="aHP-V3-syy" firstAttribute="top" secondItem="LeY-vV-ozl" secondAttribute="top" constant="15" id="bNy-eO-uX0"/>
+                            <constraint firstItem="aHP-V3-syy" firstAttribute="leading" secondItem="LeY-vV-ozl" secondAttribute="leading" constant="15" id="lpN-sh-YUd"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9kR-42-JNy"/>
                 </viewController>
@@ -331,15 +266,9 @@
     <resources>
         <image name="arrowshape.left.circle" catalog="system" width="128" height="123"/>
         <image name="exclamationmark.circle" catalog="system" width="128" height="123"/>
-        <image name="gear" catalog="system" width="128" height="122"/>
-        <image name="house.fill" catalog="system" width="128" height="104"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="moonphase.waxing.gibbous" catalog="system" width="128" height="123"/>
         <image name="point.3.filled.connected.trianglepath.dotted" catalog="system" width="128" height="96"/>
         <image name="questionmark.circle.ar" catalog="system" width="128" height="123"/>
-        <namedColor name="BackgroundBase">
-            <color red="0.12156862745098039" green="0.12156862745098039" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="BaseApp">
             <color red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

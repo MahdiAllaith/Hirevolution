@@ -84,13 +84,282 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I4h-N0-8gm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2273" y="92"/>
+            <point key="canvasLocation" x="-2250" y="137"/>
+        </scene>
+        <!--Admin Browse-->
+        <scene sceneID="aWw-KA-t1A">
+            <objects>
+                <viewController id="1Ly-D8-17r" userLabel="Admin Browse" customClass="A_Browse" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XN9-gY-GL6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yoO-fe-A7v" customClass="AnimatedBlobView" customModule="Hirevolution" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="215" width="393" height="637"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </view>
+                            <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ifg-gg-8Xu" userLabel="UpperBar">
+                                <rect key="frame" x="20" y="108" width="353" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A.Browse" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXS-97-aL4">
+                                        <rect key="frame" x="0.0" y="0.0" width="198.33333333333334" height="54"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                        <color key="textColor" name="BackgroundBase"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="LUd-Kz-65H">
+                                        <rect key="frame" x="258" y="7" width="95" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgX-mz-liN" userLabel="BorowsButton" customClass="SearchButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="s4f-qP-8JC"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="settButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8Q-us-2XA" userLabel="SettingsButton" customClass="SettingsButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="55" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="2Kj-uL-Bgm"/>
+                                                    <constraint firstAttribute="height" constant="40" id="O5E-6z-kVc"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
+                                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large" variableValue="5.5511151231257827e-17"/>
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LKp-g4-5Vn"/>
+                        <color key="backgroundColor" name="BaseApp"/>
+                        <constraints>
+                            <constraint firstItem="LKp-g4-5Vn" firstAttribute="trailing" secondItem="Ifg-gg-8Xu" secondAttribute="trailing" constant="20" id="9i2-pa-uRX"/>
+                            <constraint firstItem="Ifg-gg-8Xu" firstAttribute="leading" secondItem="LKp-g4-5Vn" secondAttribute="leading" constant="20" id="M5M-qe-fnp"/>
+                            <constraint firstItem="Ifg-gg-8Xu" firstAttribute="top" secondItem="LKp-g4-5Vn" secondAttribute="top" constant="5" id="xDR-Rt-nlj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="86d-yV-Mlt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nFd-rZ-CX2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-595" y="125"/>
+        </scene>
+        <!--Admin Library-->
+        <scene sceneID="iaD-cd-3Ub">
+            <objects>
+                <viewController storyboardIdentifier="A_Library" id="GGW-TC-yo8" userLabel="Admin Library" customClass="A_Library" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="06J-oC-xbs">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="46q-ju-35V" customClass="AnimatedBlobView" customModule="Hirevolution" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="215" width="393" height="637"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </view>
+                            <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OXk-iO-krd" userLabel="UpperBar">
+                                <rect key="frame" x="20" y="64" width="353" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A.Library" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xke-Ou-2cv">
+                                        <rect key="frame" x="0.0" y="0.0" width="189.33333333333334" height="54"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                        <color key="textColor" name="BackgroundBase"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="rxu-Px-nnx">
+                                        <rect key="frame" x="258" y="7" width="95" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYo-Ae-6cz" userLabel="BorowsButton" customClass="SearchButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="DxY-pu-rWd"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="settButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDn-sZ-9bd" userLabel="SettingsButton" customClass="SettingsButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="55" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="726-oo-IEE"/>
+                                                    <constraint firstAttribute="height" constant="40" id="njh-fa-ovq"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
+                                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large" variableValue="5.5511151231257827e-17"/>
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vL4-D5-GA3"/>
+                        <color key="backgroundColor" name="BaseApp"/>
+                        <constraints>
+                            <constraint firstItem="OXk-iO-krd" firstAttribute="top" secondItem="vL4-D5-GA3" secondAttribute="top" constant="5" id="ECz-G2-y2w"/>
+                            <constraint firstItem="OXk-iO-krd" firstAttribute="leading" secondItem="vL4-D5-GA3" secondAttribute="leading" constant="20" id="U0N-sa-Cqu"/>
+                            <constraint firstItem="vL4-D5-GA3" firstAttribute="trailing" secondItem="OXk-iO-krd" secondAttribute="trailing" constant="20" id="zMc-V9-7iB"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="A.Library" id="siH-xH-vQg" userLabel="NavBarMain">
+                        <imageReference key="image" image="book.circle.fill" catalog="system"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mm3-Yg-T5B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="808.39694656488541" y="137.32394366197184"/>
+        </scene>
+        <!--Admin Main-->
+        <scene sceneID="H91-1d-Gc5">
+            <objects>
+                <viewController storyboardIdentifier="A_Main" id="7YL-mt-hVh" userLabel="Admin Main" customClass="A_Main" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4wx-tD-fXh">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UG5-ki-y55" customClass="AnimatedBlobView" customModule="Hirevolution" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="215" width="393" height="637"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </view>
+                            <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MQ8-Cz-Ddt" userLabel="UpperBar">
+                                <rect key="frame" x="20" y="64" width="353" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A.Main" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yob-Cn-fG6">
+                                        <rect key="frame" x="0.0" y="0.0" width="144" height="54"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                        <color key="textColor" name="BackgroundBase"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="lnA-mX-cTM">
+                                        <rect key="frame" x="258" y="7" width="95" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8x-HY-Ptm" userLabel="BorowsButton" customClass="SearchButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="Z3S-XQ-Zuo"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="settButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTs-OM-aHH" userLabel="SettingsButton" customClass="SettingsButton" customModule="Hirevolution" customModuleProvider="target">
+                                                <rect key="frame" x="55" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="TgI-z2-f3M"/>
+                                                    <constraint firstAttribute="height" constant="40" id="nAs-YF-sdb"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
+                                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large" variableValue="5.5511151231257827e-17"/>
+                                                    <backgroundConfiguration key="background" cornerRadius="15">
+                                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                                    </backgroundConfiguration>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                                    <color key="baseForegroundColor" name="Blue"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="BaseApp"/>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vut-tS-Ju2">
+                                <rect key="frame" x="46" y="164" width="300" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Create Accounts">
+                                    <backgroundConfiguration key="background" cornerRadius="8">
+                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="CreateAccountButton:" destination="7YL-mt-hVh" eventType="touchUpInside" id="xvQ-4S-E5P"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Hc4-z1-wjG"/>
+                        <color key="backgroundColor" name="BaseApp"/>
+                        <constraints>
+                            <constraint firstItem="MQ8-Cz-Ddt" firstAttribute="leading" secondItem="Hc4-z1-wjG" secondAttribute="leading" constant="20" id="Yiu-LL-Bek"/>
+                            <constraint firstItem="Hc4-z1-wjG" firstAttribute="trailing" secondItem="MQ8-Cz-Ddt" secondAttribute="trailing" constant="20" id="cZd-VO-5LB"/>
+                            <constraint firstItem="MQ8-Cz-Ddt" firstAttribute="top" secondItem="Hc4-z1-wjG" secondAttribute="top" constant="5" id="lCG-kB-A6L"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="A.Main" id="Eg7-ql-VCL" userLabel="NavBarMain">
+                        <imageReference key="image" image="house.fill" catalog="system"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="OIx-QM-9Kb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lgx-C9-ssb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="147.32824427480915" y="136.61971830985917"/>
+        </scene>
+        <!--A.Browse-->
+        <scene sceneID="Lht-dU-NG3">
+            <objects>
+                <navigationController storyboardIdentifier="A_Browse" automaticallyAdjustsScrollViewInsets="NO" id="jan-LQ-qie" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="A.Browse" id="yhu-oc-1Qd" userLabel="NavBarMain">
+                        <imageReference key="image" image="magnifyingglass.circle.fill" catalog="system"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qv7-F8-8en">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1Ly-D8-17r" kind="relationship" relationship="rootViewController" id="dsO-is-P9T"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qi8-3K-d2S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1411.4503816793892" y="124.64788732394366"/>
         </scene>
     </scenes>
     <resources>
+        <image name="book.circle.fill" catalog="system" width="128" height="123"/>
         <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="list.bullet.clipboard" catalog="system" width="98" height="128"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="magnifyingglass.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="BackgroundBase">
             <color red="0.12156862745098039" green="0.12156862745098039" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

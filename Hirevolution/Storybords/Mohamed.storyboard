@@ -135,6 +135,7 @@
                                                         <constraint firstItem="76z-rY-wjZ" firstAttribute="top" secondItem="WmC-kY-43q" secondAttribute="bottom" constant="26" id="TW1-CE-bIN"/>
                                                         <constraint firstAttribute="trailing" secondItem="m8c-eZ-39J" secondAttribute="trailing" constant="95" id="Vna-Yh-Qnr"/>
                                                         <constraint firstItem="nH5-uX-dlf" firstAttribute="top" secondItem="oye-2A-eK2" secondAttribute="bottom" constant="30" id="Xpg-BO-h9A"/>
+                                                        <constraint firstItem="eWc-TM-Jy7" firstAttribute="leading" secondItem="1jt-YR-DTE" secondAttribute="leading" constant="18" id="Z9U-Cz-QIn"/>
                                                         <constraint firstItem="Dah-86-M78" firstAttribute="leading" secondItem="4z2-dl-jSP" secondAttribute="trailing" constant="2" id="aSV-I3-nfk"/>
                                                         <constraint firstAttribute="bottom" secondItem="76z-rY-wjZ" secondAttribute="bottom" constant="17" id="eA3-ER-meC"/>
                                                         <constraint firstItem="76z-rY-wjZ" firstAttribute="leading" secondItem="1jt-YR-DTE" secondAttribute="leading" constant="73" id="ehm-BE-Jr6"/>
@@ -146,6 +147,7 @@
                                                         <constraint firstItem="4z2-dl-jSP" firstAttribute="top" secondItem="nH5-uX-dlf" secondAttribute="bottom" constant="29" id="iwW-C1-JGm"/>
                                                         <constraint firstItem="WmC-kY-43q" firstAttribute="top" secondItem="m8c-eZ-39J" secondAttribute="bottom" constant="15" id="jAh-eg-3NR"/>
                                                         <constraint firstAttribute="trailing" secondItem="WmC-kY-43q" secondAttribute="trailing" constant="100" id="kMc-IY-rWP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="eWc-TM-Jy7" secondAttribute="trailing" constant="18" id="kr0-b9-0tX"/>
                                                         <constraint firstItem="m8c-eZ-39J" firstAttribute="leading" secondItem="1jt-YR-DTE" secondAttribute="leading" constant="8" id="mje-qd-yGc"/>
                                                         <constraint firstItem="94I-lT-OHe" firstAttribute="leading" secondItem="1jt-YR-DTE" secondAttribute="leading" constant="13" id="npS-WA-tV5"/>
                                                         <constraint firstItem="94I-lT-OHe" firstAttribute="top" secondItem="m8c-eZ-39J" secondAttribute="bottom" constant="12" id="stS-Hb-KnN"/>
@@ -171,6 +173,7 @@
                                             <outlet property="B_JobFiledCollection" destination="oye-2A-eK2" id="7He-dr-F0p"/>
                                             <outlet property="B_JobTitle" destination="eWc-TM-Jy7" id="Vpo-Po-456"/>
                                             <outlet property="B_JobViewedCount" destination="Dah-86-M78" id="zxF-G6-cez"/>
+                                            <outlet property="CompanyLogo" destination="nH5-uX-dlf" id="1Yo-Se-z49"/>
                                             <outlet property="ViewHolder" destination="1jt-YR-DTE" id="Etk-n5-XyK"/>
                                             <outlet property="b_JobCompanyName" destination="WmC-kY-43q" id="mbs-ba-IYH"/>
                                         </connections>

@@ -7,10 +7,12 @@
 
 import UIKit
 
-class TabBar: UITabBarController {
-
+class TabBar: UITabBarController, UITabBarControllerDelegate {
+    let authManager = AuthManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         updateViewControllers()
         // Do any additional setup after loading the view.
     }
@@ -19,6 +21,31 @@ class TabBar: UITabBarController {
     // to change the nav bar to brows call for button
     func didTapBrowseButton() {
         self.selectedIndex = 1
+    }
+    
+    private func showAlert(message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: "Notification", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            completion?()
+        }))
+        present(alert, animated: true)
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        
+        if authManager.userSession == nil{
+            if tabBarController.selectedIndex == 4  {
+                tabBarController.selectedIndex = 0
+                showAlert(message: "Your are not signed in, pleas signin or signup to view your profile")
+            }else if tabBarController.selectedIndex == 3 {
+                tabBarController.selectedIndex = 0
+                showAlert(message: "Your are not signed in, pleas signin or signup to view job applications")
+            }
+                
+            
+        }
+        
     }
     
     func updateViewControllers() {
@@ -42,9 +69,18 @@ class TabBar: UITabBarController {
         let ManageJobs = mahdi.instantiateViewController(withIdentifier: "ManageJobs")
         let Company = yhya.instantiateViewController(withIdentifier: "Company")
         
+        //admin
+        let MainV3 = motader.instantiateViewController(withIdentifier: "A_Main")
+        let BrowseV3 = motader.instantiateViewController(withIdentifier: "A_Browse")
+        let CompanyV3 = motader.instantiateViewController(withIdentifier: "A_Library")
+        
+        
         if userType == "company" {
             self.viewControllers = [MainV2, Brows, Library, ManageJobs, Company]
-        } else {
+        }else if userType == "admin"{
+            self.viewControllers = [MainV3, BrowseV3, CompanyV3]
+        }
+        else {
             self.viewControllers = [MainV1, Brows, Library, ApplicationList, Profile]
         }
     }
