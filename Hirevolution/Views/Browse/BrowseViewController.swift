@@ -1,13 +1,6 @@
-//
-//  BrowseViewController.swift
-//  Hirevolution
-//
-//  Created by Mac 14 on 25/11/2024.
-//
-
 import UIKit
 
-class BrowseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BrowseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     // MARK: - Outlets
     
@@ -19,6 +12,8 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     
     let authManager = AuthManager.shared
     var AppListedJobs: [JobList] = [] // Array to hold all the jobs data
+    var searchJobs: [JobList] = []  // Array to hold filtered jobs
+    var searching = false
     
     // MARK: - Lifecycle Methods
     
@@ -29,9 +24,13 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         FilerButton.layer.cornerRadius = 8
         sereachTextFiled.layer.cornerRadius = 8
         
+        // Set the UITextField delegate
+        sereachTextFiled.delegate = self
+        
         // Load the jobs data from UserDefaults
         if let Jobs = authManager.loadAllJobsFromUserDefaults() {
             AppListedJobs = Jobs
+            searchJobs = Jobs  // Initially show all jobs
             print("Loaded all app jobs: \(AppListedJobs)")
         } else {
             print("Failed to load jobs from UserDefaults.")
@@ -49,11 +48,11 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
-
+    
     // MARK: - UITableViewDataSource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AppListedJobs.count
+        return searchJobs.count // Show filtered or all jobs
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,7 +61,7 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         // Configure cell with job data
-        let jobListIndex = AppListedJobs[indexPath.row]
+        let jobListIndex = searchJobs[indexPath.row] // Use searchJobs here
         cell.configureCollectionCells(jobList: jobListIndex)
         cell.delegate = self // Set the delegate
         
@@ -77,6 +76,25 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Do nothing to disable cell selection
     }
+    
+    // MARK: - UITextFieldDelegate Methods
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let searchText = textField.text else { return }
+        
+        if searchText.isEmpty {
+            // If search text is empty, show all jobs
+            searchJobs = AppListedJobs
+        } else {
+            // Filter jobs where the jobTitle starts with the search text (case-insensitive)
+            searchJobs = AppListedJobs.filter { job in
+                return job.jobTitle.lowercased().hasPrefix(searchText.lowercased())
+            }
+        }
+        
+        // Reload the table view to display the filtered results
+        AppAllJobsTable.reloadData()
+    }
 }
 
 // MARK: - BrowseCellDelegate
@@ -86,7 +104,7 @@ extension BrowseViewController: BrowseCellDelegate {
         // Find the index path of the cell
         if let indexPath = AppAllJobsTable.indexPath(for: cell) {
             // Get the selected job
-            let selectedJob = AppListedJobs[indexPath.row]
+            let selectedJob = searchJobs[indexPath.row] // Use searchJobs here
             
             // Instantiate ApplyForJobView from the storyboard
             let SelectedJobDetailsView = UIStoryboard(name: "Mahdi", bundle: nil)
