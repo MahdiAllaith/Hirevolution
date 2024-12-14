@@ -227,7 +227,7 @@ EENvbXBhbnk
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Back"/>
                                 <connections>
-                                    <action selector="BackButton:" destination="oeh-Xc-7mS" eventType="touchUpInside" id="XEB-PL-ORK"/>
+                                    <action selector="BackButton:" destination="oeh-Xc-7mS" eventType="touchUpInside" id="eJZ-Ec-tnm"/>
                                 </connections>
                             </button>
                         </subviews>

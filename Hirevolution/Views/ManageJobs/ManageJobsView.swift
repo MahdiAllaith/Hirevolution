@@ -7,26 +7,20 @@
 
 import UIKit
 
-class ManageJobsView: UIViewController, ReloadTableJobsForCompanyUser {
-    
-    
-    func reload() {
-        viewDidLoad()
-    }
-
+class ManageJobsView: UIViewController, UITableViewDelegate, UITableViewDataSource, ReloadTableJobsForCompanyUser {
     
     // MARK: - Properties
     private let authManager = AuthManager.shared
     private var companyListedJobs: [JobList] = [] // Array to hold the jobs data
-
+    
     // MARK: - Outlets
     @IBOutlet weak var companyJobsTable: UITableView!
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        loadJobsData()
+        setupView() // Setup table view and initial configurations
+        loadJobsData() // Load job data for the company
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,35 +28,32 @@ class ManageJobsView: UIViewController, ReloadTableJobsForCompanyUser {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    private func showAlert(message: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            completion?()
-        }))
-        present(alert, animated: true)
+    // MARK: - Reload Table Protocol Method
+    func reload() {
+        viewDidLoad() // Reload view when the protocol method is called
     }
     
+    // MARK: - Action Methods
     @IBAction func AddNewJob(_ sender: Any) {
-        if authManager.currentUser?.companyProfile?.companyName != ""{
+        // Check if the user has created a company profile before adding a new job
+        if authManager.currentUser?.companyProfile?.companyName != "" {
             let CreateAccountView = UIStoryboard(name: "Mahdi", bundle: nil).instantiateViewController(withIdentifier: "AddJobView")
-            
             self.navigationController?.pushViewController(CreateAccountView, animated: true)
-        }else{
-            showAlert(message: "Yor didn't create you profile pleas!, to add new job list you must have company profile")
+        } else {
+            showAlert(message: "You didn't create your profile! To add a new job list, you must have a company profile.")
         }
-        
-        
     }
     
-    // MARK: - Setup Methods
+    // MARK: - Private Methods
     private func setupView() {
-        // Configure table view
+        // Configure the table view
         companyJobsTable.dataSource = self
         companyJobsTable.delegate = self
         companyJobsTable.reloadData()
     }
     
     private func loadJobsData() {
+        // Load job data from UserDefaults via AuthManager
         if let companyJobs = authManager.loadCompanyJobsFromUserDefaults() {
             companyListedJobs = companyJobs
             print("Loaded jobs: \(companyListedJobs)")  // Debugging line to confirm data
@@ -70,15 +61,23 @@ class ManageJobsView: UIViewController, ReloadTableJobsForCompanyUser {
             print("Failed to load jobs from UserDefaults.")
         }
     }
-}
-
-// MARK: - UITableViewDataSource
-extension ManageJobsView: UITableViewDataSource {
+    
+    private func showAlert(message: String, completion: (() -> Void)? = nil) {
+        // Display an alert with a message
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            completion?()
+        }))
+        present(alert, animated: true)
+    }
+    
+    // MARK: - UITableViewDataSource and UITableViewDelegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companyListedJobs.count
+        return companyListedJobs.count // Return the number of jobs
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Dequeue reusable cell and configure it with job data
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "JobCell", for: indexPath) as? JobCell else {
             return UITableViewCell()
         }
@@ -87,10 +86,7 @@ extension ManageJobsView: UITableViewDataSource {
         cell.configureCell(jobList: jobListIndex) // Configure the cell with job data
         return cell
     }
-}
-
-// MARK: - UITableViewDelegate
-extension ManageJobsView: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Get the selected job
         let selectedJob = companyListedJobs[indexPath.row]
@@ -107,8 +103,6 @@ extension ManageJobsView: UITableViewDelegate {
         
         // Push JobsDetailsView onto the navigation stack
         navigationController?.pushViewController(jobsDetailsVC, animated: true)
-        
     }
 }
-
 

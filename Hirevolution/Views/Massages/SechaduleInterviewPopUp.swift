@@ -1,13 +1,13 @@
 //
-//  A_Main.swift
+//  SechaduleInterviewPopUp.swift
 //  Hirevolution
 //
-//  Created by BP-36-201-22 on 04/12/2024.
+//  Created by Mac 14 on 14/12/2024.
 //
 
 import UIKit
 
-class A_Main: UIViewController {
+class SechaduleInterviewPopUp: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

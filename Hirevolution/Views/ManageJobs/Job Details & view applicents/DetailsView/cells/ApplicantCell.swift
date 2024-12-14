@@ -1,5 +1,5 @@
 //
-//  CandidateCell.swift
+//  ApplicantCell.swift
 //  Hirevolution
 //
 //  Created by Mac 14 on 12/12/2024.
@@ -8,7 +8,8 @@
 import UIKit
 import FirebaseStorage
 
-class CandidateCell: UICollectionViewCell {
+class ApplicantCell: UICollectionViewCell {
+    
     @IBOutlet weak var ViewHolder: UIView!
     @IBOutlet weak var UserProfileImage: UIImageView!
     @IBOutlet weak var UserName: UILabel!
@@ -18,7 +19,27 @@ class CandidateCell: UICollectionViewCell {
     @IBOutlet weak var WE_jobTitle: UILabel!
     @IBOutlet weak var WE_companyName: UILabel!
     @IBOutlet weak var WE_Experience: UILabel!
-    @IBOutlet weak var ApplicationStatus: UILabel!
+    
+    // New closure to handle taps
+    var onCellTap: (() -> Void)?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        // Ensure ViewHolder receives touch events
+        ViewHolder.isUserInteractionEnabled = true
+    }
+    
+    // Override touchesBegan to capture tap on the ViewHolder
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        // Check if the touch was within the bounds of the ViewHolder
+        if ViewHolder.bounds.contains(touches.first!.location(in: ViewHolder)) {
+            // Trigger the tap event handler
+            onCellTap?()
+        }
+    }
     
     
     func configer(UserApplican: UserApplicationsStuff) {
@@ -43,7 +64,6 @@ class CandidateCell: UICollectionViewCell {
         MainWorkFiled.text = MainWork?.jobFiled
         WE_jobTitle.text = MainWork?.jobTitle
         WE_companyName.text = "Company: \(MainWork!.companyName)"
-        ApplicationStatus.text = UserApplican.applicantStatus
 
         if let startDateString = MainWork?.startDate, let endDateString = MainWork?.endDate {
             if let startDate = convertStringToDate(dateString: startDateString),
@@ -63,47 +83,57 @@ class CandidateCell: UICollectionViewCell {
         
         // Download user profile image
         let imageURL = ApplicanUserPrfile.userProfileImage
-        let imageLogoURL = MainWork?.mainJobCompanyLogo
+        let imageLogoURL = MainWork!.mainJobCompanyLogo
 
-        
         let storage = Storage.storage()
-        let reference = storage.reference(forURL: imageURL)
-        let reference2 = storage.reference(forURL: imageURL)
-        
-        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if let error = error {
-                print("Error downloading image: \(error)")
-                return
-            }
-            
-            if let data = data {
-                let imagee = UIImage(data: data)
-                let newSize = CGSize(width: 74, height: 72)
-                let resizedImage = self.resizeImage(imagee!, to: newSize)
-                
-                // Set the resized image to the UIImageView
-                self.UserProfileImage.image = resizedImage
-                self.UserProfileImage.layer.cornerRadius = 37
-            }
-        }
-        
-        reference2.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if let error = error {
-                print("Error downloading image: \(error)")
-                return
-            }
-            
-            if let data = data {
-                let imagee = UIImage(data: data)
-                let newSize = CGSize(width: 74, height: 70)
-                let resizedImage = self.resizeImage(imagee!, to: newSize)
-                
-                // Set the resized image to the UIImageView
-                self.MainWorkCompanyLogo.image = resizedImage
-                self.MainWorkCompanyLogo.layer.cornerRadius = 15
+
+        // Validate imageURL
+        if imageURL.isEmpty {
+            self.UserProfileImage.backgroundColor = UIColor.gray
+        } else {
+            let reference = storage.reference(forURL: imageURL)
+            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print("Error downloading image: \(error)")
+                    return
+                }
+
+                if let data = data {
+                    let imagee = UIImage(data: data)
+                    let newSize = CGSize(width: 74, height: 72)
+                    let resizedImage = self.resizeImage(imagee!, to: newSize)
+
+                    // Set the resized image to the UIImageView
+                    self.UserProfileImage.image = resizedImage
+                    self.UserProfileImage.layer.borderWidth = 1
+                    self.UserProfileImage.layer.borderColor = UIColor(named: "Blue")?.cgColor
+                    self.UserProfileImage.layer.cornerRadius = 37
+                }
             }
         }
-        
+
+        // Validate imageBAckgroundURL
+        if imageLogoURL.isEmpty {
+            self.UserProfileImage.backgroundColor = UIColor.gray
+        } else {
+            let reference2 = storage.reference(forURL: imageLogoURL)
+            reference2.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print("Error downloading image: \(error)")
+                    return
+                }
+
+                if let data = data {
+                    let imagee = UIImage(data: data)
+                    let newSize = CGSize(width: 74, height: 70)
+                    let resizedImage = self.resizeImage(imagee!, to: newSize)
+
+                    // Set the resized image to the UIImageView
+                    self.MainWorkCompanyLogo.image = resizedImage
+                }
+            }
+        }
+
     }
 
     // Helper function to convert string to Date
@@ -121,5 +151,4 @@ class CandidateCell: UICollectionViewCell {
         }
     }
 
-    
 }

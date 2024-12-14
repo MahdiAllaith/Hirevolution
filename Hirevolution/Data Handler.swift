@@ -13,7 +13,7 @@ import FirebaseFirestore
 struct JobList: Codable {
     let jobID: String // Updated from previous field name
     let CompanyID: String
-    let companyProfile: CompanyProfile // Associated company profile
+    var companyProfile: CompanyProfile // Associated company profile
     var jobTitle: String
     var jobDescription: String
     var jobNotes: String
@@ -26,7 +26,7 @@ struct JobList: Codable {
     var jobRejectedApplicaintsCount: Int
     var jobInterViewedApplicaintsCount: Int
     var jobScheduledForInterviewCount: Int
-    let jobHiredUser: UserProfile? // Optional hired user details
+    var jobHiredUser: UserProfile? // Optional hired user details
     var jobViewsCount: Int
     let jobDatePublished: Date
     var ApplyedUsersApplications: [UserApplicationsStuff] = []
@@ -101,24 +101,29 @@ class AuthManager {
     
     private init() {}
     
+    //nitializes the AuthManager and loads any saved user session.
     func initialize() {
         loadSavedSession()
     }
     
+    //Loads the saved user session from UserDefaults if available.
     func loadSavedSession() {
         if let savedUID = UserDefaults.standard.string(forKey: "userSessionUID") {
             fetchUserData(uid: savedUID)
         }
     }
     
+    // Saves the user session UID to UserDefaults for later use.
     func saveUserSession(user: FirebaseAuth.User) {
         UserDefaults.standard.set(user.uid, forKey: "userSessionUID")
     }
     
+    //Removes the user session from UserDefaults.
     func removeUserSession() {
         UserDefaults.standard.removeObject(forKey: "userSessionUID")
     }
     
+    //Creates a new user with email, password, and other details, saves the user session, and stores user data in Firestore.
     func createUser(withEmail email: String, password: String, fullName: String, option: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
@@ -157,7 +162,8 @@ class AuthManager {
             
         }
     }
-    // this will not create seisson and save data
+    
+    // Registers a new user for Admin (without creating a session) and stores user data in Firestore.
     func AdminRegisterUser(withEmail email: String, password: String, fullName: String, option: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
@@ -199,6 +205,7 @@ class AuthManager {
         }
     }
     
+    //Signs in an existing user with email and password, saves the session, and fetches user data.
     func signInUser(withEmail email: String, password: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
@@ -213,6 +220,7 @@ class AuthManager {
         }
     }
     
+    //Signs out the current user, removes the session, and resets user-related data.
     func signOutUser() {
         try? Auth.auth().signOut()
         removeUserSession()
@@ -222,6 +230,7 @@ class AuthManager {
         UserDefaults.standard.set("user", forKey: "userType")
     }
     
+    //Fetches user data from Firestore based on the user’s UID and decodes it into a User object.
     func fetchUserData(uid: String) {
         Firestore.firestore().collection("users").document(uid).getDocument { (document, error) in
             if let error = error {
@@ -273,6 +282,7 @@ class AuthManager {
         }
     }
     
+    //Creates a new job in Firestore with given parameters.
     func createJob(
         jobTitle: String,
         jobDescription: String,
@@ -326,6 +336,7 @@ class AuthManager {
         }
     }
     
+    // Fetches all jobs from Firestore and stores them in UserDefaults.
     func fetchAllJobs(completion: @escaping (Error?) -> Void) {
         // Fetch jobs from Firestore
         Firestore.firestore().collection("jobs").getDocuments { (snapshot, error) in
@@ -369,7 +380,8 @@ class AuthManager {
             completion(nil)
         }
     }
-
+    
+    // Loads all jobs from UserDefaults into an array of JobList objects.
     func loadAllJobsFromUserDefaults() -> [JobList]? {
         // Retrieve the Data from UserDefaults
         if let savedJobsData = UserDefaults.standard.data(forKey: "AllJobsLists") {
@@ -391,6 +403,7 @@ class AuthManager {
         }
     }
 
+    //Fetches jobs for a specific company from Firestore based on the current user's CompanyID.
     func fetchCompanyJobs(completion: @escaping (Error?) -> Void) {
         guard let currentUser = AuthManager.shared.currentUser else {
             completion(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No current user logged in"]))
@@ -444,7 +457,7 @@ class AuthManager {
         }
     }
 
-    // MARK: - Reinstated Function: Load Jobs from UserDefaults
+    //Loads the jobs for a specific company from UserDefaults.
     func loadCompanyJobsFromUserDefaults() -> [JobList]? {
         // Retrieve the Data from UserDefaults
         if let savedJobsData = UserDefaults.standard.data(forKey: "ApplicationJobsList") {
@@ -466,46 +479,38 @@ class AuthManager {
         }
     }
 
-    func updateJobInDatabase(updatedJob: JobList, completion: @escaping (Error?) -> Void) {
+    //Updates a job's data in Firestore based on the provided updatedJob object.
+    func updateJobInDatabase(jobList: JobList, completion: @escaping (Error?) -> Void) {
+        // Get a reference to Firestore
+        let db = Firestore.firestore()
         
-        let jobID = updatedJob.jobID
-        
-        // Firestore reference to the 'jobs' collection
-        let jobRef = Firestore.firestore().collection("jobs").document(jobID)
-        
-        // Prepare the updated job data
-        let updatedData: [String: Any] = [
-            "jobTitle": updatedJob.jobTitle,
-            "jobDescription": updatedJob.jobDescription,
-            "jobNotes": updatedJob.jobNotes,
-            "jobPotentialSalary": updatedJob.jobPotentialSalary,
-            "jobType": updatedJob.jobType,
-            "jobSkills": updatedJob.jobSkills,
-            "jobFields": updatedJob.jobFields,
-            "jobApplyedApplicationsCount": updatedJob.jobApplyedApplicationsCount,
-            "jobApplicationsCanceledCount": updatedJob.jobApplicationsCanceledCount,
-            "jobRejectedApplicaintsCount": updatedJob.jobRejectedApplicaintsCount,
-            "jobInterViewedApplicaintsCount": updatedJob.jobInterViewedApplicaintsCount,
-            "jobScheduledForInterviewCount": updatedJob.jobScheduledForInterviewCount,
-            "jobHiredUser": updatedJob.jobHiredUser ?? NSNull(),
-            "jobViewsCount": updatedJob.jobViewsCount,
-            "jobDatePublished": updatedJob.jobDatePublished,
-            "ApplyedUsersApplications": updatedJob.ApplyedUsersApplications,
-            "jobStatus": updatedJob.jobStatus
+        // Reference to the document for the job based on jobID
+        let jobRef = db.collection("jobs").document(jobList.jobID)
+
+        // Create a dictionary with the fields to update
+        var updateData: [String: Any] = [
+            "jobTitle": jobList.jobTitle,
+            "jobDescription": jobList.jobDescription,
+            "jobNotes": jobList.jobNotes,
+            "jobPotentialSalary": jobList.jobPotentialSalary,
+            "jobType": jobList.jobType,
+            "jobSkills": jobList.jobSkills,
+            "jobFields": jobList.jobFields
         ]
         
-        // Update the job document in Firestore
-        jobRef.updateData(updatedData) { error in
+        // Perform the update
+        jobRef.updateData(updateData) { error in
             if let error = error {
-                print("Error updating job in Firestore: \(error)")
+                // If there was an error updating the data, call the completion with the error
                 completion(error)
             } else {
-                print("Job successfully updated in Firestore.")
+                // If the update is successful, call the completion with no error
                 completion(nil)
             }
         }
     }
 
+    //increments the view count for a specific job in Firestore.
     func incrementJobViewsCount(jobID: String, completion: @escaping (Error?) -> Void) {
         // Firestore reference to the 'jobs' collection and the document with the given jobID
         let jobRef = Firestore.firestore().collection("jobs").document(jobID)
@@ -549,6 +554,7 @@ class AuthManager {
         }
     }
     
+    //Updates a user's profile in Firestore with the given updatedUserProfile.
     func updateUserProfile(userId: String, updatedUserProfile: UserProfile, completion: @escaping (Error?) -> Void) {
         // Firestore reference to the 'users' collection
         let userRef = Firestore.firestore().collection("users").document(userId)
@@ -576,6 +582,7 @@ class AuthManager {
         }
     }
     
+    // Updates a company's profile in Firestore with the given updatedCompanyProfile.
     func updateCompanyProfile(companyId: String, updatedCompanyProfile: CompanyProfile, completion: @escaping (Error?) -> Void) {
         // Firestore reference to the 'companies' collection
         let companyRef = Firestore.firestore().collection("users").document(companyId)
@@ -603,6 +610,7 @@ class AuthManager {
         }
     }
     
+    //Allows a user to apply for a job, updating both the job and user data in Firestore.
     func applyForJob(userID: String, userProfile: UserProfile, jobID: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
         let jobRef = db.collection("jobs").document(jobID)
@@ -657,7 +665,7 @@ class AuthManager {
                     }
 
                     guard let document = documentSnapshot, document.exists,
-                          var userData = document.data() else {
+                          let userData = document.data() else {
                         completion(.failure(NSError(domain: "UserError", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
                         return
                     }
@@ -686,92 +694,182 @@ class AuthManager {
             }
         }
     }
-    func fetchUsers(withOption option: String, completion: @escaping ([User]?, Error?) -> Void) {
-        let usersRef = Firestore.firestore().collection("users")
-
-        // Create a query that filters documents where the "option" field is equal to the provided option
-        usersRef.whereField("option", isEqualTo: option).getDocuments { (querySnapshot, error) in
+    
+    //This function updates the "isCandidate" status for an applicant in the job's application list.
+    func updateCandidateStatus(jobID: String, isCandidate: Bool, applicantID: String, completion: @escaping (Error?) -> Void) {
+        // Firestore reference to the 'jobs' collection
+        let jobRef = Firestore.firestore().collection("jobs").document(jobID)
+        
+        // Fetch the job document
+        jobRef.getDocument { document, error in
             if let error = error {
-                completion(nil, error)
+                print("Error fetching job document: \(error)")
+                completion(error)
                 return
             }
-
-            guard let querySnapshot = querySnapshot else {
-                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No users found"]))
+            
+            // Check if the document exists
+            guard let document = document, document.exists else {
+                print("Job document does not exist")
+                completion(NSError(domain: "JobNotFound", code: 404, userInfo: nil))
                 return
             }
-
-            var users: [User] = []
-
-            for document in querySnapshot.documents {
-                do {
-                    let user = try document.data(as: User.self)
-                    users.append(user)
-                } catch {
-                    print("Error decoding user data: \(error)")
+            
+            // Retrieve the current applications array
+            if var jobData = document.data(), var applications = jobData["ApplyedUsersApplications"] as? [[String: Any]] {
+                // Find the application by applicantID
+                for (index, application) in applications.enumerated() {
+                    if let applicantUserID = application["applicantUserID"] as? String, applicantUserID == applicantID {
+                        // Update the 'isCandidate' field
+                        applications[index]["isCandidate"] = isCandidate
+                        
+                        // Prepare the updated job data
+                        jobData["ApplyedUsersApplications"] = applications
+                        
+                        // Update the job document in Firestore
+                        jobRef.updateData(jobData) { error in
+                            if let error = error {
+                                print("Error updating job in Firestore: \(error)")
+                                completion(error)
+                            } else {
+                                print("Successfully updated isCandidate status for applicant.")
+                                completion(nil)
+                            }
+                        }
+                        return
+                    }
                 }
+                
+                // If applicantID is not found
+                print("Applicant with ID \(applicantID) not found in the applications list.")
+                completion(NSError(domain: "ApplicantNotFound", code: 404, userInfo: nil))
+            } else {
+                print("Failed to fetch or parse ApplyedUsersApplications")
+                completion(NSError(domain: "DataError", code: 500, userInfo: nil))
             }
-
-            completion(users, nil)
         }
     }
-    func fetchJobs(withCompanyID companyID: String, completion: @escaping ([JobList]?, Error?) -> Void) {
-        let jobsRef = Firestore.firestore().collection("jobs")
-
-        // Create a query that filters documents where the "CompanyID" field is equal to the provided companyID
-        jobsRef.whereField("CompanyID", isEqualTo: companyID).getDocuments { (querySnapshot, error) in
+    
+    //This function updates the applicant's status to "Rejected" and increments the count of rejected applicants in the job document.
+    func rejectApplicantStatus(jobID: String, applicantID: String, completion: @escaping (Error?) -> Void) {
+        // Firestore reference to the 'jobs' collection
+        let jobRef = Firestore.firestore().collection("jobs").document(jobID)
+        
+        // Fetch the job document
+        jobRef.getDocument { document, error in
             if let error = error {
-                completion(nil, error)
+                print("Error fetching job document: \(error)")
+                completion(error)
                 return
             }
-
-            guard let querySnapshot = querySnapshot else {
-                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No jobs found for this company"]))
+            
+            // Check if the document exists
+            guard let document = document, document.exists else {
+                print("Job document does not exist")
+                completion(NSError(domain: "JobNotFound", code: 404, userInfo: nil))
                 return
             }
-
-            var jobs: [JobList] = []
-
-            for document in querySnapshot.documents {
-                do {
-                    let job = try document.data(as: JobList.self)
-                    jobs.append(job)
-                } catch {
-                    print("Error decoding job data: \(error)")
+            
+            // Retrieve the current applications array and rejected count
+            if var jobData = document.data(), var applications = jobData["ApplyedUsersApplications"] as? [[String: Any]] {
+                var rejectedCount = jobData["jobRejectedApplicaintsCount"] as? Int ?? 0
+                
+                // Find the application by applicantID
+                for (index, application) in applications.enumerated() {
+                    if let applicantUserID = application["applicantUserID"] as? String, applicantUserID == applicantID {
+                        // Update the status to "Rejected"
+                        applications[index]["applicantStatus"] = "Rejected"
+                        
+                        // Increment the rejected count
+                        rejectedCount += 1
+                        
+                        // Prepare the updated job data
+                        jobData["ApplyedUsersApplications"] = applications
+                        jobData["jobRejectedApplicaintsCount"] = rejectedCount
+                        
+                        // Update the job document in Firestore
+                        jobRef.updateData(jobData) { error in
+                            if let error = error {
+                                print("Error updating job in Firestore: \(error)")
+                                completion(error)
+                            } else {
+                                print("Successfully updated status to Rejected and incremented the rejected count.")
+                                completion(nil)
+                            }
+                        }
+                        return
+                    }
                 }
+                
+                // If applicantID is not found
+                print("Applicant with ID \(applicantID) not found in the applications list.")
+                completion(NSError(domain: "ApplicantNotFound", code: 404, userInfo: nil))
+            } else {
+                print("Failed to fetch or parse ApplyedUsersApplications")
+                completion(NSError(domain: "DataError", code: 500, userInfo: nil))
             }
-
-            completion(jobs, nil)
         }
     }
-
-    func fetchCompanies(completion: @escaping ([User]?, Error?) -> Void) {
-        let usersRef = Firestore.firestore().collection("users")
-
-        // Create a query that filters documents where the "option" field is equal to "company"
-        usersRef.whereField("option", isEqualTo: "company").getDocuments { (querySnapshot, error) in
+    
+    //This function updates the applicant's status to "Hired" and adds the applicant's profile to the job's hired user information.
+    func hireApplicant(jobID: String, applicantID: String, completion: @escaping (Error?) -> Void) {
+        // Firestore reference to the 'jobs' collection
+        let jobRef = Firestore.firestore().collection("jobs").document(jobID)
+        
+        // Fetch the job document
+        jobRef.getDocument { document, error in
             if let error = error {
-                completion(nil, error)
+                print("Error fetching job document: \(error)")
+                completion(error)
                 return
             }
-
-            guard let querySnapshot = querySnapshot else {
-                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No companies found"]))
+            
+            // Check if the document exists
+            guard let document = document, document.exists else {
+                print("Job document does not exist")
+                completion(NSError(domain: "JobNotFound", code: 404, userInfo: nil))
                 return
             }
-
-            var companies: [User] = []
-
-            for document in querySnapshot.documents {
-                do {
-                    let company = try document.data(as: User.self)
-                    companies.append(company)
-                } catch {
-                    print("Error decoding company data: \(error)")
+            
+            // Retrieve the current applications array
+            if var jobData = document.data(), var applications = jobData["ApplyedUsersApplications"] as? [[String: Any]] {
+                
+                // Find the application by applicantID
+                for (index, application) in applications.enumerated() {
+                    if let applicantUserID = application["applicantUserID"] as? String, applicantUserID == applicantID {
+                        // Update the applicant's status to "Hired"
+                        applications[index]["applicantStatus"] = "Hired"
+                        
+                        // Extract the applicant's profile
+                        if let applicantProfile = application["applicantProfile"] as? [String: Any] {
+                            // Add the applicant's profile to the job's hired user
+                            jobData["jobHiredUser"] = applicantProfile
+                        }
+                        
+                        // Prepare the updated job data
+                        jobData["ApplyedUsersApplications"] = applications
+                        
+                        // Update the job document in Firestore
+                        jobRef.updateData(jobData) { error in
+                            if let error = error {
+                                print("Error updating job in Firestore: \(error)")
+                                completion(error)
+                            } else {
+                                print("Successfully hired the applicant and updated job.")
+                                completion(nil)
+                            }
+                        }
+                        return
+                    }
                 }
+                
+                // If applicantID is not found
+                print("Applicant with ID \(applicantID) not found in the applications list.")
+                completion(NSError(domain: "ApplicantNotFound", code: 404, userInfo: nil))
+            } else {
+                print("Failed to fetch or parse ApplyedUsersApplications")
+                completion(NSError(domain: "DataError", code: 500, userInfo: nil))
             }
-
-            completion(companies, nil)
         }
     }
 }

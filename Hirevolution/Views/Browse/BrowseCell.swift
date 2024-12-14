@@ -8,17 +8,16 @@
 import UIKit
 import FirebaseStorage
 
-
-
+// Protocol to handle the View Job button action
 protocol BrowseCellDelegate: AnyObject {
     func didTapViewJobButton(in cell: BrowseCell)
 }
 
-
 class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    // MARK: - Properties
+
     weak var delegate: BrowseCellDelegate?
-    
     
     @IBOutlet weak var ViewHolder: UIView!
     @IBOutlet weak var B_JobTitle: UILabel!
@@ -26,27 +25,29 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
     @IBOutlet weak var B_JobDiscription: UITextView!
     @IBOutlet weak var b_JobCompanyName: UILabel!
     @IBOutlet weak var B_JobViewedCount: UILabel!
-    // wating for yhya work, updated yhaya wont finsh hia work
     @IBOutlet weak var CompanyLogo: UIImageView!
+
+    private var jobFields: [String] = [] // Store job fields locally for the collection view
+
+    // MARK: - Actions
     
     @IBAction func B_ViewJobButton(_ sender: Any) {
         delegate?.didTapViewJobButton(in: self)
     }
     
-    
-    private var jobFields: [String] = [] // Store job fields locally for the collection view
+    // MARK: - Lifecycle Methods
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         ViewHolder.layer.cornerRadius = 15
-        
-        // Set up collection view delegate and data source
         B_JobFiledCollection.delegate = self
         B_JobFiledCollection.dataSource = self
-
     }
-
+    
+    // MARK: - Helper Methods
+    
+    // Method to resize images to a new size
     func resizeImage(_ image: UIImage, to newSize: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: newSize)
         return renderer.image { _ in
@@ -54,24 +55,31 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
         }
     }
     
-    
     // Configure the cell with job data
     func configureCollectionCells(jobList: JobList) {
         print(jobList.jobViewsCount)
-        // Set the job title
+        
+        // Set job data to UI elements
         B_JobTitle.text = jobList.jobTitle
         B_JobDiscription.text = jobList.jobDescription
         b_JobCompanyName.text = jobList.companyProfile.companyName
         B_JobViewedCount.text = "\(jobList.jobViewsCount)"
         
-        // Update the job fields array and reload the collection view
+        // Update job fields array for the collection view
         jobFields = jobList.jobFields
         
-        if jobList.companyProfile.companyProfileLogo.isEmpty {
+        // Load company logo
+        loadCompanyLogo(from: jobList.companyProfile.companyProfileLogo)
+        
+        // Reload collection view
+        B_JobFiledCollection.reloadData()
+    }
+    
+    // Method to load and set the company logo image
+    private func loadCompanyLogo(from imageURL: String) {
+        if imageURL.isEmpty {
             CompanyLogo.image = UIImage(systemName: "suitcase.fill")
         } else {
-            let imageURL = jobList.companyProfile.companyProfileLogo
-            
             let storage = Storage.storage()
             let reference = storage.reference(forURL: imageURL)
             
@@ -81,23 +89,16 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
                     return
                 }
                 
-                if let data = data {
-                    let imagee = UIImage(data: data)
-                    let newSize = CGSize(width: 80, height: 80)
-                    let resizedImage = self.resizeImage(imagee!, to: newSize)
-                    
-                    // Set the resized image to the UIImageView
+                if let data = data, let image = UIImage(data: data) {
+                    let resizedImage = self.resizeImage(image, to: CGSize(width: 80, height: 80))
                     self.CompanyLogo.image = resizedImage
                 }
             }
         }
-          
-        
-        B_JobFiledCollection.reloadData()
     }
 
     // MARK: - UICollectionViewDataSource
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return jobFields.count
     }
@@ -114,16 +115,15 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 16) // Set text to bold
         label.textColor = UIColor(named: "gray")
-        label.backgroundColor = .clear // Ensure label background doesn't overlap
-        label.numberOfLines = 1 // Adjust as needed
-        label.adjustsFontSizeToFitWidth = true // Ensure text adjusts if too long
-        label.minimumScaleFactor = 0.5 // Scale down if needed to fit
+        label.backgroundColor = .clear
+        label.numberOfLines = 1
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         
-        // Add the label to the cell's content view
+        // Add label to cell content view with constraints
         label.translatesAutoresizingMaskIntoConstraints = false
         cell.contentView.addSubview(label)
         
-        // Add constraints to ensure the label is always properly displayed
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 5),
             label.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -5),
@@ -131,19 +131,15 @@ class BrowseCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewD
             label.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -5)
         ])
         
-        // Customize the cell background
+        // Customize cell background color
         cell.contentView.backgroundColor = UIColor.clear
         
         return cell
     }
-
+    
     // MARK: - UICollectionViewDelegateFlowLayout
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Adjust size based on content (fields are usually short strings)
-        return CGSize(width: 160, height: 45)
+        return CGSize(width: 160, height: 45) // Adjust size based on content
     }
-
 }
-
-

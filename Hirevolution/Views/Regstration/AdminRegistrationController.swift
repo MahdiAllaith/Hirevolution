@@ -74,7 +74,6 @@ class AdminRegistrationController: UIViewController {
                 break
         }
         
-
         // Call AuthManager to create a user
         AuthManager.shared.AdminRegisterUser(withEmail: email, password: password, fullName: fullName, option: option) { error in
             DispatchQueue.main.async {

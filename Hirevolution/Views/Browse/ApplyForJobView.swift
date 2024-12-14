@@ -5,6 +5,7 @@
 //  Created by Mac 14 on 25/11/2024.
 //
 
+
 import UIKit
 
 class ApplyForJobView: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -41,7 +42,7 @@ class ApplyForJobView: UIViewController, UITableViewDataSource, UITableViewDeleg
             ApplyForJobButton.isEnabled = false
         }
         
-        //calling data looder func
+        // Calling data loader func
         JobTitle.text = selectedJob?.jobTitle
         JobPostedDate.text = "\( selectedJob!.jobDatePublished)"
         JobViews.text = "\(selectedJob!.jobViewsCount)"
@@ -53,16 +54,13 @@ class ApplyForJobView: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         setupTables()
         
-        checkForRequirments()// will check requierments if met
-        
-
+        checkForRequirments() // will check requirements if met
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
     }
-    
-    
     
     @IBAction func backbutton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
@@ -92,7 +90,7 @@ class ApplyForJobView: UIViewController, UITableViewDataSource, UITableViewDeleg
             let applyedJobsUser: [String] = (authManager.currentUser?.userApplicationsList!.appliedJobIDLink)!
             for applyedJobsUser in applyedJobsUser {
                 if applyedJobsUser == selectedJob?.jobID{
-                    showAlert(Title: "Error", message: "You allready applied for this job")
+                    showAlert(Title: "Error", message: "You already applied for this job")
                     return
                 }
             }
@@ -106,10 +104,10 @@ class ApplyForJobView: UIViewController, UITableViewDataSource, UITableViewDeleg
                     switch result {
                     case .success():
                         
-                        // fetching data to update
+                        // Fetching data to update
                         self.authManager.fetchUserData(uid: self.authManager.currentUser!.id)
                         
-                        self.showAlert(Title: "Success", message: "Your application was Successfully, wait for a respond from empolyer")
+                        self.showAlert(Title: "Success", message: "Your application was successful, wait for a response from employer")
                         
                         self.navigationController?.popToRootViewController(animated: true)
                         
@@ -118,16 +116,13 @@ class ApplyForJobView: UIViewController, UITableViewDataSource, UITableViewDeleg
                     }
                 }
                 
-                
-            }else{
-                showAlert(Title: "Requierments not met", message: "You daont have the nenessary requierments to apply for this job")
+            } else {
+                showAlert(Title: "Requirements not met", message: "You don't have the necessary requirements to apply for this job")
             }
             
-        }else{
-            showAlert(Title: "No Profile", message: "Yor didn't create you profile pleas!, to apply for job list you must have create your profile")
+        } else {
+            showAlert(Title: "No Profile", message: "You didn't create your profile please! To apply for the job list you must have created your profile")
         }
-        
-        
     }
     
     private func showAlert(Title: String, message: String) {
