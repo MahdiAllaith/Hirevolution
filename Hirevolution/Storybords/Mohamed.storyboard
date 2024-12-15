@@ -6,7 +6,6 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +40,7 @@
                                                     <rect key="frame" x="20" y="20" width="353" height="327"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWc-TM-Jy7">
-                                                            <rect key="frame" x="0.0" y="12" width="353" height="32"/>
+                                                            <rect key="frame" x="0.0" y="12" width="335" height="32"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                             <color key="textColor" name="Blue"/>
                                                             <nil key="highlightedColor"/>
@@ -136,6 +135,7 @@
                                                         <constraint firstItem="76z-rY-wjZ" firstAttribute="top" secondItem="WmC-kY-43q" secondAttribute="bottom" constant="26" id="TW1-CE-bIN"/>
                                                         <constraint firstAttribute="trailing" secondItem="m8c-eZ-39J" secondAttribute="trailing" constant="95" id="Vna-Yh-Qnr"/>
                                                         <constraint firstItem="nH5-uX-dlf" firstAttribute="top" secondItem="oye-2A-eK2" secondAttribute="bottom" constant="30" id="Xpg-BO-h9A"/>
+                                                        <constraint firstItem="eWc-TM-Jy7" firstAttribute="leading" secondItem="1jt-YR-DTE" secondAttribute="leading" constant="18" id="Z9U-Cz-QIn"/>
                                                         <constraint firstItem="Dah-86-M78" firstAttribute="leading" secondItem="4z2-dl-jSP" secondAttribute="trailing" constant="2" id="aSV-I3-nfk"/>
                                                         <constraint firstAttribute="bottom" secondItem="76z-rY-wjZ" secondAttribute="bottom" constant="17" id="eA3-ER-meC"/>
                                                         <constraint firstItem="76z-rY-wjZ" firstAttribute="leading" secondItem="1jt-YR-DTE" secondAttribute="leading" constant="73" id="ehm-BE-Jr6"/>
@@ -147,6 +147,7 @@
                                                         <constraint firstItem="4z2-dl-jSP" firstAttribute="top" secondItem="nH5-uX-dlf" secondAttribute="bottom" constant="29" id="iwW-C1-JGm"/>
                                                         <constraint firstItem="WmC-kY-43q" firstAttribute="top" secondItem="m8c-eZ-39J" secondAttribute="bottom" constant="15" id="jAh-eg-3NR"/>
                                                         <constraint firstAttribute="trailing" secondItem="WmC-kY-43q" secondAttribute="trailing" constant="100" id="kMc-IY-rWP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="eWc-TM-Jy7" secondAttribute="trailing" constant="18" id="kr0-b9-0tX"/>
                                                         <constraint firstItem="m8c-eZ-39J" firstAttribute="leading" secondItem="1jt-YR-DTE" secondAttribute="leading" constant="8" id="mje-qd-yGc"/>
                                                         <constraint firstItem="94I-lT-OHe" firstAttribute="leading" secondItem="1jt-YR-DTE" secondAttribute="leading" constant="13" id="npS-WA-tV5"/>
                                                         <constraint firstItem="94I-lT-OHe" firstAttribute="top" secondItem="m8c-eZ-39J" secondAttribute="bottom" constant="12" id="stS-Hb-KnN"/>
@@ -172,6 +173,7 @@
                                             <outlet property="B_JobFiledCollection" destination="oye-2A-eK2" id="7He-dr-F0p"/>
                                             <outlet property="B_JobTitle" destination="eWc-TM-Jy7" id="Vpo-Po-456"/>
                                             <outlet property="B_JobViewedCount" destination="Dah-86-M78" id="zxF-G6-cez"/>
+                                            <outlet property="CompanyLogo" destination="nH5-uX-dlf" id="1Yo-Se-z49"/>
                                             <outlet property="ViewHolder" destination="1jt-YR-DTE" id="Etk-n5-XyK"/>
                                             <outlet property="b_JobCompanyName" destination="WmC-kY-43q" id="mbs-ba-IYH"/>
                                         </connections>
@@ -294,33 +296,40 @@
             </objects>
             <point key="canvasLocation" x="-2405" y="2031"/>
         </scene>
-        <!--Apply For Job View-->
-        <scene sceneID="8hq-mF-yft">
+        <!--Sechadule Interview Pop Up-->
+        <scene sceneID="sAT-E0-wgv">
             <objects>
-                <viewController storyboardIdentifier="ApplyForJobView" id="fie-wk-dl0" customClass="ApplyForJobView" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lOX-KN-9wN">
+                <viewController storyboardIdentifier="SechaduleInterviewPopUp" id="lpX-eA-Dfh" customClass="SechaduleInterviewPopUp" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w42-Zv-W7L">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUV-m6-q8w">
-                                <rect key="frame" x="146" y="189" width="75" height="39"/>
+                            <datePicker contentMode="scaleToFill" semanticContentAttribute="spatial" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gx5-Wl-gZ5">
+                                <rect key="frame" x="0.0" y="18" width="304" height="101"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="Blue"/>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hL-hm-viV">
+                                <rect key="frame" x="55" y="127" width="283" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" name="Blue"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="backbutton:" destination="fie-wk-dl0" eventType="touchUpInside" id="Wfw-4B-n2j"/>
-                                    <action selector="backbutton:" destination="C6A-HE-oxe" eventType="touchUpInside" id="YHm-jh-GkB"/>
-                                </connections>
+                                <buttonConfiguration key="configuration" style="plain" title="Send Interview Date">
+                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                        <color key="backgroundColor" name="BackgroundBase"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="25"/>
+                                </buttonConfiguration>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="pMP-nv-iTt"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="8gM-Cf-H2R"/>
+                        <color key="backgroundColor" name="Settings"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rc2-KQ-4c9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="C6A-HE-oxe" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bxw-AG-v80" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2372" y="2740"/>
+            <point key="canvasLocation" x="-798" y="2031"/>
         </scene>
     </scenes>
     <resources>
@@ -339,14 +348,14 @@
         <namedColor name="BrowsFiledCells">
             <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Settings">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gray">
             <color red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

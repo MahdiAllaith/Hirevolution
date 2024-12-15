@@ -9,19 +9,23 @@ import UIKit
 
 class BrowseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var FilerButton: UIButton!
     @IBOutlet weak var sereachTextFiled: UITextField!
+    @IBOutlet weak var AppAllJobsTable: UITableView!
+    
+    // MARK: - Properties
     
     let authManager = AuthManager.shared
+    var AppListedJobs: [JobList] = [] // Array to hold all the jobs data
     
-    // Array to hold all the jobs data
-    var AppListedJobs: [JobList] = []
-    
-    @IBOutlet weak var AppAllJobsTable: UITableView!
+    // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // UI setup
         FilerButton.layer.cornerRadius = 8
         sereachTextFiled.layer.cornerRadius = 8
         
@@ -40,8 +44,13 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         // Reload the table to display the data
         AppAllJobsTable.reloadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
 
-    // MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return AppListedJobs.count
@@ -52,6 +61,7 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
             return UITableViewCell()
         }
         
+        // Configure cell with job data
         let jobListIndex = AppListedJobs[indexPath.row]
         cell.configureCollectionCells(jobList: jobListIndex)
         cell.delegate = self // Set the delegate
@@ -62,12 +72,14 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-    // MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Do nothing to disable cell selection
     }
 }
+
+// MARK: - BrowseCellDelegate
 
 extension BrowseViewController: BrowseCellDelegate {
     func didTapViewJobButton(in cell: BrowseCell) {
@@ -82,7 +94,7 @@ extension BrowseViewController: BrowseCellDelegate {
                 // Pass the selected job to ApplyForJobView
                 applyJobVC.selectedJob = selectedJob
                 
-                // Increment by 1 for viewing job
+                // Increment job views count
                 authManager.incrementJobViewsCount(jobID: selectedJob.jobID) { error in
                     if let error = error {
                         // Handle error (e.g., show alert)
@@ -99,7 +111,3 @@ extension BrowseViewController: BrowseCellDelegate {
         }
     }
 }
-
-
-
-

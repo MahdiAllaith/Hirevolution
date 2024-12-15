@@ -258,23 +258,22 @@ class RegistrationController: UIViewController {
         ])
     }
     
+    func resizeImage(_ image: UIImage, to newSize: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
+    
     //colse button styleing
     private func styleCloseButton() {
         if let currentImage = ColseButton.imageView?.image {
             let boldImage = currentImage.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
-            let resizedImage = boldImage.resized(to: CGSize(width: 40, height: 40))
+            let resizedImage = resizeImage(boldImage, to: CGSize(width: 40, height: 40))
             let templateImage = resizedImage.withRenderingMode(.alwaysTemplate)
             ColseButton.setImage(templateImage, for: .normal)
-            ColseButton.tintColor = UIColor(named: "Gold")
+            ColseButton.tintColor = UIColor(named: "Blue")
         }
     }
 }
 
-extension UIImage {
-    func resized(to newSize: CGSize) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: newSize)
-        return renderer.image { _ in
-            self.draw(in: CGRect(origin: .zero, size: newSize))
-        }
-    }
-}

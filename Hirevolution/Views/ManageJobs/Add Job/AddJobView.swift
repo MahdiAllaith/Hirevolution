@@ -33,6 +33,9 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureTextView(JobDiscription)
+        configureTextView(JobNots)
+        
         setupUI()
         setupTables()
     }
@@ -61,7 +64,7 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
         let jobDescription = JobDiscription.text ?? ""
         let jobNotes = JobNots.text ?? ""
         let jobPotentialSalary = jobSalary.text ?? ""
-        let jobSkills = selectedSkills.isEmpty ? ["unknown"] : selectedSkills
+        let jobSkills = selectedSkills
         let jobFields = selectedJobs
 
         // Map segment index to job type string
@@ -86,6 +89,12 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
             showAlert(message: "Job Description is required.")
             return
         }
+        
+        guard !jobSkills.isEmpty else {
+            showAlert(message: "At least one Job Skill is required.")
+            return
+        }
+        
         guard !jobFields.isEmpty else {
             showAlert(message: "At least one Job Field is required.")
             return
@@ -108,10 +117,18 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
                 self?.showAlert(message: "Job successfully created!") {
                     // Reload the data and navigate back after the success alert
                     
-                    // Get the new data
+                    // Get the new data for browse
                     self?.authManager.fetchAllJobs { error in
                         if let error = error {
                             print("Error fetching jobs: \(error.localizedDescription)")
+                        } else {
+                            print("AppDelegate: Jobs fetched and stored in UserDefaults successfully.")
+                        }
+                    }
+                    // Get the new data for company list
+                    self?.authManager.fetchCompanyJobs() { error in
+                        if let error = error {
+                            print("Error fetching comapny jobs: \(error.localizedDescription)")
                         } else {
                             print("AppDelegate: Jobs fetched and stored in UserDefaults successfully.")
                         }
@@ -138,7 +155,7 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
     private func setupUI() {
         // Configure UI elements
         [JobTitle, jobSalary].forEach { configureTextField($0) }
-        [JobDiscription, JobNots].forEach { configureTextView($0) }
+//        [JobDiscription, JobNots].forEach { configureTextView($0) }
         [SkillsTable, JobFiledsTable].forEach { configureTableView($0) }
     }
     
@@ -184,9 +201,13 @@ class AddJobView: UIViewController, JobFiledPopupDelegate, UITableViewDataSource
 
     // Configure UITextView to add radius and stroke
     private func configureTextView(_ textView: UITextView?) {
-        textView?.layer.cornerRadius = 8
-        textView?.layer.borderColor = UIColor(named: "Blue")?.cgColor
-        textView?.layer.borderWidth = 2
+        guard let textView = textView else{ return }
+        
+        textView.layer.cornerRadius = 8
+        textView.layer.borderColor = UIColor(named: "Blue")?.cgColor
+        textView.layer.borderWidth = 2
+        
+        textView.clipsToBounds = true
     }
     
     private func configureTableView(_ table: UITableView?) {
