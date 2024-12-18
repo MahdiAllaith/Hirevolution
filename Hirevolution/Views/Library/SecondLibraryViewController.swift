@@ -24,28 +24,28 @@ class SecondLibraryViewController: UIViewController, UICollectionViewDelegate, U
             // Check the title of the selected card and append accordingly
             if selectedCard.title == "  General Tips" {
                 // Append General Tips related cards
-                arrCards.append(Card(photo: workCardImage!, title: "Interview Tips"))
-                arrCards.append(Card(photo: workCardImage!, title: "Time Management Tips"))
-                arrCards.append(Card(photo: workCardImage!, title: "CV Building Tips"))
-                arrCards.append(Card(photo: workCardImage!, title: "Public Speaking Tips"))
+                arrCards.append(Card(photo: workCardImage!, title: " Interview Tips"))
+                arrCards.append(Card(photo: workCardImage!, title: " Time Management Tips"))
+                arrCards.append(Card(photo: workCardImage!, title: " CV Building Tips"))
+                arrCards.append(Card(photo: workCardImage!, title: " Public Speaking Tips"))
             } else if selectedCard.title == "  IT" {
                 // Append IT related cards
-                arrCards.append(Card(photo: workCardImage!, title: "The Rise of IOT"))
-                arrCards.append(Card(photo: workCardImage!, title: "Introduction to Cloud Computing"))
-                arrCards.append(Card(photo: workCardImage!, title: "What is CyberSecurity?"))
-                arrCards.append(Card(photo: workCardImage!, title: "How to Start a Career in Software Development"))
+                arrCards.append(Card(photo: workCardImage!, title: " The Rise of IOT"))
+                arrCards.append(Card(photo: workCardImage!, title: " Introduction to Cloud Computing"))
+                arrCards.append(Card(photo: workCardImage!, title: " What is CyberSecurity?"))
+                arrCards.append(Card(photo: workCardImage!, title: " How to Start a Career in Software Development"))
             } else if selectedCard.title == "  Engineering" {
                 // Append Engineering related cards
-                arrCards.append(Card(photo: workCardImage!, title: "How to Choose the Right Engineering Field"))
-                arrCards.append(Card(photo: workCardImage!, title: "The Importance of Ethics in Engineering"))
-                arrCards.append(Card(photo: workCardImage!, title: "How to Land Your First Engineering Job"))
-                arrCards.append(Card(photo: workCardImage!, title: "What is Civil Engineering?"))
+                arrCards.append(Card(photo: workCardImage!, title: " How to Choose the Right Engineering Field"))
+                arrCards.append(Card(photo: workCardImage!, title: " The Importance of Ethics in Engineering"))
+                arrCards.append(Card(photo: workCardImage!, title: " How to Land Your First Engineering Job"))
+                arrCards.append(Card(photo: workCardImage!, title: " What is Civil Engineering?"))
             } else if selectedCard.title == "  Business" {
                 // Append Business related cards
-                arrCards.append(Card(photo: workCardImage!, title: "How to Start Your Own Business"))
-                arrCards.append(Card(photo: workCardImage!, title: "The Impact of AI on Business Operations"))
-                arrCards.append(Card(photo: workCardImage!, title: "The Basics of Digital Marketing"))
-                arrCards.append(Card(photo: workCardImage!, title: "The Future of E-commerce"))
+                arrCards.append(Card(photo: workCardImage!, title: " How to Start Your Own Business"))
+                arrCards.append(Card(photo: workCardImage!, title: " The Impact of AI on Business Operations"))
+                arrCards.append(Card(photo: workCardImage!, title: " The Basics of Digital Marketing"))
+                arrCards.append(Card(photo: workCardImage!, title: " The Future of E-commerce"))
             }
         }
         
