@@ -11,10 +11,13 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
     
     
 
+    @IBOutlet weak var jobStatusCollectionView: UICollectionView!
     @IBOutlet weak var jobRecCollectionView: UICollectionView!
     var jobRecommendations: [Job] = [
-            Job(jobTitle: "Software Engineer", company: "Tech Corp", description: "Develop high-quality software.", role: "Developer", salary: "$80,000", location: "New York", image: UIImage(named: "workCardImage")!),
-            Job(jobTitle: "Product Manager", company: "Product Inc.", description: "Lead product development.", role: "Manager", salary: "$100,000", location: "San Francisco", image: UIImage(named: "workCardImage")!),
+            Job(jobTitle: "Software Engineer", company: "Tech Corp", description: "Join Tech Corp as a Software Engineer and contribute to building cutting-edge software solutions. You will work with a dynamic team to develop scalable systems and improve user experiences. Focus on writing clean, efficient code and collaborating across departments to deliver top-quality products. Grow your career through mentorship and continuous learning in a supportive environment.", role: "Developer", salary: "$80,000", location: "New York", image: UIImage(named: "workCardImage")!),
+            Job(jobTitle: "Product Manager", company: "Product Inc.", description: "As a Product Manager at Product Inc., you’ll oversee the development of key products from concept to launch. Collaborate with engineering and design teams to define product features, prioritize tasks, and deliver on business goals. Drive product strategies and use data to continuously improve the user experience and product performance.", role: "Manager", salary: "$100,000", location: "San Francisco", image: UIImage(named: "workCardImage")!),
+            Job(jobTitle: "Product Manager", company: "Product Inc.", description: "As a Product Manager at Product Inc., you’ll oversee the development of key products from concept to launch. Collaborate with engineering and design teams to define product features, prioritize tasks, and deliver on business goals. Drive product strategies and use data to continuously improve the user experience and product performance.", role: "Manager", salary: "$100,000", location: "San Francisco", image: UIImage(named: "workCardImage")!),
+            Job(jobTitle: "Product Manager", company: "Product Inc.", description: "As a Product Manager at Product Inc., you’ll oversee the development of key products from concept to launch. Collaborate with engineering and design teams to define product features, prioritize tasks, and deliver on business goals. Drive product strategies and use data to continuously improve the user experience and product performance.", role: "Manager", salary: "$100,000", location: "San Francisco", image: UIImage(named: "workCardImage")!),
             // Add more jobs here...
         ]
     override func viewDidLoad() {
@@ -22,7 +25,10 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
 
         jobRecCollectionView.delegate = self
         jobRecCollectionView.dataSource = self
+        jobStatusCollectionView.delegate = self
+        jobStatusCollectionView.dataSource = self
     }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return jobRecommendations.count
         }
@@ -65,4 +71,10 @@ struct Job {
     var salary: String
     var location: String
     var image: UIImage
+}
+struct JobStatus {
+    var jobTitle: String
+    var company: String
+    var jobStatus: String?
+    var jobApplicationDate: String?
 }
