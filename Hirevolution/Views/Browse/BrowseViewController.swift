@@ -1,6 +1,6 @@
 import UIKit
 
-class BrowseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, JobFiledFilterDelegate {
+class BrowseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
 
     // MARK: - Outlets
     @IBOutlet weak var FilerButton: UIButton!
@@ -65,8 +65,7 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         // Configure the cell with job data
         let job = searchJobs[indexPath.row]
         cell.configureCollectionCells(jobList: job)
-        cell.delegate = self
-
+       
         // Disable the default selection style for cells
         cell.selectionStyle = .none
 
@@ -77,17 +76,7 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func filterButtonTapped(_ sender: UIButton) {
         // Instantiate the JobFiledFilter View Controller from the storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let jobFilterVC = storyboard.instantiateViewController(withIdentifier: "JobFiledFilter") as? JobFiledFilter {
-            // Set up the delegate for the filter
-            jobFilterVC.delegate = self
-
-            // Pass the current selected job fields to the filter
-            jobFilterVC.selectedJobs = selectedJobFields
-
-            // Present the filter popup
-            self.present(jobFilterVC, animated: true, completion: nil)
-        }
-    }
+        
 
     // MARK: - Search Text Field Handling
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -147,20 +136,4 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         print("Filtered jobs count: \(searchJobs.count)") // Debug statement
     }
 }
-
-// MARK: - BrowseCellDelegate
-extension BrowseViewController: BrowseCellDelegate {
-    func didTapViewJobButton(in cell: BrowseCell) {
-        // Get the index path of the selected cell
-        if let indexPath = AppAllJobsTable.indexPath(for: cell) {
-            let selectedJob = searchJobs[indexPath.row]
-
-            // Push the selected job details view
-            let selectedJobDetailsView = UIStoryboard(name: "Mahdi", bundle: nil)
-            if let applyJobVC = selectedJobDetailsView.instantiateViewController(withIdentifier: "ApplyForJobView") as? ApplyForJobView {
-                applyJobVC.selectedJob = selectedJob
-                navigationController?.pushViewController(applyJobVC, animated: true)
-            }
-        }
-    }
 }

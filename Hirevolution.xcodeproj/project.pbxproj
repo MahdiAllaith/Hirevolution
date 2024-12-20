@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		574F429F2D0DCFCF00641E70 /* JobFiledFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574F429E2D0DCFCE00641E70 /* JobFiledFilter.swift */; };
+		3F0466E02D15A9CF00EA45EB /* StreamChat in Frameworks */ = {isa = PBXBuildFile; productRef = 3F0466DF2D15A9CF00EA45EB /* StreamChat */; };
+		3F0466E22D15A9CF00EA45EB /* StreamChatTestMockServer in Frameworks */ = {isa = PBXBuildFile; productRef = 3F0466E12D15A9CF00EA45EB /* StreamChatTestMockServer */; };
+		3F0466E42D15A9CF00EA45EB /* StreamChatTestTools in Frameworks */ = {isa = PBXBuildFile; productRef = 3F0466E32D15A9CF00EA45EB /* StreamChatTestTools */; };
+		3F0466E62D15A9CF00EA45EB /* StreamChatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3F0466E52D15A9CF00EA45EB /* StreamChatUI */; };
+		3F0466EB2D15BF9900EA45EB /* DemoChannelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0466EA2D15BF9900EA45EB /* DemoChannelVC.swift */; };
+		574F429F2D0DCFCF00641E70 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574F429E2D0DCFCE00641E70 /* Interaction.swift */; };
 		68046F182CEAC1AD00DB29CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F172CEAC1AD00DB29CF /* AppDelegate.swift */; };
 		68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */; };
 		68046F1F2CEAC1AD00DB29CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68046F1D2CEAC1AD00DB29CF /* Main.storyboard */; };
@@ -61,7 +66,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		574F429E2D0DCFCE00641E70 /* JobFiledFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobFiledFilter.swift; sourceTree = "<group>"; };
+		3F0466EA2D15BF9900EA45EB /* DemoChannelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoChannelVC.swift; sourceTree = "<group>"; };
+		574F429E2D0DCFCE00641E70 /* Interaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interaction.swift; sourceTree = "<group>"; };
 		68046F142CEAC1AD00DB29CF /* Hirevolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hirevolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68046F172CEAC1AD00DB29CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,11 +122,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0466E42D15A9CF00EA45EB /* StreamChatTestTools in Frameworks */,
+				3F0466E02D15A9CF00EA45EB /* StreamChat in Frameworks */,
 				6834E9792CED5A070028BCD3 /* FirebaseMessaging in Frameworks */,
+				3F0466E62D15A9CF00EA45EB /* StreamChatUI in Frameworks */,
 				6834E9752CED5A070028BCD3 /* FirebaseDatabase in Frameworks */,
 				6834E9732CED5A060028BCD3 /* FirebaseAuth in Frameworks */,
 				6834E97B2CED5A070028BCD3 /* FirebaseStorage in Frameworks */,
 				6834E9772CED5A070028BCD3 /* FirebaseFirestore in Frameworks */,
+				3F0466E22D15A9CF00EA45EB /* StreamChatTestMockServer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +222,6 @@
 			children = (
 				68BFC7DB2CF0E24700F13DA1 /* BrowseCell.swift */,
 				68BFC7DD2CF421DD00F13DA1 /* BrowseViewController.swift */,
-				574F429E2D0DCFCE00641E70 /* JobFiledFilter.swift */,
 				68BFC7DF2CF4AFD600F13DA1 /* ApplyForJobView.swift */,
 			);
 			path = Browse;
@@ -316,6 +325,8 @@
 			isa = PBXGroup;
 			children = (
 				68E9EFD12D0D280000D741FC /* SechaduleInterviewPopUp.swift */,
+				574F429E2D0DCFCE00641E70 /* Interaction.swift */,
+				3F0466EA2D15BF9900EA45EB /* DemoChannelVC.swift */,
 			);
 			path = Massages;
 			sourceTree = "<group>";
@@ -363,6 +374,10 @@
 				6834E9762CED5A070028BCD3 /* FirebaseFirestore */,
 				6834E9782CED5A070028BCD3 /* FirebaseMessaging */,
 				6834E97A2CED5A070028BCD3 /* FirebaseStorage */,
+				3F0466DF2D15A9CF00EA45EB /* StreamChat */,
+				3F0466E12D15A9CF00EA45EB /* StreamChatTestMockServer */,
+				3F0466E32D15A9CF00EA45EB /* StreamChatTestTools */,
+				3F0466E52D15A9CF00EA45EB /* StreamChatUI */,
 			);
 			productName = Hirevolution;
 			productReference = 68046F142CEAC1AD00DB29CF /* Hirevolution.app */;
@@ -394,6 +409,7 @@
 			mainGroup = 68046F0B2CEAC1AD00DB29CF;
 			packageReferences = (
 				6834E9712CED5A060028BCD3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3F0466DE2D15A9CF00EA45EB /* XCRemoteSwiftPackageReference "stream-chat-swift" */,
 			);
 			productRefGroup = 68046F152CEAC1AD00DB29CF /* Products */;
 			projectDirPath = "";
@@ -432,7 +448,7 @@
 				68046F2F2CEAC2F900DB29CF /* TabBar.swift in Sources */,
 				68BFC7E02CF4AFD600F13DA1 /* ApplyForJobView.swift in Sources */,
 				68D1966C2CEEF16200486E15 /* ManageJobsView.swift in Sources */,
-				574F429F2D0DCFCF00641E70 /* JobFiledFilter.swift in Sources */,
+				574F429F2D0DCFCF00641E70 /* Interaction.swift in Sources */,
 				68E9EFC72D0BDB3400D741FC /* ViewedApplicantProfile.swift in Sources */,
 				68D86F862CECF4600084A32D /* AddJobView.swift in Sources */,
 				68E405D32CED156700E9540E /* CustomStyleTabBar.swift in Sources */,
@@ -452,6 +468,7 @@
 				68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */,
 				68BFC7DC2CF0E24700F13DA1 /* BrowseCell.swift in Sources */,
 				68BFC7DE2CF421DD00F13DA1 /* BrowseViewController.swift in Sources */,
+				3F0466EB2D15BF9900EA45EB /* DemoChannelVC.swift in Sources */,
 				68E9EFD22D0D280000D741FC /* SechaduleInterviewPopUp.swift in Sources */,
 				68E9EFC52D0B786900D741FC /* CandidateCell.swift in Sources */,
 				68E0E8C92CF6D8F7001E491F /* EditJobView.swift in Sources */,
@@ -691,6 +708,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3F0466DE2D15A9CF00EA45EB /* XCRemoteSwiftPackageReference "stream-chat-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getstream/stream-chat-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		6834E9712CED5A060028BCD3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -702,6 +727,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3F0466DF2D15A9CF00EA45EB /* StreamChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F0466DE2D15A9CF00EA45EB /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChat;
+		};
+		3F0466E12D15A9CF00EA45EB /* StreamChatTestMockServer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F0466DE2D15A9CF00EA45EB /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChatTestMockServer;
+		};
+		3F0466E32D15A9CF00EA45EB /* StreamChatTestTools */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F0466DE2D15A9CF00EA45EB /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChatTestTools;
+		};
+		3F0466E52D15A9CF00EA45EB /* StreamChatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F0466DE2D15A9CF00EA45EB /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChatUI;
+		};
 		6834E9722CED5A060028BCD3 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6834E9712CED5A060028BCD3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
