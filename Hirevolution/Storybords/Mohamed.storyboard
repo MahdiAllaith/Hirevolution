@@ -249,7 +249,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Filter"/>
                                         <connections>
-                                            <segue destination="QhF-Yi-DNN" kind="popoverPresentation" popoverAnchorView="h0b-t7-yAR" id="SVD-uN-lHh">
+                                            <segue destination="akV-H5-Bgk" kind="popoverPresentation" popoverAnchorView="h0b-t7-yAR" id="AaU-tr-UKj">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
@@ -335,51 +335,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bxw-AG-v80" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-689" y="2031"/>
+            <point key="canvasLocation" x="-703" y="2031"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="8uZ-jn-OxP">
+        <!--Job Filed Popup-->
+        <scene sceneID="e1v-hh-BUo">
             <objects>
-                <tableViewController id="tRI-PL-SUJ" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="wIr-FL-w7j">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="67" id="gZB-Bd-zha">
-                                <rect key="frame" x="0.0" y="50" width="393" height="67"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gZB-Bd-zha" id="IDC-fE-Sx6">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="67"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="tRI-PL-SUJ" id="S9V-Bq-AmH"/>
-                            <outlet property="delegate" destination="tRI-PL-SUJ" id="ahW-6G-zEq"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yTL-cj-dpP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1492.3664122137404" y="2704.929577464789"/>
-        </scene>
-        <!--Job Filed Filter-->
-        <scene sceneID="ysM-NQ-Jc1">
-            <objects>
-                <viewController storyboardIdentifier="JobFiledFilter" id="QhF-Yi-DNN" customClass="JobFiledFilter" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qCO-4P-XW4">
+                <viewController storyboardIdentifier="JobFiledPopup" id="akV-H5-Bgk" customClass="JobFiledPopup" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Zg-4r-CMz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ed8-A7-677">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mOv-vV-xT5">
                                 <rect key="frame" x="11" y="30" width="371" height="50"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JrE-5q-j5Z">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6V6-rb-KDa">
                                         <rect key="frame" x="0.0" y="0.0" width="371" height="51"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="UMJ-6L-Fjj"/>
+                                            <constraint firstAttribute="height" constant="50" id="bfe-tD-3mI"/>
                                         </constraints>
                                         <segments>
                                             <segment title="ICT"/>
@@ -388,34 +360,34 @@
                                             <segment title="Other"/>
                                         </segments>
                                         <connections>
-                                            <action selector="segmentChanged:" destination="QhF-Yi-DNN" eventType="valueChanged" id="ZfO-6n-9ai"/>
+                                            <action selector="segmentChanged:" destination="akV-H5-Bgk" eventType="valueChanged" id="gHk-Ho-HDk"/>
                                         </connections>
                                     </segmentedControl>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="S1m-bf-T1K">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ipO-cH-jym">
                                 <rect key="frame" x="0.0" y="138" width="370" height="270"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" name="AccentColor"/>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="Aul-fB-khl"/>
+                        <viewLayoutGuide key="safeArea" id="8nA-fx-vEo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Aul-fB-khl" firstAttribute="trailing" secondItem="ed8-A7-677" secondAttribute="trailing" constant="11" id="Dby-Xo-k0t"/>
-                            <constraint firstItem="ed8-A7-677" firstAttribute="leading" secondItem="Aul-fB-khl" secondAttribute="leading" constant="11" id="sxV-AP-lVC"/>
-                            <constraint firstItem="ed8-A7-677" firstAttribute="top" secondItem="Aul-fB-khl" secondAttribute="top" constant="30" id="z97-gl-xsg"/>
+                            <constraint firstItem="8nA-fx-vEo" firstAttribute="trailing" secondItem="mOv-vV-xT5" secondAttribute="trailing" constant="11" id="Ejk-JW-w8x"/>
+                            <constraint firstItem="mOv-vV-xT5" firstAttribute="leading" secondItem="8nA-fx-vEo" secondAttribute="leading" constant="11" id="qUI-o8-YYe"/>
+                            <constraint firstItem="mOv-vV-xT5" firstAttribute="top" secondItem="8nA-fx-vEo" secondAttribute="top" constant="30" id="rv0-Al-DeZ"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="FiledJobsTable" destination="S1m-bf-T1K" id="1U8-tk-kzH"/>
-                        <outlet property="FiledType" destination="JrE-5q-j5Z" id="LAF-rd-P7m"/>
+                        <outlet property="FiledJobsTable" destination="ipO-cH-jym" id="CN9-jT-uKM"/>
+                        <outlet property="FiledType" destination="6V6-rb-KDa" id="S9v-Yr-WJj"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="05d-z9-c4o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gOS-DX-JzS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-708" y="1351"/>
+            <point key="canvasLocation" x="-702" y="1381"/>
         </scene>
     </scenes>
     <resources>

@@ -13,6 +13,27 @@ class TabBar: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        
+        let isDarkModeEnabled = UserDefaults.standard.string(forKey: "isDarkMode")
+        
+        if isDarkModeEnabled == "ON"{
+            // Set the interface style for the key window based on stored setting
+            if let window = UIApplication.shared.connectedScenes
+                .compactMap({ ($0 as? UIWindowScene)?.windows.first })
+                .first {
+                window.overrideUserInterfaceStyle = (isDarkModeEnabled != nil) ? .dark : .light
+            }
+            
+        }else{
+            if let window = UIApplication.shared.connectedScenes
+                            .compactMap({ $0 as? UIWindowScene })
+                            .first?.windows.first {
+                window.overrideUserInterfaceStyle = .light // Force light mode
+            }
+            
+        }
+        
+        
         updateViewControllers()
         // Do any additional setup after loading the view.
     }

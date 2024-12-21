@@ -60,7 +60,7 @@
         <!--Settings-->
         <scene sceneID="sau-y9-jAb">
             <objects>
-                <tableViewController id="Loq-JN-cnY" userLabel="Settings" customClass="SettingsTableView" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsTableView" id="Loq-JN-cnY" userLabel="Settings" customClass="SettingsTableView" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="Ixq-2s-SGU" userLabel="SettingsTable">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
