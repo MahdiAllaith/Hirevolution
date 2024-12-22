@@ -1,17 +1,18 @@
 import UIKit
 
-class BrowseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, JobFilterPopupDelegate {
+class BrowseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, JobFilterPopupDelegate, BrowseCellDelegate {
 
     // MARK: - Outlets
-    @IBOutlet weak var FilerButton: UIButton!
-    @IBOutlet weak var sereachTextFiled: UITextField!
-    @IBOutlet weak var AppAllJobsTable: UITableView!
+    @IBOutlet weak var FilerButton: UIButton!              // Filter button
+    @IBOutlet weak var sereachTextFiled: UITextField!      // Search text field
+    @IBOutlet weak var AppAllJobsTable: UITableView!        // Table for listing jobs
 
     // MARK: - Properties
     let authManager = AuthManager.shared
-    var AppListedJobs: [JobList] = [] // Array to hold all the jobs data
-    var searchJobs: [JobList] = []  // Array to hold filtered jobs
-    var searching = false
+    var AppListedJobs: [JobList] = []  // Array to hold all the jobs data
+    var searchJobs: [JobList] = []     // Array to hold jobs based on search and filters
+    var searching = false              // Flag for searching state
+    var appliedFilters: [String] = []  // Store applied filter criteria (job fields)
 
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -22,20 +23,20 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         sereachTextFiled.layer.cornerRadius = 8
         sereachTextFiled.delegate = self
 
-        // Load the jobs data from UserDefaults
-        if let Jobs = authManager.loadAllJobsFromUserDefaults() {
-            AppListedJobs = Jobs
-            searchJobs = Jobs  // Initially show all jobs
+        // Load jobs data from UserDefaults
+        if let jobs = authManager.loadAllJobsFromUserDefaults() {
+            AppListedJobs = jobs
+            searchJobs = jobs  // Initially show all jobs
             print("Loaded all app jobs: \(AppListedJobs)")
         } else {
             print("Failed to load jobs from UserDefaults.")
         }
 
-        // Set the tableview's data source and delegate
+        // Set table view data source and delegate
         AppAllJobsTable.dataSource = self
         AppAllJobsTable.delegate = self
 
-        // Reload the table to display the data
+        // Reload table to show data
         AppAllJobsTable.reloadData()
     }
 
@@ -44,9 +45,9 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         self.tabBarController?.tabBar.isHidden = false
     }
 
-    // MARK: - UITableViewDataSource Methods
+    // MARK: - UITableView Data Source Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Handle empty state case
+        // Handle empty state (show no jobs message)
         if searchJobs.isEmpty {
             let messageLabel = UILabel()
             messageLabel.text = "No jobs found"
@@ -57,7 +58,8 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         } else {
             tableView.backgroundView = nil
         }
-        return searchJobs.count  // Show filtered or all jobs
+
+        return searchJobs.count  // Return filtered jobs count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,26 +67,27 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
             return UITableViewCell()
         }
 
-        let jobListIndex = searchJobs[indexPath.row]  // Use searchJobs here
-        cell.configureCollectionCells(jobList: jobListIndex)
-        cell.delegate = self // Set the delegate
+        let job = searchJobs[indexPath.row]  // Get the job at the filtered index
+        cell.configureCollectionCells(jobList: job)
+        cell.delegate = self  // Set the delegate for the cell
 
-        // Disable the default selection style for cells
+        // Disable the default cell selection style
         cell.selectionStyle = .none
 
         return cell
-    }
-
-    // MARK: - UITableViewDelegate Methods
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Do nothing to disable cell selection
     }
 
     // MARK: - JobFilterPopupDelegate Methods
     func jobFilterUpdated(filteredJobs: [JobList]) {
         // When the filter is applied, update the filtered jobs
         searchJobs = filteredJobs
-        AppAllJobsTable.reloadData()  // Reload the table to show the filtered jobs
+        appliedFilters = filteredJobs.flatMap { $0.jobFields }  // Store all selected job fields in appliedFilters
+        
+        // After updating the filters, reapply the search and field filters
+        applyFilters()
+
+        // Reload the table to show the filtered jobs
+        AppAllJobsTable.reloadData()
     }
 
     // MARK: - Filter Button Action
@@ -92,61 +95,63 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         // Present the JobFilterPopup when the filter button is tapped
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let filterPopupVC = storyboard.instantiateViewController(withIdentifier: "JobFilterPopup") as? JobFilterPopup {
-            filterPopupVC.delegate = self  // Set the delegate to BrowseViewController
+            filterPopupVC.delegate = self  // Set delegate to BrowseViewController
             filterPopupVC.allJobs = AppListedJobs  // Pass all jobs data to the popup
+            filterPopupVC.incomingSelectedJobs = appliedFilters  // Pass selected filters to the popup
             self.present(filterPopupVC, animated: true, completion: nil)
         }
     }
-}
 
-// MARK: - BrowseCellDelegate
-extension BrowseViewController: BrowseCellDelegate {
+    // MARK: - Apply Filters Method
+    private func applyFilters() {
+        // First filter by search text
+        searchJobs = AppListedJobs.filter { job in
+            job.jobTitle.lowercased().contains(sereachTextFiled.text?.lowercased() ?? "")
+        }
+
+        // Then apply job field filters if any
+        if !appliedFilters.isEmpty {
+            searchJobs = searchJobs.filter { job in
+                job.jobFields.contains { field in
+                    appliedFilters.contains(field)
+                }
+            }
+        }
+
+        // Reload the table with the filtered results
+        AppAllJobsTable.reloadData()
+    }
+
+    // MARK: - BrowseCellDelegate
     func didTapViewJobButton(in cell: BrowseCell) {
-        // Find the index path of the cell
         if let indexPath = AppAllJobsTable.indexPath(for: cell) {
-            // Get the selected job
-            let selectedJob = searchJobs[indexPath.row]  // Use searchJobs here
-
-            // Instantiate ApplyForJobView from the storyboard
-            let SelectedJobDetailsView = UIStoryboard(name: "Mahdi", bundle: nil)
-            if let applyJobVC = SelectedJobDetailsView.instantiateViewController(withIdentifier: "ApplyForJobView") as? ApplyForJobView {
-                // Pass the selected job to ApplyForJobView
+            let selectedJob = searchJobs[indexPath.row]
+            let storyboard = UIStoryboard(name: "Mahdi", bundle: nil)
+            if let applyJobVC = storyboard.instantiateViewController(withIdentifier: "ApplyForJobView") as? ApplyForJobView {
                 applyJobVC.selectedJob = selectedJob
 
                 // Increment job views count
                 authManager.incrementJobViewsCount(jobID: selectedJob.jobID) { error in
                     if let error = error {
-                        // Handle error (e.g., show alert)
                         print("Failed to increment job views: \(error.localizedDescription)")
                     } else {
-                        // Successfully incremented views
                         print("Job views incremented successfully")
                     }
                 }
 
-                // Push ApplyForJobView onto the navigation stack
                 navigationController?.pushViewController(applyJobVC, animated: true)
             }
         }
     }
-}
 
-// MARK: - UITextFieldDelegate Methods
-extension BrowseViewController {
+    // MARK: - UITextFieldDelegate Methods (Search)
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let searchText = textField.text else { return }
+        guard textField.text != nil else { return }
 
-        if searchText.isEmpty {
-            // If search text is empty, show all jobs
-            searchJobs = AppListedJobs
-        } else {
-            // Filter jobs where the jobTitle starts with the search text (case-insensitive)
-            searchJobs = AppListedJobs.filter { job in
-                return job.jobTitle.lowercased().hasPrefix(searchText.lowercased())
-            }
-        }
+        // Apply filters after updating the search results
+        applyFilters()
 
-        // Reload the table view to display the filtered results
+        // Reload table view to reflect the filtered results
         AppAllJobsTable.reloadData()
     }
 }
