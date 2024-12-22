@@ -80,6 +80,7 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK: - JobFilterPopupDelegate Methods
     func jobFilterUpdated(filteredJobs: [JobList]) {
         // When the filter is applied, update the filtered jobs
+        print("Filtered jobs in BrowseViewController: \(filteredJobs)")
         searchJobs = filteredJobs
         appliedFilters = filteredJobs.flatMap { $0.jobFields }  // Store all selected job fields in appliedFilters
         
@@ -104,12 +105,17 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
 
     // MARK: - Apply Filters Method
     private func applyFilters() {
-        // First filter by search text
-        searchJobs = AppListedJobs.filter { job in
-            job.jobTitle.lowercased().contains(sereachTextFiled.text?.lowercased() ?? "")
+        // Start with all jobs
+        searchJobs = AppListedJobs
+
+        // Apply search filter if there's text in the search field
+        if let searchText = sereachTextFiled.text, !searchText.isEmpty {
+            searchJobs = searchJobs.filter { job in
+                job.jobTitle.lowercased().contains(searchText.lowercased())
+            }
         }
 
-        // Then apply job field filters if any
+        // Apply job field filters if any filters are applied
         if !appliedFilters.isEmpty {
             searchJobs = searchJobs.filter { job in
                 job.jobFields.contains { field in
@@ -118,7 +124,7 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
 
-        // Reload the table with the filtered results
+        // Reload the table to reflect filtered jobs
         AppAllJobsTable.reloadData()
     }
 
@@ -146,12 +152,10 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
 
     // MARK: - UITextFieldDelegate Methods (Search)
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard textField.text != nil else { return }
-
-        // Apply filters after updating the search results
+        // Apply filters after the search text is updated
         applyFilters()
 
-        // Reload table view to reflect the filtered results
+        // Reload table to reflect the filtered results
         AppAllJobsTable.reloadData()
     }
 }
