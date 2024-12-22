@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57B30B272D1805B200129909 /* JobFilterPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B30B262D1805B200129909 /* JobFilterPopup.swift */; };
 		68046F182CEAC1AD00DB29CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F172CEAC1AD00DB29CF /* AppDelegate.swift */; };
 		68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */; };
 		68046F1F2CEAC1AD00DB29CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68046F1D2CEAC1AD00DB29CF /* Main.storyboard */; };
@@ -60,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57B30B262D1805B200129909 /* JobFilterPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobFilterPopup.swift; path = "../../../../../Downloads/Hirevolution-main/Hirevolution/Views/ManageJobs/Add Job/JobFilterPopup.swift"; sourceTree = "<group>"; };
 		68046F142CEAC1AD00DB29CF /* Hirevolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hirevolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68046F172CEAC1AD00DB29CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				68BFC7DB2CF0E24700F13DA1 /* BrowseCell.swift */,
 				68BFC7DD2CF421DD00F13DA1 /* BrowseViewController.swift */,
+				57B30B262D1805B200129909 /* JobFilterPopup.swift */,
 				68BFC7DF2CF4AFD600F13DA1 /* ApplyForJobView.swift */,
 			);
 			path = Browse;
@@ -429,6 +432,7 @@
 				68046F2F2CEAC2F900DB29CF /* TabBar.swift in Sources */,
 				68BFC7E02CF4AFD600F13DA1 /* ApplyForJobView.swift in Sources */,
 				68D1966C2CEEF16200486E15 /* ManageJobsView.swift in Sources */,
+				57B30B272D1805B200129909 /* JobFilterPopup.swift in Sources */,
 				68E9EFC72D0BDB3400D741FC /* ViewedApplicantProfile.swift in Sources */,
 				68D86F862CECF4600084A32D /* AddJobView.swift in Sources */,
 				68E405D32CED156700E9540E /* CustomStyleTabBar.swift in Sources */,

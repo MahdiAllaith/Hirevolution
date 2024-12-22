@@ -249,7 +249,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Filter"/>
                                         <connections>
-                                            <segue destination="akV-H5-Bgk" kind="popoverPresentation" popoverAnchorView="h0b-t7-yAR" id="AaU-tr-UKj">
+                                            <segue destination="duy-BX-WJ5" kind="popoverPresentation" popoverAnchorView="h0b-t7-yAR" id="Zo9-IZ-dAi">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
@@ -337,21 +337,21 @@
             </objects>
             <point key="canvasLocation" x="-703" y="2031"/>
         </scene>
-        <!--Job Filed Popup-->
-        <scene sceneID="e1v-hh-BUo">
+        <!--Job Filter Popup-->
+        <scene sceneID="FhL-IN-mKx">
             <objects>
-                <viewController storyboardIdentifier="JobFiledPopup" id="akV-H5-Bgk" customClass="JobFiledPopup" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1Zg-4r-CMz">
+                <viewController storyboardIdentifier="JobFilterPopup" id="duy-BX-WJ5" customClass="JobFilterPopup" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xzj-5L-Te4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mOv-vV-xT5">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oGy-aJ-akY">
                                 <rect key="frame" x="11" y="30" width="371" height="50"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6V6-rb-KDa">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O2O-mO-Vd2">
                                         <rect key="frame" x="0.0" y="0.0" width="371" height="51"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="bfe-tD-3mI"/>
+                                            <constraint firstAttribute="height" constant="50" id="dq5-lv-Feh"/>
                                         </constraints>
                                         <segments>
                                             <segment title="ICT"/>
@@ -360,34 +360,34 @@
                                             <segment title="Other"/>
                                         </segments>
                                         <connections>
-                                            <action selector="segmentChanged:" destination="akV-H5-Bgk" eventType="valueChanged" id="gHk-Ho-HDk"/>
+                                            <action selector="segmentChanged:" destination="duy-BX-WJ5" eventType="valueChanged" id="pxS-J2-zs6"/>
                                         </connections>
                                     </segmentedControl>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ipO-cH-jym">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MM0-5C-65o">
                                 <rect key="frame" x="0.0" y="138" width="370" height="270"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" name="AccentColor"/>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="8nA-fx-vEo"/>
+                        <viewLayoutGuide key="safeArea" id="itY-cm-G1n"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8nA-fx-vEo" firstAttribute="trailing" secondItem="mOv-vV-xT5" secondAttribute="trailing" constant="11" id="Ejk-JW-w8x"/>
-                            <constraint firstItem="mOv-vV-xT5" firstAttribute="leading" secondItem="8nA-fx-vEo" secondAttribute="leading" constant="11" id="qUI-o8-YYe"/>
-                            <constraint firstItem="mOv-vV-xT5" firstAttribute="top" secondItem="8nA-fx-vEo" secondAttribute="top" constant="30" id="rv0-Al-DeZ"/>
+                            <constraint firstItem="oGy-aJ-akY" firstAttribute="leading" secondItem="itY-cm-G1n" secondAttribute="leading" constant="11" id="4K2-wb-jU1"/>
+                            <constraint firstItem="oGy-aJ-akY" firstAttribute="top" secondItem="itY-cm-G1n" secondAttribute="top" constant="30" id="6D7-Vb-mGs"/>
+                            <constraint firstItem="itY-cm-G1n" firstAttribute="trailing" secondItem="oGy-aJ-akY" secondAttribute="trailing" constant="11" id="EHc-DD-jkr"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="FiledJobsTable" destination="ipO-cH-jym" id="CN9-jT-uKM"/>
-                        <outlet property="FiledType" destination="6V6-rb-KDa" id="S9v-Yr-WJj"/>
+                        <outlet property="FiledJobsTable" destination="MM0-5C-65o" id="UCk-2b-bEG"/>
+                        <outlet property="FiledType" destination="O2O-mO-Vd2" id="KPc-Cf-mQA"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gOS-DX-JzS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sLJ-4O-x68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-702" y="1381"/>
+            <point key="canvasLocation" x="-703" y="1320"/>
         </scene>
     </scenes>
     <resources>
