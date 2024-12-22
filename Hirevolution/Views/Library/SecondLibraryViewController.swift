@@ -12,6 +12,15 @@ class SecondLibraryViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var collectionViewCard2: UICollectionView!
     var arrCards = [Card]()
     var selectedCard: Card?
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(animated)
+           // Show the tab bar when leaving this view controller and returning to the previous one
+           self.tabBarController?.tabBar.isHidden = false
+       }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,19 +76,32 @@ class SecondLibraryViewController: UIViewController, UICollectionViewDelegate, U
         }
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let card = arrCards[indexPath.row]
-            
-            // Instantiate ArticleViewController from the storyboard
-            let storyboard = UIStoryboard(name: "Hussain", bundle: nil)
-            if let articleVC = storyboard.instantiateViewController(withIdentifier: "ArticleViewController") as? ArticleViewController {
-                
-                // Pass the selected card's data (title or any relevant information)
-                articleVC.selectedCardTitle = card.title
-                
-                // Present the ArticleViewController modally
-                self.present(articleVC, animated: true, completion: nil)
+        // Get the selected card
+        let card = arrCards[indexPath.row]
+        
+        // Debugging: Print the selected card's title
+        print("Selected Card: \(card.title)")
+        
+        self.tabBarController?.tabBar.isHidden = true
+        
+        // Perform the segue and pass the selected card via sender
+        performSegue(withIdentifier: "secondToArticle", sender: card)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "secondToArticle" {
+            // Get the destination view controller
+            if let articleVC = segue.destination as? ArticleViewController {
+                // Pass the selected card to the destination view controller
+                if let selectedCard = sender as? Card {
+                    articleVC.selectedCardTitle = selectedCard.title
+                    // Debugging: Print to ensure the card is passed correctly
+                    print("Passing selected card: \(selectedCard.title) to ArticleViewController")
+                }
             }
         }
+    }
+
+
        
         
     }

@@ -20,6 +20,10 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
             Job(jobTitle: "Product Manager", company: "Product Inc.", description: "As a Product Manager at Product Inc., you’ll oversee the development of key products from concept to launch. Collaborate with engineering and design teams to define product features, prioritize tasks, and deliver on business goals. Drive product strategies and use data to continuously improve the user experience and product performance.", role: "Manager", salary: "$100,000", location: "San Francisco", image: UIImage(named: "workCardImage")!),
             // Add more jobs here...
         ]
+    var jobStatuses: [JobStatus] = [
+            JobStatus(jobTitle: "Software Engineer", company: "Tech Corp", jobStatus: "Applied", jobApplicationDate: "2024-12-20"),
+            JobStatus(jobTitle: "Product Manager", company: "Product Inc.", jobStatus: "Interview Scheduled", jobApplicationDate: "2024-12-22")
+        ]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,30 +31,58 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
         jobRecCollectionView.dataSource = self
         jobStatusCollectionView.delegate = self
         jobStatusCollectionView.dataSource = self
+        
+        let layout = UICollectionViewFlowLayout()
+            layout.minimumLineSpacing = 10  // Space between rows
+            layout.minimumInteritemSpacing = 10  // Space between items horizontally
+            layout.itemSize = CGSize(width: 269, height: 214)
     }
+    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jobRecommendations.count
+            if collectionView == jobRecCollectionView {
+                return jobRecommendations.count  // Number of job recommendations
+            } else if collectionView == jobStatusCollectionView {
+                return jobStatuses.count  // Number of job statuses
+            }
+            return 0
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            // Dequeue the cell
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JobRecCell", for: indexPath) as! JobRecCollectionViewCell
-                    
-                    // Get the job data for the current indexPath
-                    let job = jobRecommendations[indexPath.row]
-                    
-                    // Configure the cell with job data
-                    cell.lblJobTitle.text = job.jobTitle
-                    cell.lblJobCompany.text = job.company
-                    cell.lblJobDescription.text = job.description
-                    cell.lblJobRole.text = job.role
-                    cell.lblJobSalary.text = job.salary
-                    cell.lblJobLocation.text = job.location
-                    cell.imgJobRec.image = job.image
-                    
-                    return cell
+            if collectionView == jobRecCollectionView {
+                // Dequeue JobRecCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JobRecCell", for: indexPath) as! JobRecCollectionViewCell
+                
+                let job = jobRecommendations[indexPath.row]
+                // Configure the JobRecCollectionViewCell with data
+                cell.lblJobTitle.text = job.jobTitle
+                cell.lblJobCompany.text = job.company
+                cell.lblJobDescription.text = job.description
+                cell.lblJobRole.text = job.role
+                cell.lblJobSalary.text = job.salary
+                cell.lblJobLocation.text = job.location
+                cell.imgJobRec.image = job.image
+                
+                return cell
+            } else if collectionView == jobStatusCollectionView {
+                // Dequeue JobStatusCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JobStatusCell", for: indexPath) as! JobStatusCollectionViewCell
+                
+                let jobStatus = jobStatuses[indexPath.row]
+                // Configure the JobStatusCollectionViewCell with data
+                cell.lblJobTitle.text = jobStatus.jobTitle
+                cell.lblJobCompany.text = jobStatus.company
+                cell.lblJobStatus.text = jobStatus.jobStatus
+                cell.lblJobApplicationDate.text = jobStatus.jobApplicationDate
+                
+                
+                return cell
+            }
+            
+            return UICollectionViewCell() // Default return if something goes wrong
         }
+    
+    
 
     /*
     // MARK: - Navigation

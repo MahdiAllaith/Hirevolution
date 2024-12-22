@@ -11,10 +11,15 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
 
     @IBOutlet weak var collectionViewCard: UICollectionView!
     var arrCards = [Card]()
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        self.hidesBottomBarWhenPushed = true
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         collectionViewCard.delegate = self
         collectionViewCard.dataSource = self
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  General Tips"))
@@ -36,21 +41,34 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item clicked at index: \(indexPath.row)")
-        let selectedCard = arrCards[indexPath.row]
+            print("Item clicked at index: \(indexPath.row)")
+            
+            // Get the selected card
+            let selectedCard = arrCards[indexPath.row]
+            
+            // Debugging: Print the selected card's title
+            print("Selected Card: \(selectedCard.title)")
         
-        // Instantiate SecondLibraryViewController using the correct Storyboard ID
-        if let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "SecondLibraryViewController") as? SecondLibraryViewController {
-            print("Successfully instantiated SecondLibraryViewController")
+            self.tabBarController?.tabBar.isHidden = true
             
-            secondVC.selectedCard = selectedCard
-            
-            self.present(secondVC, animated: true, completion: nil)
-        } else {
-            print("Error: Could not instantiate SecondLibraryViewController")
+            // Perform the segue and pass the selected card via sender
+            performSegue(withIdentifier: "libraryToSecond", sender: selectedCard)
         }
-    }
 
+        // Prepare for the segue to pass the selected card
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "libraryToSecond" {
+                // Get the destination view controller
+                if let secondVC = segue.destination as? SecondLibraryViewController {
+                    // Pass the selected card
+                    if let selectedCard = sender as? Card {
+                        secondVC.selectedCard = selectedCard
+                        // Debugging: Print to ensure the card is passed correctly
+                        print("Passing selected card: \(selectedCard.title) to SecondLibraryViewController")
+                    }
+                }
+            }
+        }
     /*
     // MARK: - Navigation
 

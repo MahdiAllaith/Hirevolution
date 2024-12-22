@@ -16,6 +16,17 @@ class ArticleViewController: UIViewController, UICollectionViewDelegate, UIColle
     var arrofContent = [Content]()
     var selectedCardTitle: String?
     
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            // Ensure tab bar is hidden when returning to SecondLibraryViewController
+            self.tabBarController?.tabBar.isHidden = true
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

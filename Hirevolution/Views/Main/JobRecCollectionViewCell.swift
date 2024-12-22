@@ -26,7 +26,7 @@ class JobRecCollectionViewCell: UICollectionViewCell {
         lblJobRole.translatesAutoresizingMaskIntoConstraints = false
         btnViewJobDetails.translatesAutoresizingMaskIntoConstraints = false
         
-        //// Add border and rounded corners to the cell
+        /// Add border and rounded corners to the cell
         self.layer.borderColor = UIColor.white.cgColor  // Border color
         self.layer.borderWidth = 1.0  // Border width
         self.layer.cornerRadius = 20.0  // Rounded corners
