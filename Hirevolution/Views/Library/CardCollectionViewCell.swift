@@ -17,7 +17,8 @@ class CardCollectionViewCell: UICollectionViewCell {
             // Round the corners of the cell
             self.layer.cornerRadius = 10  // Set to desired radius
             self.layer.masksToBounds = true  // Ensure the content respects the corner radius
-            
+                imgCardLibrary.contentMode = .scaleToFill  // Stretch the image to fill the entire cell
+                imgCardLibrary.clipsToBounds = true
             // Optionally, you can add a border (if desired)
             self.layer.borderWidth = 1  // Set border width (optional)
             self.layer.borderColor = UIColor.black.cgColor  // Set border color (optional)

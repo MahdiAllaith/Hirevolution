@@ -12,19 +12,38 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var collectionViewCard: UICollectionView!
     var arrCards = [Card]()
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-//    override func viewWillDisappear(_ animated: Bool) {
-//        self.hidesBottomBarWhenPushed = true
-//    }
+            super.viewWillAppear(animated)
+            
+            // Ensure the tab bar is always visible in this view controller
+            self.tabBarController?.tabBar.isHidden = false
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set the layout to adjust the item size to the screen width and add space
+                if let layout = collectionViewCard.collectionViewLayout as? UICollectionViewFlowLayout {
+                    // Dynamically set the item size based on the screen width
+                    let screenWidth = UIScreen.main.bounds.width
+
+                    // Setting space between rows (vertical)
+                    layout.minimumLineSpacing = 10  // Space between the rows
+                    layout.minimumInteritemSpacing = 0 // Space between items horizontally (set to 0 to fill full width)
+
+                    // Set item size (Width = screen width, height = 250)
+                    layout.itemSize = CGSize(width: screenWidth, height: 250)
+
+                    // Apply the layout changes
+                    collectionViewCard.collectionViewLayout = layout
+                    collectionViewCard.reloadData()  // Reload to apply changes
+                }
         collectionViewCard.delegate = self
         collectionViewCard.dataSource = self
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  General Tips"))
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  IT"))
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  Engineering"))
+        arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  Business"))
+        arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  Business"))
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  Business"))
     }
     

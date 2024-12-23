@@ -31,7 +31,9 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
         jobRecCollectionView.dataSource = self
         jobStatusCollectionView.delegate = self
         jobStatusCollectionView.dataSource = self
-        
+        let screenWidth = UIScreen.main.bounds.width
+            jobRecCollectionView.frame.size.width = screenWidth
+            jobStatusCollectionView.frame.size.width = screenWidth
         let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 10  // Space between rows
             layout.minimumInteritemSpacing = 10  // Space between items horizontally

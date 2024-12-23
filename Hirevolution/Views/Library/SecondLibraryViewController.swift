@@ -13,17 +13,28 @@ class SecondLibraryViewController: UIViewController, UICollectionViewDelegate, U
     var arrCards = [Card]()
     var selectedCard: Card?
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-           super.viewWillDisappear(animated)
-           // Show the tab bar when leaving this view controller and returning to the previous one
-           self.tabBarController?.tabBar.isHidden = false
-       }
+            super.viewWillAppear(animated)
+            
+            // Ensure the tab bar is always hidden in this view controller
+            self.tabBarController?.tabBar.isHidden = true
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
+//
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let layout = collectionViewCard2.collectionViewLayout as? UICollectionViewFlowLayout {
+                    let screenWidth = UIScreen.main.bounds.width
+
+                    // Set item size for collection view cells (width = screen width, height = 250)
+                    layout.itemSize = CGSize(width: screenWidth, height: 250)
+
+                    // Set the spacing between items
+                    layout.minimumLineSpacing = 10  // Space between rows
+                    layout.minimumInteritemSpacing = 0  // Space between items horizontally
+
+                    // Reload the collection view to apply the updated layout
+                    collectionViewCard2.reloadData()
+                }
         collectionViewCard2.delegate = self
         collectionViewCard2.dataSource = self
         let workCardImage = UIImage(named: "workCardImage")
@@ -54,6 +65,8 @@ class SecondLibraryViewController: UIViewController, UICollectionViewDelegate, U
                 arrCards.append(Card(photo: workCardImage!, title: " How to Start Your Own Business"))
                 arrCards.append(Card(photo: workCardImage!, title: " The Impact of AI on Business Operations"))
                 arrCards.append(Card(photo: workCardImage!, title: " The Basics of Digital Marketing"))
+                arrCards.append(Card(photo: workCardImage!, title: " The Future of E-commerce"))
+                arrCards.append(Card(photo: workCardImage!, title: " The Future of E-commerce"))
                 arrCards.append(Card(photo: workCardImage!, title: " The Future of E-commerce"))
             }
         }
