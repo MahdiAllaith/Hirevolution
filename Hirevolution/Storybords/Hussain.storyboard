@@ -360,7 +360,7 @@
         <scene sceneID="Sgu-st-cgB">
             <objects>
                 <viewController storyboardIdentifier="MainV1" id="5g0-Ua-Y9N" customClass="UserMainPageViewController" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6H6-fc-kSB">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="6H6-fc-kSB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -504,8 +504,9 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ErG-PD-Jgb">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ErG-PD-Jgb">
                                 <rect key="frame" x="0.0" y="562" width="393" height="211"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="BaseApp"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5Qv-3U-Nnw">
                                     <size key="itemSize" width="269" height="214"/>
@@ -549,14 +550,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pS2-fK-1cG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pS2-fK-1cG">
                                                     <rect key="frame" x="69" y="97" width="184" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsD-T4-3TC">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsD-T4-3TC">
                                                     <rect key="frame" x="98" y="126" width="171" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -589,15 +590,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMI-ed-mRG">
+                                <rect key="frame" x="16" y="528" width="238" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recommended Jobs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpI-bt-hje">
+                                <rect key="frame" x="16" y="145" width="238" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AkX-a7-xzL"/>
                         <color key="backgroundColor" name="BaseApp"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ErG-PD-Jgb" secondAttribute="bottom" constant="79" id="2pH-gt-hvf"/>
+                            <constraint firstAttribute="bottom" secondItem="ErG-PD-Jgb" secondAttribute="bottom" multiplier="1.2" constant="79" id="2pH-gt-hvf"/>
                             <constraint firstItem="ErG-PD-Jgb" firstAttribute="leading" secondItem="AkX-a7-xzL" secondAttribute="leading" id="GYr-fr-SGb"/>
                             <constraint firstItem="ErG-PD-Jgb" firstAttribute="top" secondItem="AkX-a7-xzL" secondAttribute="top" constant="503" id="Hb8-Xh-Nij"/>
                             <constraint firstItem="je3-ir-nLf" firstAttribute="top" secondItem="vE6-Dt-CV6" secondAttribute="bottom" constant="65" id="KCT-zC-ALN"/>
-                            <constraint firstItem="AkX-a7-xzL" firstAttribute="bottom" secondItem="ErG-PD-Jgb" secondAttribute="bottom" constant="45" id="MNX-Bd-LWk"/>
                             <constraint firstItem="je3-ir-nLf" firstAttribute="leading" secondItem="AkX-a7-xzL" secondAttribute="leading" id="YDe-BC-wWN"/>
                             <constraint firstItem="vE6-Dt-CV6" firstAttribute="top" secondItem="AkX-a7-xzL" secondAttribute="top" constant="5" id="b5q-oF-pyw"/>
                             <constraint firstItem="ErG-PD-Jgb" firstAttribute="top" secondItem="je3-ir-nLf" secondAttribute="bottom" constant="42" id="e5V-H3-lAx"/>
@@ -615,7 +629,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIg-Hw-3fU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2358" y="806"/>
+            <point key="canvasLocation" x="-2358.0152671755723" y="805.63380281690149"/>
         </scene>
         <!--Profile-->
         <scene sceneID="TrP-Ac-kaF">

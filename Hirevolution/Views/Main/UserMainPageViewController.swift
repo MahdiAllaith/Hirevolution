@@ -22,6 +22,10 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
         ]
     var jobStatuses: [JobStatus] = [
             JobStatus(jobTitle: "Software Engineer", company: "Tech Corp", jobStatus: "Applied", jobApplicationDate: "2024-12-20"),
+            JobStatus(jobTitle: "Product Manager", company: "Product Inc.", jobStatus: "Interview Scheduled", jobApplicationDate: "2024-12-22"),
+            JobStatus(jobTitle: "Product Manager", company: "Product Inc.", jobStatus: "Interview Scheduled", jobApplicationDate: "2024-12-22"),
+            JobStatus(jobTitle: "Product Manager", company: "Product Inc.", jobStatus: "Interview Scheduled", jobApplicationDate: "2024-12-22"),
+            JobStatus(jobTitle: "Product Manager", company: "Product Inc.", jobStatus: "Interview Scheduled", jobApplicationDate: "2024-12-22"),
             JobStatus(jobTitle: "Product Manager", company: "Product Inc.", jobStatus: "Interview Scheduled", jobApplicationDate: "2024-12-22")
         ]
     override func viewDidLoad() {

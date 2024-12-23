@@ -25,6 +25,12 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
         lblJobApplicationDate.translatesAutoresizingMaskIntoConstraints = false
         btnViewStatusDetails.translatesAutoresizingMaskIntoConstraints = false
 
+        // Increase font size for the status labels
+        lblstatustext.font = UIFont.systemFont(ofSize: 12)  // Adjust size as needed
+        lblJobStatus.font = UIFont.systemFont(ofSize: 12)    // Adjust size as needed
+        lblstatustext2.font = UIFont.systemFont(ofSize: 12)  // Adjust size as needed
+        lblJobApplicationDate.font = UIFont.systemFont(ofSize: 12)  // Adjust size as needed
+
         // Add border and rounded corners to the cell
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1.0
@@ -60,8 +66,8 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
         let statusStackView = UIStackView(arrangedSubviews: [lblstatustext, lblJobStatus])
         statusStackView.axis = .horizontal
         statusStackView.spacing = 8
-        statusStackView.alignment = .center
-        statusStackView.distribution = .fillProportionally
+        statusStackView.alignment = .leading  // Align items to the left
+        statusStackView.distribution = .fill  // This ensures the content fills the available width
         statusStackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(statusStackView)
 
@@ -75,8 +81,8 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
         let status2StackView = UIStackView(arrangedSubviews: [lblstatustext2, lblJobApplicationDate])
         status2StackView.axis = .horizontal
         status2StackView.spacing = 8
-        status2StackView.alignment = .center
-        status2StackView.distribution = .fillProportionally
+        status2StackView.alignment = .leading  // Align items to the left
+        status2StackView.distribution = .fill  // This ensures the content fills the available width
         status2StackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(status2StackView)
 
@@ -103,4 +109,5 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
             contentView.heightAnchor.constraint(equalToConstant: 214)
         ])
     }
+
 }
