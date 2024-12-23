@@ -23,18 +23,24 @@ class SecondLibraryViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         if let layout = collectionViewCard2.collectionViewLayout as? UICollectionViewFlowLayout {
-                    let screenWidth = UIScreen.main.bounds.width
+                        // Dynamically set the item size based on the screen width
+                        let screenWidth = UIScreen.main.bounds.width
 
-                    // Set item size for collection view cells (width = screen width, height = 250)
-                    layout.itemSize = CGSize(width: screenWidth, height: 250)
+                        // Set the size of the cell (adjust width and height here)
+                        let cellWidth = screenWidth * 0.95  // 90% of screen width (reduce width if needed)
+                        let cellHeight: CGFloat = 160  // Adjust the height as needed
 
-                    // Set the spacing between items
-                    layout.minimumLineSpacing = 10  // Space between rows
-                    layout.minimumInteritemSpacing = 0  // Space between items horizontally
+                        // Setting space between rows (vertical)
+                        layout.minimumLineSpacing = 10  // Space between rows
+                        layout.minimumInteritemSpacing = 0 // Space between items horizontally
 
-                    // Reload the collection view to apply the updated layout
-                    collectionViewCard2.reloadData()
-                }
+                        // Set item size (width = cellWidth, height = cellHeight)
+                        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+
+                        // Apply the layout changes
+                        collectionViewCard2.collectionViewLayout = layout
+                        collectionViewCard2.reloadData()  // Reload to apply changes
+                    }
         collectionViewCard2.delegate = self
         collectionViewCard2.dataSource = self
         let workCardImage = UIImage(named: "workCardImage")

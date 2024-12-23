@@ -22,21 +22,25 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the layout to adjust the item size to the screen width and add space
-                if let layout = collectionViewCard.collectionViewLayout as? UICollectionViewFlowLayout {
-                    // Dynamically set the item size based on the screen width
-                    let screenWidth = UIScreen.main.bounds.width
+        if let layout = collectionViewCard.collectionViewLayout as? UICollectionViewFlowLayout {
+                        // Dynamically set the item size based on the screen width
+                        let screenWidth = UIScreen.main.bounds.width
 
-                    // Setting space between rows (vertical)
-                    layout.minimumLineSpacing = 10  // Space between the rows
-                    layout.minimumInteritemSpacing = 0 // Space between items horizontally (set to 0 to fill full width)
+                        // Set the size of the cell (adjust width and height here)
+                        let cellWidth = screenWidth * 0.95  // 90% of screen width (reduce width if needed)
+                        let cellHeight: CGFloat = 160  // Adjust the height as needed
 
-                    // Set item size (Width = screen width, height = 250)
-                    layout.itemSize = CGSize(width: screenWidth, height: 250)
+                        // Setting space between rows (vertical)
+                        layout.minimumLineSpacing = 10  // Space between rows
+                        layout.minimumInteritemSpacing = 0 // Space between items horizontally
 
-                    // Apply the layout changes
-                    collectionViewCard.collectionViewLayout = layout
-                    collectionViewCard.reloadData()  // Reload to apply changes
-                }
+                        // Set item size (width = cellWidth, height = cellHeight)
+                        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+
+                        // Apply the layout changes
+                        collectionViewCard.collectionViewLayout = layout
+                        collectionViewCard.reloadData()  // Reload to apply changes
+                    }
         collectionViewCard.delegate = self
         collectionViewCard.dataSource = self
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  General Tips"))

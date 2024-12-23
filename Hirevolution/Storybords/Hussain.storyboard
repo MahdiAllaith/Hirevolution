@@ -360,7 +360,7 @@
         <scene sceneID="Sgu-st-cgB">
             <objects>
                 <viewController storyboardIdentifier="MainV1" id="5g0-Ua-Y9N" customClass="UserMainPageViewController" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="6H6-fc-kSB">
+                    <view key="view" contentMode="scaleToFill" id="6H6-fc-kSB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -608,9 +608,7 @@
                         <viewLayoutGuide key="safeArea" id="AkX-a7-xzL"/>
                         <color key="backgroundColor" name="BaseApp"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ErG-PD-Jgb" secondAttribute="bottom" multiplier="1.2" constant="79" id="2pH-gt-hvf"/>
                             <constraint firstItem="ErG-PD-Jgb" firstAttribute="leading" secondItem="AkX-a7-xzL" secondAttribute="leading" id="GYr-fr-SGb"/>
-                            <constraint firstItem="ErG-PD-Jgb" firstAttribute="top" secondItem="AkX-a7-xzL" secondAttribute="top" constant="503" id="Hb8-Xh-Nij"/>
                             <constraint firstItem="je3-ir-nLf" firstAttribute="top" secondItem="vE6-Dt-CV6" secondAttribute="bottom" constant="65" id="KCT-zC-ALN"/>
                             <constraint firstItem="je3-ir-nLf" firstAttribute="leading" secondItem="AkX-a7-xzL" secondAttribute="leading" id="YDe-BC-wWN"/>
                             <constraint firstItem="vE6-Dt-CV6" firstAttribute="top" secondItem="AkX-a7-xzL" secondAttribute="top" constant="5" id="b5q-oF-pyw"/>

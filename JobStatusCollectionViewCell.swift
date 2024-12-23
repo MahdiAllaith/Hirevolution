@@ -72,7 +72,7 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(statusStackView)
 
         NSLayoutConstraint.activate([
-            statusStackView.topAnchor.constraint(equalTo: lblJobCompany.bottomAnchor, constant: 8),
+            statusStackView.topAnchor.constraint(equalTo: lblJobCompany.bottomAnchor, constant: 20), // Increased the constant to move it down
             statusStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             statusStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         ])
@@ -87,17 +87,18 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(status2StackView)
 
         NSLayoutConstraint.activate([
-            status2StackView.topAnchor.constraint(equalTo: statusStackView.bottomAnchor, constant: 8),
+            status2StackView.topAnchor.constraint(equalTo: statusStackView.bottomAnchor, constant: 20), // Increased the constant to move it down
             status2StackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             status2StackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         ])
 
-        // 5. Button (fixed size, centered horizontally)
+
+        // 5. Button (fixed size, positioned independently of other elements)
         btnViewStatusDetails.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(btnViewStatusDetails)
 
         NSLayoutConstraint.activate([
-            btnViewStatusDetails.topAnchor.constraint(equalTo: status2StackView.bottomAnchor, constant: 12),
+            btnViewStatusDetails.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140), // Raise the button (adjust as needed)
             btnViewStatusDetails.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             btnViewStatusDetails.widthAnchor.constraint(equalToConstant: 165),
             btnViewStatusDetails.heightAnchor.constraint(equalToConstant: 53)
@@ -109,5 +110,6 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
             contentView.heightAnchor.constraint(equalToConstant: 214)
         ])
     }
+
 
 }

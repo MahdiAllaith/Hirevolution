@@ -30,7 +30,6 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
         ]
     override func viewDidLoad() {
         super.viewDidLoad()
-
         jobRecCollectionView.delegate = self
         jobRecCollectionView.dataSource = self
         jobStatusCollectionView.delegate = self
@@ -43,6 +42,7 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
             layout.minimumInteritemSpacing = 10  // Space between items horizontally
             layout.itemSize = CGSize(width: 269, height: 214)
     }
+    
     
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
