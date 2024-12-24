@@ -54,39 +54,50 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
             return 0
         }
         
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            if collectionView == jobRecCollectionView {
-                // Dequeue JobRecCollectionViewCell
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JobRecCell", for: indexPath) as! JobRecCollectionViewCell
-                
-                let job = jobRecommendations[indexPath.row]
-                // Configure the JobRecCollectionViewCell with data
-                cell.lblJobTitle.text = job.jobTitle
-                cell.lblJobCompany.text = job.company
-                cell.lblJobDescription.text = job.description
-                cell.lblJobRole.text = job.role
-                cell.lblJobSalary.text = job.salary
-                cell.lblJobLocation.text = job.location
-                cell.imgJobRec.image = job.image
-                
-                return cell
-            } else if collectionView == jobStatusCollectionView {
-                // Dequeue JobStatusCollectionViewCell
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JobStatusCell", for: indexPath) as! JobStatusCollectionViewCell
-                
-                let jobStatus = jobStatuses[indexPath.row]
-                // Configure the JobStatusCollectionViewCell with data
-                cell.lblJobTitle.text = jobStatus.jobTitle
-                cell.lblJobCompany.text = jobStatus.company
-                cell.lblJobStatus.text = jobStatus.jobStatus
-                cell.lblJobApplicationDate.text = jobStatus.jobApplicationDate
-                
-                
-                return cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == jobRecCollectionView {
+            // Dequeue JobRecCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JobRecCell", for: indexPath) as! JobRecCollectionViewCell
+            
+            let job = jobRecommendations[indexPath.row]
+            // Configure the JobRecCollectionViewCell with data
+            cell.lblJobTitle.text = job.jobTitle
+            cell.lblJobCompany.text = job.company
+            cell.lblJobDescription.text = job.description
+            cell.lblJobRole.text = job.role
+            cell.lblJobSalary.text = job.salary
+            cell.lblJobLocation.text = job.location
+            cell.imgJobRec.image = job.image
+            
+            return cell
+        } else if collectionView == jobStatusCollectionView {
+            // Dequeue JobStatusCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JobStatusCell", for: indexPath) as! JobStatusCollectionViewCell
+            
+            let jobStatus = jobStatuses[indexPath.row]
+            // Configure the JobStatusCollectionViewCell with data
+            cell.lblJobTitle.text = jobStatus.jobTitle
+            cell.lblJobCompany.text = jobStatus.company
+            
+            // Prepending text before status and application date
+            if let status = jobStatus.jobStatus {
+                cell.lblJobStatus.text = "Status: \(status)"
+            } else {
+                cell.lblJobStatus.text = "Status: N/A"
             }
             
-            return UICollectionViewCell() // Default return if something goes wrong
+            if let applicationDate = jobStatus.jobApplicationDate {
+                cell.lblJobApplicationDate.text = "Applied on: \(applicationDate)"
+            } else {
+                cell.lblJobApplicationDate.text = "Applied on: N/A"
+            }
+            
+            return cell
         }
+        
+        return UICollectionViewCell() // Default return if something goes wrong
+    }
+
     
     
 
