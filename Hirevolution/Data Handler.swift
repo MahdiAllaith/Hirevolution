@@ -90,6 +90,20 @@ struct User: Identifiable, Codable {
     var userApplicationsList: UserApplicationsList?
 }
 
+struct ChatMessage: Codable {
+    let userID: String  // This will store the ID of the sender
+    let message: String // The message content
+    let timestamp: Date // Timestamp is optional if you don’t need it
+
+    // Initialize the message
+    init(userID: String, message: String, timestamp: Date) {
+        self.userID = userID
+        self.message = message
+        self.timestamp = timestamp
+    }
+}
+
+
 class AuthManager {
     static let shared = AuthManager()
     

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57B30B272D1805B200129909 /* JobFilterPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B30B262D1805B200129909 /* JobFilterPopup.swift */; };
+		574B4D162D1AE95D00DE5773 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574B4D152D1AE95D00DE5773 /* ChatViewController.swift */; };
+		574B4D192D1AFFCB00DE5773 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574B4D172D1AFFCB00DE5773 /* ChatMessageCell.swift */; };
 		68046F182CEAC1AD00DB29CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F172CEAC1AD00DB29CF /* AppDelegate.swift */; };
 		68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */; };
 		68046F1F2CEAC1AD00DB29CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68046F1D2CEAC1AD00DB29CF /* Main.storyboard */; };
@@ -31,7 +32,7 @@
 		68BFC7D82CEFE5CD00F13DA1 /* JobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BFC7D72CEFE5CD00F13DA1 /* JobCell.swift */; };
 		68BFC7DA2CF073CC00F13DA1 /* JobsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BFC7D92CF073CC00F13DA1 /* JobsDetailsView.swift */; };
 		68BFC7DC2CF0E24700F13DA1 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BFC7DB2CF0E24700F13DA1 /* BrowseCell.swift */; };
-		68BFC7DE2CF421DD00F13DA1 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BFC7DD2CF421DD00F13DA1 /* BrowseViewController.swift */; };
+		68BFC7DE2CF421DD00F13DA1 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BFC7DD2CF421DD00F13DA1 /* BrowseView.swift */; };
 		68BFC7E02CF4AFD600F13DA1 /* ApplyForJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BFC7DF2CF4AFD600F13DA1 /* ApplyForJobView.swift */; };
 		68D1966C2CEEF16200486E15 /* ManageJobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D1966B2CEEF16200486E15 /* ManageJobsView.swift */; };
 		68D7F6092D0A8F0D00BCE82A /* ViewedCompanyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7F6082D0A8F0D00BCE82A /* ViewedCompanyProfile.swift */; };
@@ -61,7 +62,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		57B30B262D1805B200129909 /* JobFilterPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobFilterPopup.swift; path = "../../../../../Downloads/Hirevolution-main/Hirevolution/Views/ManageJobs/Add Job/JobFilterPopup.swift"; sourceTree = "<group>"; };
+		574B4D152D1AE95D00DE5773 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		574B4D172D1AFFCB00DE5773 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		68046F142CEAC1AD00DB29CF /* Hirevolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hirevolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68046F172CEAC1AD00DB29CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +84,7 @@
 		68BFC7D72CEFE5CD00F13DA1 /* JobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCell.swift; sourceTree = "<group>"; };
 		68BFC7D92CF073CC00F13DA1 /* JobsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsDetailsView.swift; sourceTree = "<group>"; };
 		68BFC7DB2CF0E24700F13DA1 /* BrowseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCell.swift; sourceTree = "<group>"; };
-		68BFC7DD2CF421DD00F13DA1 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
+		68BFC7DD2CF421DD00F13DA1 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		68BFC7DF2CF4AFD600F13DA1 /* ApplyForJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForJobView.swift; sourceTree = "<group>"; };
 		68D1966B2CEEF16200486E15 /* ManageJobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageJobsView.swift; sourceTree = "<group>"; };
 		68D7F6082D0A8F0D00BCE82A /* ViewedCompanyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewedCompanyProfile.swift; sourceTree = "<group>"; };
@@ -211,8 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				68BFC7DB2CF0E24700F13DA1 /* BrowseCell.swift */,
-				68BFC7DD2CF421DD00F13DA1 /* BrowseViewController.swift */,
-				57B30B262D1805B200129909 /* JobFilterPopup.swift */,
+				68BFC7DD2CF421DD00F13DA1 /* BrowseView.swift */,
 				68BFC7DF2CF4AFD600F13DA1 /* ApplyForJobView.swift */,
 			);
 			path = Browse;
@@ -316,6 +317,8 @@
 			isa = PBXGroup;
 			children = (
 				68E9EFD12D0D280000D741FC /* SechaduleInterviewPopUp.swift */,
+				574B4D172D1AFFCB00DE5773 /* ChatMessageCell.swift */,
+				574B4D152D1AE95D00DE5773 /* ChatViewController.swift */,
 			);
 			path = Massages;
 			sourceTree = "<group>";
@@ -432,14 +435,15 @@
 				68046F2F2CEAC2F900DB29CF /* TabBar.swift in Sources */,
 				68BFC7E02CF4AFD600F13DA1 /* ApplyForJobView.swift in Sources */,
 				68D1966C2CEEF16200486E15 /* ManageJobsView.swift in Sources */,
-				57B30B272D1805B200129909 /* JobFilterPopup.swift in Sources */,
 				68E9EFC72D0BDB3400D741FC /* ViewedApplicantProfile.swift in Sources */,
+				574B4D192D1AFFCB00DE5773 /* ChatMessageCell.swift in Sources */,
 				68D86F862CECF4600084A32D /* AddJobView.swift in Sources */,
 				68E405D32CED156700E9540E /* CustomStyleTabBar.swift in Sources */,
 				68046F182CEAC1AD00DB29CF /* AppDelegate.swift in Sources */,
 				68E9EFCB2D0CC9CD00D741FC /* ViewedApplicationTableCell.swift in Sources */,
 				68D86F812CEC4C720084A32D /* SmallAnimation.swift in Sources */,
 				68E9EFC32D0B785400D741FC /* ApplicantCell.swift in Sources */,
+				574B4D162D1AE95D00DE5773 /* ChatViewController.swift in Sources */,
 				6834E97D2CED64D00028BCD3 /* Data Handler.swift in Sources */,
 				68D86F6F2CEAEC1C0084A32D /* Account CellTableViewCell.swift in Sources */,
 				68E9EFCE2D0CDF9A00D741FC /* ManageApplicant.swift in Sources */,
@@ -451,7 +455,7 @@
 				68D86F762CEAF0B20084A32D /* RegistrationController.swift in Sources */,
 				68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */,
 				68BFC7DC2CF0E24700F13DA1 /* BrowseCell.swift in Sources */,
-				68BFC7DE2CF421DD00F13DA1 /* BrowseViewController.swift in Sources */,
+				68BFC7DE2CF421DD00F13DA1 /* BrowseView.swift in Sources */,
 				68E9EFD22D0D280000D741FC /* SechaduleInterviewPopUp.swift in Sources */,
 				68E9EFC52D0B786900D741FC /* CandidateCell.swift in Sources */,
 				68E0E8C92CF6D8F7001E491F /* EditJobView.swift in Sources */,
