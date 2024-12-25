@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6645BFF42D1C36020027B5A2 /* CompanyMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645BFF32D1C36020027B5A2 /* CompanyMainViewController.swift */; };
+		6645BFF62D1C36F80027B5A2 /* CompanyCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645BFF52D1C36F80027B5A2 /* CompanyCardCollectionViewCell.swift */; };
 		68046F182CEAC1AD00DB29CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F172CEAC1AD00DB29CF /* AppDelegate.swift */; };
 		68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */; };
 		68046F1F2CEAC1AD00DB29CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68046F1D2CEAC1AD00DB29CF /* Main.storyboard */; };
@@ -69,6 +71,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6645BFF32D1C36020027B5A2 /* CompanyMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompanyMainViewController.swift; path = Hirevolution/Storybords/CompanyMainViewController.swift; sourceTree = SOURCE_ROOT; };
+		6645BFF52D1C36F80027B5A2 /* CompanyCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompanyCardCollectionViewCell.swift; path = Hirevolution/Storybords/CompanyCardCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		68046F142CEAC1AD00DB29CF /* Hirevolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hirevolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68046F172CEAC1AD00DB29CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 		AC3D2DE72D13113200B63A21 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				6645BFF52D1C36F80027B5A2 /* CompanyCardCollectionViewCell.swift */,
+				6645BFF32D1C36020027B5A2 /* CompanyMainViewController.swift */,
 				AC754DA22D1447BA0043BFF9 /* JobStatusCollectionViewCell.swift */,
 				AC3D2DE52D13112C00B63A21 /* UserMainPageViewController.swift */,
 				AC754DA02D14062F0043BFF9 /* JobRecCollectionViewCell.swift */,
@@ -481,6 +487,7 @@
 				68E9EFCB2D0CC9CD00D741FC /* ViewedApplicationTableCell.swift in Sources */,
 				68D86F812CEC4C720084A32D /* SmallAnimation.swift in Sources */,
 				68E9EFC32D0B785400D741FC /* ApplicantCell.swift in Sources */,
+				6645BFF62D1C36F80027B5A2 /* CompanyCardCollectionViewCell.swift in Sources */,
 				6834E97D2CED64D00028BCD3 /* Data Handler.swift in Sources */,
 				68D86F6F2CEAEC1C0084A32D /* Account CellTableViewCell.swift in Sources */,
 				68E9EFCE2D0CDF9A00D741FC /* ManageApplicant.swift in Sources */,
@@ -489,6 +496,7 @@
 				68D86F8B2CED11650084A32D /* SkillsPopup.swift in Sources */,
 				AC754DA32D1447BA0043BFF9 /* JobStatusCollectionViewCell.swift in Sources */,
 				C3F6A3782D003D3700F40FED /* Company_Profile.swift in Sources */,
+				6645BFF42D1C36020027B5A2 /* CompanyMainViewController.swift in Sources */,
 				68E9EFC92D0CC7E500D741FC /* ApplicantsView.swift in Sources */,
 				68A7DEC02CF72B0E00584086 /* SettingsButton.swift in Sources */,
 				68D86F762CEAF0B20084A32D /* RegistrationController.swift in Sources */,
