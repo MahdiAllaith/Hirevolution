@@ -249,9 +249,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Filter"/>
                                         <connections>
-                                            <segue destination="6vQ-XW-UGb" kind="popoverPresentation" popoverAnchorView="h0b-t7-yAR" id="9VC-sl-tke">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="06Q-Ub-en6" kind="show" id="yEz-Dy-mUU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -493,20 +491,20 @@
             <point key="canvasLocation" x="-1019" y="2768"/>
         </scene>
         <!--Job Filter Popup-->
-        <scene sceneID="nDf-a1-eCo">
+        <scene sceneID="79m-Oo-Wrd">
             <objects>
-                <viewController storyboardIdentifier="JobFiledPopup" id="6vQ-XW-UGb" customClass="JobFilterPopup" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="62A-XG-Nzw">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                <viewController storyboardIdentifier="JobFilterPopup" id="06Q-Ub-en6" customClass="JobFilterPopup" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aR6-uj-QfU">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUG-dh-bfJ">
-                                <rect key="frame" x="11" y="30" width="371" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MAX-u3-Q3s">
+                                <rect key="frame" x="11" y="89" width="371" height="50"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="knI-ck-K9V">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rig-kc-Dst">
                                         <rect key="frame" x="0.0" y="0.0" width="371" height="51"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="OTH-LC-fF8"/>
+                                            <constraint firstAttribute="height" constant="50" id="8Oc-GC-LAu"/>
                                         </constraints>
                                         <segments>
                                             <segment title="ICT"/>
@@ -515,35 +513,46 @@
                                             <segment title="Other"/>
                                         </segments>
                                         <connections>
-                                            <action selector="segmentChanged:" destination="6vQ-XW-UGb" eventType="valueChanged" id="5uB-Aj-LlP"/>
+                                            <action selector="segmentChanged:" destination="06Q-Ub-en6" eventType="valueChanged" id="iLM-yy-A8D"/>
                                         </connections>
                                     </segmentedControl>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NaC-Hi-vUe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MEL-vh-wDG">
                                 <rect key="frame" x="0.0" y="138" width="370" height="270"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" name="AccentColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Og-Fi-2ye">
+                                <rect key="frame" x="159" y="479" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <segue destination="AcL-Bh-jsI" kind="unwind" unwindAction="unwindToBrowse:" id="b3h-vz-Wmd"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="UFf-Tn-WJl"/>
+                        <viewLayoutGuide key="safeArea" id="0G1-RB-pn0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="UFf-Tn-WJl" firstAttribute="trailing" secondItem="oUG-dh-bfJ" secondAttribute="trailing" constant="11" id="bwq-wd-g9s"/>
-                            <constraint firstItem="oUG-dh-bfJ" firstAttribute="top" secondItem="UFf-Tn-WJl" secondAttribute="top" constant="30" id="cba-ZN-bOD"/>
-                            <constraint firstItem="oUG-dh-bfJ" firstAttribute="leading" secondItem="UFf-Tn-WJl" secondAttribute="leading" constant="11" id="rzk-Yz-AbS"/>
+                            <constraint firstItem="MAX-u3-Q3s" firstAttribute="top" secondItem="0G1-RB-pn0" secondAttribute="top" constant="30" id="42o-kf-SZP"/>
+                            <constraint firstItem="MAX-u3-Q3s" firstAttribute="leading" secondItem="0G1-RB-pn0" secondAttribute="leading" constant="11" id="lua-CI-BX9"/>
+                            <constraint firstItem="0G1-RB-pn0" firstAttribute="trailing" secondItem="MAX-u3-Q3s" secondAttribute="trailing" constant="11" id="v9L-Xs-Is5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="09l-kl-3Lt"/>
                     <connections>
-                        <outlet property="FieldType" destination="knI-ck-K9V" id="cqm-eR-3vG"/>
-                        <outlet property="FiledJobsTable" destination="NaC-Hi-vUe" id="7tY-f4-dvB"/>
-                        <outlet property="FiledType" destination="knI-ck-K9V" id="bsD-rR-02a"/>
+                        <outlet property="FiledJobsTable" destination="MEL-vh-wDG" id="qfn-MS-fAE"/>
+                        <outlet property="FiledType" destination="rig-kc-Dst" id="yjW-8v-cEt"/>
+                        <segue destination="AcL-Bh-jsI" kind="unwind" unwindAction="unwindToBrowse:" id="ZZI-iS-4dv"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fOY-Rf-rgo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="acG-OU-0fZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="AcL-Bh-jsI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-686" y="1386"/>
+            <point key="canvasLocation" x="-703" y="1361"/>
         </scene>
     </scenes>
     <resources>

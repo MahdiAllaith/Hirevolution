@@ -1,15 +1,5 @@
-
-
-//
-//  JobFiledPopup.swift
-//  Project-G5
-//
-//  Created by Mac 14 on 14/11/2024.
-//
-
 import UIKit
 
-// MARK: - Protocol Definition
 
 class JobFilterPopup: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -21,7 +11,7 @@ class JobFilterPopup: UIViewController, UITableViewDataSource, UITableViewDelega
     var currentJobs: [String] = FiledICT                 // Current jobs based on selected segment
     var selectedJobs: [String] = []                      // List of selected jobs
     var incomingSelectedJobs: [String] = []              // Jobs passed from the parent view
-    weak var delegate: JobFiledPopupDelegate?            // Delegate to handle selection changes
+    weak var delegate: JobFiledPopupDelegate? 
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -36,7 +26,7 @@ class JobFilterPopup: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Initialize job list and selected jobs
         updateJobFields(for: FiledType.selectedSegmentIndex)
-        selectedJobs = incomingSelectedJobs
+//        selectedJobs = incomingSelectedJobs
     }
     
     // MARK: - Actions
@@ -92,6 +82,9 @@ class JobFilterPopup: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Update cell UI
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        print(selectedJobs)
     }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        <#code#>
+//    }
 }
-

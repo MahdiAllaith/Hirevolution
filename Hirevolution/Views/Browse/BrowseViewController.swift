@@ -11,7 +11,8 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     let authManager = AuthManager.shared
     var AppListedJobs: [JobList] = []  // Array to hold all the jobs data
     var searchJobs: [JobList] = []     // Array to hold jobs based on search and filters
-    var appliedFilters: [String] = []  // Store applied filter criteria (job fields)
+    var appliedFilters: [String] = [] 
+    var FilteredJobs: [String] = []// Store applied filter criteria (job fields)
 
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -116,5 +117,14 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
 
         // Reload the table view to display the filtered results
         AppAllJobsTable.reloadData()
+    }
+    
+    @IBAction func unwindToBrowse(_ segue: UIStoryboardSegue) {
+        if let sourceVC = segue.source as? JobFilterPopup {
+            FilteredJobs = sourceVC.selectedJobs
+            print(FilteredJobs)
+        }
+            
+            
     }
 }
