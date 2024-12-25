@@ -11,8 +11,8 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     let authManager = AuthManager.shared
     var AppListedJobs: [JobList] = []  // Array to hold all the jobs data
     var searchJobs: [JobList] = []     // Array to hold jobs based on search and filters
-    var appliedFilters: [String] = [] 
-    var FilteredJobs: [String] = []// Store applied filter criteria (job fields)
+    var appliedFilters: [String] = []
+    var FilteredJobs: [String] = []    // Store applied filter criteria (job fields)
 
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -102,11 +102,11 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK: - UITextFieldDelegate Methods (Search)
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let searchText = textField.text else { return }
-        
+
         print("Search text entered: \(searchText)")  // Debugging output
 
+        // If the search text is empty, show all jobs
         if searchText.isEmpty {
-            // If search text is empty, show all jobs
             searchJobs = AppListedJobs
         } else {
             // Filter jobs where the jobTitle starts with the search text (case-insensitive)
@@ -121,10 +121,25 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func unwindToBrowse(_ segue: UIStoryboardSegue) {
         if let sourceVC = segue.source as? JobFilterPopup {
-            FilteredJobs = sourceVC.selectedJobs
-            print(FilteredJobs)
+            FilteredJobs = sourceVC.selectedJobs // Assuming selectedJobs is an array of Strings
+            print("Filtered jobs: \(FilteredJobs)")  // Debugging output
+
+            // Apply filters if there are any selected
+            if FilteredJobs.isEmpty {
+                // If no filters are selected, show all jobs
+                searchJobs = AppListedJobs
+            } else {
+                // Filter the jobs based on selected filters in FilteredJobs
+                searchJobs = AppListedJobs.filter { job in
+                    // Only return jobs whose jobFields match any of the filters in FilteredJobs
+                    return job.jobFields.contains { field in
+                        FilteredJobs.contains(field)
+                    }
+                }
+            }
+
+            // Reload the table view with the filtered data
+            AppAllJobsTable.reloadData()
         }
-            
-            
     }
 }
