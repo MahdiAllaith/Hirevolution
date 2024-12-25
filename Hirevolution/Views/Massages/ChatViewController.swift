@@ -9,24 +9,26 @@ class ChatViewController: UIViewController {
     
     var messages: [ChatMessage] = []  // Store all chat messages
     var currentUser: User?  // Store the current logged-in user
-    
-    
 
     override func viewDidLoad() {
-            super.viewDidLoad()
+        super.viewDidLoad()
 
-            // Register the NIB for the custom cell (replace "ChatMessageCell" with the name of your NIB file)
-            let nib = UINib(nibName: "ChatMessageCell", bundle: nil)
-            tableView.register(nib, forCellReuseIdentifier: "ChatMessageCell")
+        // Register the NIB for the custom cell
+        let nib = UINib(nibName: "ChatMessageCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "ChatMessageCell")
 
-            // Set up the table view
-            tableView.dataSource = self
-            tableView.delegate = self
+        // Set up the table view
+        tableView.dataSource = self
+        tableView.delegate = self
 
-            // Add send button action
-            sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
-        }
-    
+        // Add send button action
+        sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+
+        // Add observers for keyboard appearance
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
     // Action for the Send button
     @objc func sendButtonTapped() {
         print("Send button tapped!")
@@ -50,14 +52,14 @@ class ChatViewController: UIViewController {
 
         print("Message sent: \(newMessage.message)") // Debug print
 
-        // Reload the TableView
-        tableView.reloadData()
+        // Reload the TableView on the main thread
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.scrollToBottom()
+        }
 
         // Clear the TextField
         messageTextField.text = ""
-
-        // Scroll to bottom of TableView
-        scrollToBottom()
     }
 
     // Scroll to the bottom of the TableView to show the latest message
@@ -65,6 +67,23 @@ class ChatViewController: UIViewController {
         if messages.count > 0 {
             let indexPath = IndexPath(row: messages.count - 1, section: 0)
             tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+
+    // Handle keyboard appearance and adjust view
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = -keyboardHeight
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
         }
     }
 
@@ -90,10 +109,10 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         // Determine if the message is from the current user
         let isSender = message.userID == currentUser?.id
         
-        // Configure the cell with the message and sender info
+        print("Configuring cell for message: \(message.message)") // Debug print
+        
         cell.configure(with: message, isSender: isSender)
         
         return cell
     }
 }
-

@@ -11,7 +11,6 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
     let authManager = AuthManager.shared
     var AppListedJobs: [JobList] = []  // Array to hold all the jobs data
     var searchJobs: [JobList] = []     // Array to hold jobs based on search and filters
-    var searching = false              // Flag for searching state
     var appliedFilters: [String] = []  // Store applied filter criteria (job fields)
 
     // MARK: - Lifecycle Methods
@@ -27,7 +26,7 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         if let jobs = authManager.loadAllJobsFromUserDefaults() {
             AppListedJobs = jobs
             searchJobs = jobs  // Initially show all jobs
-            print("Loaded all app jobs: \(AppListedJobs)")
+            print("Loaded all app jobs: \(AppListedJobs)")  // Debugging output
         } else {
             print("Failed to load jobs from UserDefaults.")
         }
@@ -77,31 +76,6 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
 
-    // MARK: - JobFilterPopupDelegate Methods
-    func jobFilterUpdated(filteredJobs: [JobList]) {
-        // When the filter is applied, update the filtered jobs
-        print("Filtered jobs in BrowseViewController: \(filteredJobs)")
-        searchJobs = filteredJobs
-        appliedFilters = filteredJobs.flatMap { $0.jobFields }  // Store all selected job fields in appliedFilters
-        
-        // After updating the filters, reapply the search and field filters
-       
-        // Reload the table to show the filtered jobs
-        AppAllJobsTable.reloadData()
-    }
-
-    // MARK: - Filter Button Action
-    @IBAction func filterButtonTapped(_ sender: UIButton) {
-        // Present the JobFilterPopup when the filter button is tapped
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-       
-
-    // MARK: - Apply Filters Method
-
-        // Reload the table to reflect filtered jobs
-        AppAllJobsTable.reloadData()
-    }
-
     // MARK: - BrowseCellDelegate
     func didTapViewJobButton(in cell: BrowseCell) {
         if let indexPath = AppAllJobsTable.indexPath(for: cell) {
@@ -113,9 +87,9 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
                 // Increment job views count
                 authManager.incrementJobViewsCount(jobID: selectedJob.jobID) { error in
                     if let error = error {
-                        print("Failed to increment job views: \(error.localizedDescription)")
+                        print("Failed to increment job views: \(error.localizedDescription)")  // Debugging output
                     } else {
-                        print("Job views incremented successfully")
+                        print("Job views incremented successfully")  // Debugging output
                     }
                 }
 
@@ -126,10 +100,21 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
 
     // MARK: - UITextFieldDelegate Methods (Search)
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        // Apply filters after the search text is updated
+        guard let searchText = textField.text else { return }
         
+        print("Search text entered: \(searchText)")  // Debugging output
 
-        // Reload table to reflect the filtered results
+        if searchText.isEmpty {
+            // If search text is empty, show all jobs
+            searchJobs = AppListedJobs
+        } else {
+            // Filter jobs where the jobTitle starts with the search text (case-insensitive)
+            searchJobs = AppListedJobs.filter { job in
+                return job.jobTitle.lowercased().hasPrefix(searchText.lowercased())
+            }
+        }
+
+        // Reload the table view to display the filtered results
         AppAllJobsTable.reloadData()
     }
 }

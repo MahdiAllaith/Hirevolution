@@ -37,11 +37,13 @@ class ChatMessageCell: UITableViewCell {
             senderLabel.textAlignment = .left
         }
 
-        // Adjust the position of the message bubble based on the sender/receiver
+        // Make sure Auto Layout handles the positioning, not manual frame manipulation
         if isSender {
-            messageBubble.frame.origin.x = self.contentView.frame.width - messageBubble.frame.width - 10
+            messageBubble.layer.borderWidth = 1
+            messageBubble.layer.borderColor = UIColor.systemBlue.cgColor
         } else {
-            messageBubble.frame.origin.x = 10
+            messageBubble.layer.borderWidth = 1
+            messageBubble.layer.borderColor = UIColor.systemGray.cgColor
         }
     }
 }
