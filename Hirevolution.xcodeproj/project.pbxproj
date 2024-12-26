@@ -57,6 +57,7 @@
 		AC3D2DE62D13112C00B63A21 /* UserMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2DE52D13112C00B63A21 /* UserMainPageViewController.swift */; };
 		AC754DA12D14062F0043BFF9 /* JobRecCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC754DA02D14062F0043BFF9 /* JobRecCollectionViewCell.swift */; };
 		AC754DA32D1447BA0043BFF9 /* JobStatusCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC754DA22D1447BA0043BFF9 /* JobStatusCollectionViewCell.swift */; };
+		ACB10D162D1D4BA200D63087 /* ArticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB10D152D1D4BA200D63087 /* ArticleManager.swift */; };
 		C3F6A36E2D0036DD00F40FED /* A_Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F6A36D2D0036DD00F40FED /* A_Main.swift */; };
 		C3F6A3702D0036EA00F40FED /* A_Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F6A36F2D0036EA00F40FED /* A_Browse.swift */; };
 		C3F6A3722D0036FE00F40FED /* A_Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F6A3712D0036FE00F40FED /* A_Library.swift */; };
@@ -118,6 +119,7 @@
 		AC3D2DE52D13112C00B63A21 /* UserMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserMainPageViewController.swift; path = Hirevolution/Views/Main/UserMainPageViewController.swift; sourceTree = SOURCE_ROOT; };
 		AC754DA02D14062F0043BFF9 /* JobRecCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobRecCollectionViewCell.swift; sourceTree = "<group>"; };
 		AC754DA22D1447BA0043BFF9 /* JobStatusCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobStatusCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		ACB10D152D1D4BA200D63087 /* ArticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleManager.swift; sourceTree = "<group>"; };
 		C3F6A36D2D0036DD00F40FED /* A_Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Main.swift; sourceTree = "<group>"; };
 		C3F6A36F2D0036EA00F40FED /* A_Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Browse.swift; sourceTree = "<group>"; };
 		C3F6A3712D0036FE00F40FED /* A_Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Library.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				CF6807292D0EFF6700D78E18 /* CardCollectionViewCell.swift */,
 				CF68072B2D0F165700D78E18 /* SecondLibraryViewController.swift */,
 				CF68072F2D0F5AED00D78E18 /* ArticleCollectionViewCell.swift */,
+				ACB10D152D1D4BA200D63087 /* ArticleManager.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				CF6807282D0EFA5700D78E18 /* LibraryViewController.swift in Sources */,
 				AC754DA12D14062F0043BFF9 /* JobRecCollectionViewCell.swift in Sources */,
 				C3F6A3762D003D2500F40FED /* User_Profile.swift in Sources */,
+				ACB10D162D1D4BA200D63087 /* ArticleManager.swift in Sources */,
 				68D86F7C2CEAFBDD0084A32D /* SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

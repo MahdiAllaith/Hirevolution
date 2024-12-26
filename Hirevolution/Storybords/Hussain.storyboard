@@ -622,16 +622,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EWc-R2-6gz" userLabel="UpperBar">
-                                <rect key="frame" x="20" y="64" width="353" height="54"/>
+                                <rect key="frame" x="20" y="64" width="353" height="43.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zm-oW-vhi">
-                                        <rect key="frame" x="0.0" y="0.0" width="101.33333333333333" height="54"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="101.33333333333333" height="43.666666666666664"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                         <color key="textColor" name="BackgroundBase"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="EZq-A1-dRt">
-                                        <rect key="frame" x="258" y="7" width="95" height="40"/>
+                                        <rect key="frame" x="258" y="2" width="95" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crW-J7-Nue" userLabel="BorowsButton" customClass="SearchButton" customModule="Hirevolution" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -674,9 +674,9 @@
                                 <color key="backgroundColor" name="BaseApp"/>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2vz-hu-tB6">
-                                <rect key="frame" x="0.0" y="196" width="393" height="235"/>
+                                <rect key="frame" x="0.0" y="185.66666666666663" width="393" height="248.33333333333337"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UNI-6R-W86">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UNI-6R-W86">
                                     <size key="itemSize" width="396" height="187"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -684,7 +684,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CompanyCardCell" id="EjT-YZ-wm8" customClass="CompanyCardCollectionViewCell" customModule="Hirevolution" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24" width="396" height="187"/>
+                                        <rect key="frame" x="0.0" y="30.666666666666668" width="396" height="187"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2Ch-q5-CFT">
                                             <rect key="frame" x="0.0" y="0.0" width="396" height="187"/>
@@ -816,18 +816,43 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Job Applications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qb1-yy-Hvv">
+                                <rect key="frame" x="8" y="168.66666666666666" width="243" height="31.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBG-3C-nPl">
+                                <rect key="frame" x="278" y="179" width="93" height="20.333333333333343"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivi-iA-ftB">
+                                        <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="GrayV2"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tg5-n0-FWc">
+                                        <rect key="frame" x="80.333333333333314" y="2" width="12.666666666666671" height="16.666666666666664"/>
+                                        <color key="tintColor" name="GrayV2"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Lde-GG-Zhg"/>
                         <color key="backgroundColor" name="BaseApp"/>
                         <constraints>
                             <constraint firstItem="Lde-GG-Zhg" firstAttribute="trailing" secondItem="EWc-R2-6gz" secondAttribute="trailing" constant="20" id="2Eo-hX-Chr"/>
-                            <constraint firstItem="Lde-GG-Zhg" firstAttribute="bottom" secondItem="2vz-hu-tB6" secondAttribute="bottom" constant="387" id="8bY-J2-KAG"/>
+                            <constraint firstItem="Lde-GG-Zhg" firstAttribute="trailing" secondItem="fBG-3C-nPl" secondAttribute="trailing" constant="22" id="Bqe-uG-ZCO"/>
+                            <constraint firstItem="Lde-GG-Zhg" firstAttribute="bottom" secondItem="2vz-hu-tB6" secondAttribute="bottom" constant="384" id="Cyp-he-pKc"/>
+                            <constraint firstItem="fBG-3C-nPl" firstAttribute="top" secondItem="EWc-R2-6gz" secondAttribute="bottom" constant="71.333333333333343" id="F2A-tT-RhM"/>
                             <constraint firstItem="2vz-hu-tB6" firstAttribute="trailing" secondItem="Lde-GG-Zhg" secondAttribute="trailing" id="KYs-81-W6O"/>
                             <constraint firstItem="2vz-hu-tB6" firstAttribute="leading" secondItem="Lde-GG-Zhg" secondAttribute="leading" id="Xjp-IS-2vx"/>
                             <constraint firstItem="EWc-R2-6gz" firstAttribute="top" secondItem="Lde-GG-Zhg" secondAttribute="top" constant="5" id="bWU-E1-vTO"/>
+                            <constraint firstItem="Qb1-yy-Hvv" firstAttribute="top" secondItem="EWc-R2-6gz" secondAttribute="bottom" constant="61" id="cyf-3q-0iz"/>
                             <constraint firstItem="2vz-hu-tB6" firstAttribute="top" secondItem="EWc-R2-6gz" secondAttribute="bottom" constant="78" id="hUf-EU-rrf"/>
+                            <constraint firstItem="Qb1-yy-Hvv" firstAttribute="leading" secondItem="Lde-GG-Zhg" secondAttribute="leading" constant="8" id="hdZ-Oo-NKH"/>
+                            <constraint firstItem="8gr-i8-aQH" firstAttribute="top" secondItem="Qb1-yy-Hvv" secondAttribute="bottom" constant="108" id="j1o-us-7vq"/>
                             <constraint firstItem="EWc-R2-6gz" firstAttribute="leading" secondItem="Lde-GG-Zhg" secondAttribute="leading" constant="20" id="lMx-b4-eWr"/>
-                            <constraint firstAttribute="bottom" secondItem="2vz-hu-tB6" secondAttribute="bottom" constant="421" id="wbe-hd-Shx"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Main" id="Ca4-g7-81q" userLabel="NavBarMain">
@@ -835,6 +860,10 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="CompanyCardCollectionView" destination="2vz-hu-tB6" id="fOh-xD-EXf"/>
+                        <outlet property="lblJobApps" destination="Qb1-yy-Hvv" id="Cqo-zH-Ywc"/>
+                        <outlet property="lblViewMore" destination="ivi-iA-ftB" id="dpd-FS-fD2"/>
+                        <outlet property="stckViewMore" destination="fBG-3C-nPl" id="wBX-V3-hks"/>
+                        <outlet property="viewMoreNav" destination="tg5-n0-FWc" id="DGr-v2-8lN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOF-96-6Pz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -861,6 +890,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>

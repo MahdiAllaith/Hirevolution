@@ -47,8 +47,6 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  IT"))
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  Engineering"))
         arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  Business"))
-        arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  Business"))
-        arrCards.append(Card(photo: UIImage(named: "workCardImage")!, title: "  Business"))
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
