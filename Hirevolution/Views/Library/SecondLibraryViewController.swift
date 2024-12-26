@@ -44,6 +44,7 @@ class SecondLibraryViewController: UIViewController, UICollectionViewDelegate, U
         collectionViewCard2.delegate = self
         collectionViewCard2.dataSource = self
         let workCardImage = UIImage(named: "workCardImage")
+
         
                 // Check if the selectedCard exists
                 if let selectedCard = selectedCard {

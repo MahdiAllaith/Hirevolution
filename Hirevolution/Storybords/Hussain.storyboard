@@ -185,7 +185,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="CY6-HW-HlM"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.20487850899999999" green="0.46911543610000001" blue="0.96482771639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -607,14 +607,14 @@
                             <constraint firstItem="ErG-PD-Jgb" firstAttribute="trailing" secondItem="AkX-a7-xzL" secondAttribute="trailing" id="zhr-Ho-krB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Main" id="MRX-n8-FZp" userLabel="NavBarMain">
-                        <imageReference key="image" image="house" catalog="system"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Main" image="house" catalog="system" id="MRX-n8-FZp" userLabel="NavBarMain"/>
                     <navigationItem key="navigationItem" id="G1a-3H-xfl"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="jobRecCollectionView" destination="je3-ir-nLf" id="qWL-wa-cHq"/>
                         <outlet property="jobStatusCollectionView" destination="ErG-PD-Jgb" id="P4L-nq-Kiw"/>
+                        <outlet property="lblJobStatus" destination="yMI-ed-mRG" id="0UJ-Ae-uad"/>
+                        <outlet property="lblRecJobs" destination="6H6-fc-kSB" id="HBE-l1-VHr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIg-Hw-3fU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

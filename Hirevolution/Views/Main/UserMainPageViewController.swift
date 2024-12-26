@@ -11,6 +11,8 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
     
     
 
+    @IBOutlet weak var lblJobStatus: UILabel!
+    @IBOutlet var lblRecJobs: UIView!
     @IBOutlet weak var jobStatusCollectionView: UICollectionView!
     @IBOutlet weak var jobRecCollectionView: UICollectionView!
     var jobRecommendations: [Job] = [
@@ -41,6 +43,15 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
             layout.minimumLineSpacing = 10  // Space between rows
             layout.minimumInteritemSpacing = 10  // Space between items horizontally
             layout.itemSize = CGSize(width: 269, height: 214)
+//        if AuthManager.shared. {
+//                    // User is signed in, show the elements
+//                    lblJobStatus.isHidden = false
+//                    jobStatusCollectionView.isHidden = false
+//                } else {
+//                    // User is not signed in, hide the elements
+//                    lblJobStatus.isHidden = true
+//                    jobStatusCollectionView.isHidden = true
+//                }
     }
     
     
