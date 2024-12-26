@@ -103,6 +103,22 @@ struct ChatMessage: Codable {
     }
 }
 
+struct ScheduledInterview {
+    var interviewDate: Date
+}
+
+class InterviewTime {
+    static let shared = InterviewTime() // Singleton instance
+    
+    var scheduledInterviews: [ScheduledInterview] = []
+    
+    func addSchedule(interview: ScheduledInterview) {
+        scheduledInterviews.append(interview)
+        print("Interview scheduled on: \(interview.interviewDate)")
+    }
+}
+
+
 
 class AuthManager {
     static let shared = AuthManager()

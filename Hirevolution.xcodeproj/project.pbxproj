@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		574B4D162D1AE95D00DE5773 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574B4D152D1AE95D00DE5773 /* ChatViewController.swift */; };
 		574B4D192D1AFFCB00DE5773 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574B4D172D1AFFCB00DE5773 /* ChatMessageCell.swift */; };
+		57776D9D2D1D68D9008AC41F /* NoitificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57776D9C2D1D68D9008AC41F /* NoitificationViewController.swift */; };
+		57776D9F2D1D6EB9008AC41F /* NoificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57776D9E2D1D6EB9008AC41F /* NoificationCell.swift */; };
 		578B5F872D1C1177009BE255 /* JobFilterPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B5F862D1C1177009BE255 /* JobFilterPopupViewController.swift */; };
 		68046F182CEAC1AD00DB29CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F172CEAC1AD00DB29CF /* AppDelegate.swift */; };
 		68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68046F192CEAC1AD00DB29CF /* SceneDelegate.swift */; };
@@ -65,6 +67,8 @@
 /* Begin PBXFileReference section */
 		574B4D152D1AE95D00DE5773 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		574B4D172D1AFFCB00DE5773 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		57776D9C2D1D68D9008AC41F /* NoitificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoitificationViewController.swift; sourceTree = "<group>"; };
+		57776D9E2D1D6EB9008AC41F /* NoificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoificationCell.swift; sourceTree = "<group>"; };
 		578B5F862D1C1177009BE255 /* JobFilterPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobFilterPopupViewController.swift; sourceTree = "<group>"; };
 		68046F142CEAC1AD00DB29CF /* Hirevolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hirevolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68046F172CEAC1AD00DB29CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 				68E9EFD12D0D280000D741FC /* SechaduleInterviewPopUp.swift */,
 				574B4D172D1AFFCB00DE5773 /* ChatMessageCell.swift */,
 				574B4D152D1AE95D00DE5773 /* ChatViewController.swift */,
+				57776D9C2D1D68D9008AC41F /* NoitificationViewController.swift */,
+				57776D9E2D1D6EB9008AC41F /* NoificationCell.swift */,
 			);
 			path = Massages;
 			sourceTree = "<group>";
@@ -444,6 +450,7 @@
 				68E405D32CED156700E9540E /* CustomStyleTabBar.swift in Sources */,
 				68046F182CEAC1AD00DB29CF /* AppDelegate.swift in Sources */,
 				68E9EFCB2D0CC9CD00D741FC /* ViewedApplicationTableCell.swift in Sources */,
+				57776D9F2D1D6EB9008AC41F /* NoificationCell.swift in Sources */,
 				68D86F812CEC4C720084A32D /* SmallAnimation.swift in Sources */,
 				68E9EFC32D0B785400D741FC /* ApplicantCell.swift in Sources */,
 				574B4D162D1AE95D00DE5773 /* ChatViewController.swift in Sources */,
@@ -459,6 +466,7 @@
 				68D86F762CEAF0B20084A32D /* RegistrationController.swift in Sources */,
 				68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */,
 				68BFC7DC2CF0E24700F13DA1 /* BrowseCell.swift in Sources */,
+				57776D9D2D1D68D9008AC41F /* NoitificationViewController.swift in Sources */,
 				68BFC7DE2CF421DD00F13DA1 /* BrowseViewController.swift in Sources */,
 				68E9EFD22D0D280000D741FC /* SechaduleInterviewPopUp.swift in Sources */,
 				68E9EFC52D0B786900D741FC /* CandidateCell.swift in Sources */,
