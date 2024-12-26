@@ -3,4 +3,94 @@
    uuid = "C54AFFE2-668C-4A60-9219-084B2495D2C9"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CAE96B58-89E8-472C-A524-D9DEC865E2A8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Hirevolution/Views/Tab Bar/CustomStyleTabBar.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "10"
+            endingLineNumber = "10"
+            landmarkName = "CustomStyleTabBar"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "CAE96B58-89E8-472C-A524-D9DEC865E2A8 - d8fe37e9ba90bde1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.CustomStyleTabBar.__allocating_init(frame: __C.CGRect) -&gt; Hirevolution.CustomStyleTabBar"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Guest/Desktop/Hirevolution/Hirevolution/Views/Tab%20Bar/CustomStyleTabBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "CAE96B58-89E8-472C-A524-D9DEC865E2A8 - a3510c32c8a946c5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.CustomStyleTabBar.init(frame: __C.CGRect) -&gt; Hirevolution.CustomStyleTabBar"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Guest/Desktop/Hirevolution/Hirevolution/Views/Tab%20Bar/CustomStyleTabBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10">
+               </Location>
+               <Location
+                  uuid = "CAE96B58-89E8-472C-A524-D9DEC865E2A8 - c225a29bbd6b248e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.CustomStyleTabBar.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Hirevolution.CustomStyleTabBar&gt;"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Guest/Desktop/Hirevolution/Hirevolution/Views/Tab%20Bar/CustomStyleTabBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "CAE96B58-89E8-472C-A524-D9DEC865E2A8 - 35f95d976759b6c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.CustomStyleTabBar.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Hirevolution.CustomStyleTabBar&gt;"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Guest/Desktop/Hirevolution/Hirevolution/Views/Tab%20Bar/CustomStyleTabBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10">
+               </Location>
+               <Location
+                  uuid = "CAE96B58-89E8-472C-A524-D9DEC865E2A8 - f2ff48bb280954e0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.CustomStyleTabBar.__deallocating_deinit"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Guest/Desktop/Hirevolution/Hirevolution/Views/Tab%20Bar/CustomStyleTabBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
