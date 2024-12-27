@@ -141,5 +141,7 @@ class BrowseViewController: UIViewController, UITableViewDataSource, UITableView
             // Reload the table view with the filtered data
             AppAllJobsTable.reloadData()
         }
+        
+        
     }
 }

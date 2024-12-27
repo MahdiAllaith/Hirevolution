@@ -1255,6 +1255,7 @@
                                 <connections>
                                     <action selector="ListJobButtonClicked:" destination="Vvg-dw-rOs" eventType="touchUpInside" id="RBx-ph-cDE"/>
                                     <action selector="viewSchaduleInterViewToMassageButton:" destination="KCg-tW-Fw2" eventType="touchUpInside" id="XIp-7Q-NZ7"/>
+                                    <segue destination="0aM-6F-NuN" kind="show" id="ffQ-ep-eWp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k20-Se-0vR">
@@ -2851,21 +2852,26 @@
             <point key="canvasLocation" x="-1152" y="877"/>
         </scene>
         <!--Sechadule Interview Pop Up-->
-        <scene sceneID="hDk-Dc-OoZ">
+        <scene sceneID="kvu-VA-KJe">
             <objects>
-                <viewController storyboardIdentifier="SechaduleInterviewPopUp" id="aAr-QD-rsH" customClass="SechaduleInterviewPopUp" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Rxs-ZR-UVw">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                <viewController storyboardIdentifier="SechaduleInterviewPopUp" id="0aM-6F-NuN" customClass="SechaduleInterviewPopUp" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qat-Jc-c2n">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" semanticContentAttribute="spatial" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="X9x-h1-Llr">
-                                <rect key="frame" x="0.0" y="18" width="304" height="101"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" name="Blue"/>
-                            </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbi-tv-hq2">
-                                <rect key="frame" x="55" y="290" width="283" height="46"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgZ-Ud-NpT">
+                                <rect key="frame" x="146" y="91" width="101.33333333333331" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AQH-Rc-pLu">
+                                <rect key="frame" x="39.333333333333343" y="145" width="314.33333333333326" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbe-gf-IWi">
+                                <rect key="frame" x="55" y="530" width="283" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" name="Blue"/>
                                 <state key="normal" title="Button"/>
@@ -2876,18 +2882,31 @@
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="25"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="ListJobButtonClicked:" destination="Vvg-dw-rOs" eventType="touchUpInside" id="Zj1-dR-aEW"/>
-                                    <action selector="ViewUserProfileButton:" destination="KCg-tW-Fw2" eventType="touchUpInside" id="N6o-az-SZ0"/>
+                                    <action selector="sendButtonTapped:" destination="0aM-6F-NuN" eventType="touchDragInside" id="42s-bq-UzH"/>
+                                    <segue destination="w6O-uu-dWD" kind="unwind" unwindAction="unwindToManage:" id="xDn-v9-grV"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="Yd6-v4-e6O"/>
+                        <viewLayoutGuide key="safeArea" id="Nwv-Tr-2ee"/>
                         <color key="backgroundColor" name="Settings"/>
+                        <constraints>
+                            <constraint firstItem="PgZ-Ud-NpT" firstAttribute="centerX" secondItem="Nwv-Tr-2ee" secondAttribute="centerX" id="Erq-o4-YPm"/>
+                            <constraint firstItem="AQH-Rc-pLu" firstAttribute="top" secondItem="PgZ-Ud-NpT" secondAttribute="bottom" constant="30" id="MEo-YC-UDp"/>
+                            <constraint firstItem="AQH-Rc-pLu" firstAttribute="width" secondItem="qat-Jc-c2n" secondAttribute="width" multiplier="0.8" id="O6F-WC-95e"/>
+                            <constraint firstItem="AQH-Rc-pLu" firstAttribute="centerX" secondItem="PgZ-Ud-NpT" secondAttribute="centerX" id="Pna-aU-PRd"/>
+                            <constraint firstItem="PgZ-Ud-NpT" firstAttribute="top" secondItem="Nwv-Tr-2ee" secondAttribute="top" constant="91" id="bhR-wB-S7N"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Iec-Hr-Fjn"/>
+                    <connections>
+                        <outlet property="dateTF" destination="AQH-Rc-pLu" id="XgJ-9f-6CR"/>
+                        <outlet property="sendButton" destination="Vbe-gf-IWi" id="I2Y-xi-l53"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="r6b-yq-ckH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="53H-wq-tpk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="w6O-uu-dWD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="516.79389312977094" y="2200.7042253521126"/>
+            <point key="canvasLocation" x="1317" y="2288"/>
         </scene>
     </scenes>
     <resources>
@@ -2933,7 +2952,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

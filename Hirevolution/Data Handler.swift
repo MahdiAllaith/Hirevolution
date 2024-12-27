@@ -90,33 +90,46 @@ struct User: Identifiable, Codable {
     var userApplicationsList: UserApplicationsList?
 }
 
-struct ChatMessage: Codable {
-    let userID: String  // This will store the ID of the sender
-    let message: String // The message content
-    let timestamp: Date // Timestamp is optional if you don’t need it
 
-    // Initialize the message
-    init(userID: String, message: String, timestamp: Date) {
-        self.userID = userID
-        self.message = message
-        self.timestamp = timestamp
-    }
-}
 
-struct ScheduledInterview {
+
+
+struct ScheduledInterview: Codable {
     var interviewDate: Date
-}
-
-class InterviewTime {
-    static let shared = InterviewTime() // Singleton instance
+    var userID: String
+    var jobID: String
     
-    var scheduledInterviews: [ScheduledInterview] = []
-    
-    func addSchedule(interview: ScheduledInterview) {
-        scheduledInterviews.append(interview)
-        print("Interview scheduled on: \(interview.interviewDate)")
+    // Initializer
+    init(interviewDate: Date, userID: String, jobID: String) {
+        self.interviewDate = interviewDate
+        self.userID = userID
+        self.jobID = jobID
     }
 }
+
+
+struct ScheduledInterviewWithJob {
+    var interviewDate: Date
+    var userID: String
+    var jobID: String
+    var job: JobList?  // This will store the associated job details
+    
+    // Initializer
+    init(interviewDate: Date, userID: String, jobID: String, job: JobList? = nil) {
+        self.interviewDate = interviewDate
+        self.userID = userID
+        self.jobID = jobID
+        self.job = job
+    }
+}
+
+
+struct ChatMessage {
+    let userID: String
+    let message: String
+}
+
+
 
 
 
@@ -200,12 +213,12 @@ class AuthManager {
                 completion(error)
                 return
             }
-
+            
             guard let authResult = authResult else {
                 completion(NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to create user"]))
                 return
             }
-
+            
             let userId = authResult.user.uid
             var userData: [String: Any] = [
                 "id": userId,
@@ -214,7 +227,7 @@ class AuthManager {
                 "password": password,
                 "option": option
             ]
-
+            
             if option == "company" {
                 let companyProfile = CompanyProfile(profilebackgroundPictuer: "", companyProfileLogo: "", companyName: "", companyDescription: "", yearOfEstablishment: "", numberOfEmployees: "", companyCEOName: "", companyNetworth: "")
                 userData["companyProfile"] = try? Firestore.Encoder().encode(companyProfile)
@@ -224,7 +237,7 @@ class AuthManager {
                 userData["userProfile"] = try? Firestore.Encoder().encode(userProfile)
                 userData["userApplicationsList"] = try? Firestore.Encoder().encode(userApplicationsList)
             }
-
+            
             Firestore.firestore().collection("users").document(userId).setData(userData) { error in
                 if let error = error {
                     completion(error)
@@ -303,7 +316,7 @@ class AuthManager {
                     }
                 } else if user.option == "user"{
                     UserDefaults.standard.set("user", forKey: "userType")
-                }else{                    
+                }else{
                     UserDefaults.standard.set("admin", forKey: "userType")
                 }
             } catch {
@@ -432,7 +445,7 @@ class AuthManager {
             return nil
         }
     }
-
+    
     //Fetches jobs for a specific company from Firestore based on the current user's CompanyID.
     func fetchCompanyJobs(completion: @escaping (Error?) -> Void) {
         guard let currentUser = AuthManager.shared.currentUser else {
@@ -486,7 +499,7 @@ class AuthManager {
             }
         }
     }
-
+    
     //Loads the jobs for a specific company from UserDefaults.
     func loadCompanyJobsFromUserDefaults() -> [JobList]? {
         // Retrieve the Data from UserDefaults
@@ -508,7 +521,7 @@ class AuthManager {
             return nil
         }
     }
-
+    
     //Updates a job's data in Firestore based on the provided updatedJob object.
     func updateJobInDatabase(jobList: JobList, completion: @escaping (Error?) -> Void) {
         // Get a reference to Firestore
@@ -516,7 +529,7 @@ class AuthManager {
         
         // Reference to the document for the job based on jobID
         let jobRef = db.collection("jobs").document(jobList.jobID)
-
+        
         // Create a dictionary with the fields to update
         var updateData: [String: Any] = [
             "jobTitle": jobList.jobTitle,
@@ -539,7 +552,7 @@ class AuthManager {
             }
         }
     }
-
+    
     //increments the view count for a specific job in Firestore.
     func incrementJobViewsCount(jobID: String, completion: @escaping (Error?) -> Void) {
         // Firestore reference to the 'jobs' collection and the document with the given jobID
@@ -645,26 +658,26 @@ class AuthManager {
         let db = Firestore.firestore()
         let jobRef = db.collection("jobs").document(jobID)
         let userRef = db.collection("users").document(userID)  // Reference to the user document
-
+        
         // Create a userApplicationStuff struct
         let userApplication = UserApplicationsStuff(applicantProfile: userProfile, applicantUserID: userID, applicantStatus: "On-going", isCandidate: false)
-
+        
         // Fetch the job document
         jobRef.getDocument { documentSnapshot, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
-
+            
             guard let document = documentSnapshot, document.exists,
                   let jobData = document.data() else {
                 completion(.failure(NSError(domain: "JobError", code: 404, userInfo: [NSLocalizedDescriptionKey: "Job not found"])))
                 return
             }
-
+            
             // Update appliedUserApplications and increment count
             var appliedUserApplications = jobData["ApplyedUsersApplications"] as? [[String: Any]] ?? []
-
+            
             do {
                 // Encode the user application
                 let userApplicationDict = try Firestore.Encoder().encode(userApplication) as [String: Any]
@@ -673,10 +686,10 @@ class AuthManager {
                 completion(.failure(error))
                 return
             }
-
+            
             let currentCount = jobData["jobApplyedApplicationsCount"] as? Int ?? 0
             let updatedCount = currentCount + 1
-
+            
             // Update job document
             jobRef.updateData([
                 "ApplyedUsersApplications": appliedUserApplications,
@@ -686,32 +699,32 @@ class AuthManager {
                     completion(.failure(error))
                     return
                 }
-
+                
                 // Now update the user document with the job ID
                 userRef.getDocument { documentSnapshot, error in
                     if let error = error {
                         completion(.failure(error))
                         return
                     }
-
+                    
                     guard let document = documentSnapshot, document.exists,
                           let userData = document.data() else {
                         completion(.failure(NSError(domain: "UserError", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
                         return
                     }
-
+                    
                     // Access the userApplicationsList and update appliedJobIDLink
                     var userApplicationsList = userData["userApplicationsList"] as? [String: Any] ?? [:]
-
+                    
                     // Get the appliedJobIDLink from the userApplicationsList
                     var appliedJobIDLink = userApplicationsList["appliedJobIDLink"] as? [String] ?? []
-
+                    
                     // Append the jobID to appliedJobIDLink
                     appliedJobIDLink.append(jobID)
-
+                    
                     // Update userApplicationsList
                     userApplicationsList["appliedJobIDLink"] = appliedJobIDLink
-
+                    
                     // Update the user document with the new userApplicationsList
                     userRef.updateData(["userApplicationsList": userApplicationsList]) { error in
                         if let error = error {
@@ -903,5 +916,34 @@ class AuthManager {
         }
     }
 }
-
-
+    class TimeHandler {
+        
+        // Singleton pattern
+        static let shared = TimeHandler()
+        
+        private init() {}
+        
+        // Firestore reference
+        private let db = Firestore.firestore()
+        
+        // Method to save interview to Firestore
+        func saveInterviewToFirebase(_ interview: ScheduledInterview, completion: @escaping (Bool) -> Void) {
+            // Convert the interview date to a Firestore-compatible format (timestamps are typically stored as seconds)
+            let interviewData: [String: Any] = [
+                "interviewDate": Timestamp(date: interview.interviewDate), // Convert Date to Firestore Timestamp
+                "userID": interview.userID, // Link interview with the user's UID
+                "jobID": interview.jobID   // Associate interview with the job ID
+            ]
+            
+            // Add the interview to the Firestore collection "users" under the user's UID
+            db.collection("users").document(interview.userID).collection("interviews").addDocument(data: interviewData) { error in
+                if let error = error {
+                    print("Error saving interview to Firestore: \(error.localizedDescription)")
+                    completion(false) // Return false in case of an error
+                } else {
+                    print("Interview successfully saved to Firestore!")
+                    completion(true) // Return true on success
+                }
+            }
+        }
+    }

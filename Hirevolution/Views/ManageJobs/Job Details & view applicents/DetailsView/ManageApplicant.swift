@@ -357,5 +357,7 @@ class ManageApplicant: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func unwindToManage(_ sender: UIStoryboardSegue) {}
 
 }

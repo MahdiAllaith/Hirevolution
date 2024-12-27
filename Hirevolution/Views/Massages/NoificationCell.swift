@@ -9,18 +9,18 @@ class NotificationCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    // Configure the cell with job data and the interview date
-    func configureCollectionCells(jobList: JobList) {
-        print(jobList.companyProfile.companyName)
-        
+    //basiclly links datas
+    func configureCollectionCells(jobList: JobList, interviewDate: Date) {
         // Set job data to UI elements
         JobName.text = jobList.companyProfile.companyName
-
-        // Fetch and display the interview date
-        displayInterviewDate()
+        
+        // displays company logo
+        loadCompanyLogo(from: jobList.companyProfile.companyProfileLogo)
+        
+        // Displays interview date
+        displayInterviewDate(interviewDate: interviewDate)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -57,19 +57,14 @@ class NotificationCell: UITableViewCell {
         }
     }
 
-    // Fetch the scheduled interview date from DataHandler and update the label
-    func displayInterviewDate() {
-        // Fetch the first scheduled interview from DataHandler (or select an index if needed)
-        if let interview = InterviewTime.shared.scheduledInterviews.first {
-            // Format the date
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMMM dd yyyy, h:mm a"
-            let formattedDate = formatter.string(from: interview.interviewDate)
-            
-            // Update the InterviewDate label
-            InterviewDate.text = "Interview Date: \(formattedDate)"
-        } else {
-            InterviewDate.text = "No interview scheduled"
-        }
+    // Display the interview date
+    func displayInterviewDate(interviewDate: Date) {
+        // Format the date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM dd yyyy, h:mm a"
+        let formattedDate = formatter.string(from: interviewDate)
+        
+        // Update the InterviewDate label
+        InterviewDate.text = "Interview Date: \(formattedDate)"
     }
 }
