@@ -369,7 +369,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vE6-Dt-CV6" userLabel="UpperBar">
-                                <rect key="frame" x="20" y="64" width="353" height="54"/>
+                                <rect key="frame" x="20" y="108" width="353" height="54"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRZ-g6-0bm">
                                         <rect key="frame" x="0.0" y="0.0" width="101.33333333333333" height="54"/>
@@ -416,7 +416,7 @@
                                 <color key="backgroundColor" name="BaseApp"/>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="je3-ir-nLf">
-                                <rect key="frame" x="0.0" y="183" width="393" height="337"/>
+                                <rect key="frame" x="0.0" y="227" width="393" height="293"/>
                                 <color key="backgroundColor" name="BaseApp"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="67o-2y-EVb">
                                     <size key="itemSize" width="393" height="319"/>
@@ -426,7 +426,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JobRecCell" id="NbK-a5-j5D" customClass="JobRecCollectionViewCell" customModule="Hirevolution" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="9" width="393" height="319"/>
+                                        <rect key="frame" x="0.0" y="-13" width="393" height="319"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="C4A-aT-4hZ">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="319"/>
@@ -614,21 +614,22 @@
                             <constraint firstItem="ErG-PD-Jgb" firstAttribute="trailing" secondItem="AkX-a7-xzL" secondAttribute="trailing" id="zhr-Ho-krB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Main" image="house" catalog="system" id="MRX-n8-FZp" userLabel="NavBarMain"/>
+                    <tabBarItem key="tabBarItem" title="Main" image="house" catalog="system" id="mzg-Yr-VTb" userLabel="NavBarMain"/>
                     <navigationItem key="navigationItem" id="G1a-3H-xfl"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="imgView" destination="Ut9-IU-jNr" id="Mmu-po-NRF"/>
                         <outlet property="jobRecCollectionView" destination="je3-ir-nLf" id="qWL-wa-cHq"/>
                         <outlet property="jobStatusCollectionView" destination="ErG-PD-Jgb" id="P4L-nq-Kiw"/>
-                        <outlet property="lblJobStatus" destination="yMI-ed-mRG" id="0UJ-Ae-uad"/>
-                        <outlet property="lblRecJobs" destination="6H6-fc-kSB" id="HBE-l1-VHr"/>
+                        <outlet property="lblJobStatus" destination="yMI-ed-mRG" id="KwA-ZU-nCg"/>
+                        <outlet property="lblRecJobs" destination="bpI-bt-hje" id="VDz-to-Bdr"/>
                         <outlet property="lblViewMore" destination="YOb-gl-tmL" id="OIz-rn-Hge"/>
                         <outlet property="stackView" destination="9yA-po-bBi" id="RuU-iX-bhG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIg-Hw-3fU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2358.0152671755723" y="805.63380281690149"/>
+            <point key="canvasLocation" x="-1431.2977099236641" y="805.63380281690149"/>
         </scene>
         <!--Profile-->
         <scene sceneID="TrP-Ac-kaF">
@@ -904,6 +905,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SfO-qb-KeP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2358.0152671755723" y="150.70422535211267"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="HNx-uU-bo3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="y1d-8V-odx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Main" image="house" catalog="system" id="MRX-n8-FZp" userLabel="NavBarMain"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="P8w-fj-gwt">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5g0-Ua-Y9N" kind="relationship" relationship="rootViewController" id="NAU-Nw-NXl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o6z-8J-nIH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2358.0152671755723" y="805.63380281690149"/>
         </scene>
     </scenes>
     <resources>

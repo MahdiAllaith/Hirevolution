@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iX0-2u-tnr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iX0-2u-tnr">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -42,6 +42,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZJ-PU-bZe">
+                                <rect key="frame" x="16" y="180" width="350" height="638"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <mutableString key="text">Welcome to Hirevolution, the platform dedicated to revolutionizing the hiring process. Our mission is to connect top talent with leading companies through a seamless and innovative experience.
+
+Our Vision
+We aim to make the job search and recruitment process faster, easier, and more efficient for both job seekers and employers. By leveraging technology, we simplify the process of finding the perfect job or candidate.
+
+What We Offer
+For Job Seekers: Access to a wide range of job opportunities, personalized recommendations, and tools to help you create the perfect profile.
+For Employers: A powerful platform to post jobs, manage applications, and connect with qualified candidates.
+Why Choose Hirevolution?
+User-Friendly Interface: Easy navigation and intuitive features to make your experience smooth.
+Personalized Job Matches: Get job recommendations based on your skills and preferences.
+Reliable Support: Our team is always here to help with any issues you might encounter.
+At Hirevolution, we believe that finding the right job or candidate should be a simple and stress-free experience. Join us today and take your career or business to the next level!</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VY0-hf-n09"/>
                         <color key="backgroundColor" name="BaseApp"/>
@@ -55,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i37-my-vdY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4624" y="-711"/>
+            <point key="canvasLocation" x="-4625.1908396946565" y="-711.26760563380287"/>
         </scene>
         <!--Settings-->
         <scene sceneID="sau-y9-jAb">
@@ -218,6 +238,42 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQY-C1-3WL">
+                                <rect key="frame" x="15" y="171" width="363" height="638"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <mutableString key="text">Welcome to Hirevolution! By using our platform, you agree to the following policies.
+
+1. Privacy
+We respect your privacy and only use your data to provide job recommendations and process applications. We do not share your information without your consent, except as required by law.
+
+2. Acceptable Use
+Use Hirevolution responsibly:
+
+Job Seekers: Provide accurate information.
+Employers: Post genuine job listings.
+Harassment or inappropriate behavior is not tolerated.
+3. Content Ownership
+You retain ownership of your content, but by using the platform, you grant Hirevolution a license to display it for job-related purposes.
+
+4. Account Termination
+We may suspend or terminate accounts that violate these policies. Users can contact support if they believe this was done in error.
+
+5. Limitation of Liability
+Hirevolution is a platform for connecting job seekers and employers. We are not liable for any actions or results of job applications.
+
+6. Changes to Policies
+We may update these policies from time to time. Continued use of the platform means you accept the changes.
+
+7. Contact Us
+For any questions or concerns, contact us at:
+
+Email: support@hirevolution.com
+Phone: (123) 456-7890
+Thank you for using Hirevolution!</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="saC-KP-jaT"/>
                         <color key="backgroundColor" name="BaseApp"/>
@@ -231,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUK-3w-1YD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5940" y="-706"/>
+            <point key="canvasLocation" x="-5941.221374045801" y="-706.33802816901414"/>
         </scene>
         <!--Settings.Help-->
         <scene sceneID="qeO-M3-zG2">
@@ -244,6 +300,36 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHP-V3-syy">
                                 <rect key="frame" x="15" y="118" width="98" height="54"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2m6-Zq-cEc">
+                                <rect key="frame" x="15" y="180" width="362" height="638"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <mutableString key="text">Welcome to the Hirevolution Help Center! We're here to assist you.
+
+1. Account Issues
+If you're having trouble with your account, ensure you’re using the correct login credentials. If you’ve forgotten your password, click “Forgot Password” on the login page to reset it.
+
+2. Job Search
+To find jobs, simply use the search bar or browse through categories. You can filter jobs by location, salary, or job type to find the perfect match.
+
+3. Applying for Jobs
+To apply, click on a job listing and press the “Apply” button. Ensure your profile is up-to-date, including your resume and any additional information requested by the employer.
+
+4. Job Postings
+Employers can post jobs by clicking on “Post a Job” and filling in the necessary details. Make sure your job description is clear and accurate to attract the best candidates.
+
+5. Contact Us
+If you need help or have questions, you can reach our support team:
+
+Email: support@hirevolution.com
+Phone: (123) 456-7890
+6. Troubleshooting
+If you encounter issues using the platform, try clearing your browser cache or updating your app. For further assistance, contact our support team.
+
+Thank you for using Hirevolution!</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -260,7 +346,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RuE-kh-Hja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5282" y="-711"/>
+            <point key="canvasLocation" x="-5283.2061068702287" y="-711.26760563380287"/>
         </scene>
     </scenes>
     <resources>

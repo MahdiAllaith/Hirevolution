@@ -9,7 +9,7 @@ class JobRecCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblJobSalary: UILabel!
     @IBOutlet weak var lblJobRole: UILabel!
     @IBOutlet weak var lblJobDescription: UILabel!
-
+    var job: JobList?  // Hold the job data for this cell
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
@@ -26,7 +26,7 @@ class JobRecCollectionViewCell: UICollectionViewCell {
         lblJobRole.translatesAutoresizingMaskIntoConstraints = false
         btnViewJobDetails.translatesAutoresizingMaskIntoConstraints = false
         
-        /// Add border and rounded corners to the cell
+        // Add border and rounded corners to the cell
         self.layer.borderColor = UIColor.white.cgColor  // Border color
         self.layer.borderWidth = 1.0  // Border width
         self.layer.cornerRadius = 20.0  // Rounded corners
@@ -68,15 +68,17 @@ class JobRecCollectionViewCell: UICollectionViewCell {
             lblJobCompany.widthAnchor.constraint(equalToConstant: 227)  // Fixed width
         ])
         
+        // 4. Job Description (Allow it to expand vertically but limit to 7 lines and add ellipsis)
         lblJobDescription.font = UIFont.systemFont(ofSize: 12)
-               lblJobDescription.textColor = .darkGray
-               lblJobDescription.numberOfLines = 0 // Allow description to expand vertically
-               NSLayoutConstraint.activate([
-                   lblJobDescription.topAnchor.constraint(equalTo: imgJobRec.bottomAnchor, constant: 10),  // Start below the image
-                   lblJobDescription.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 37),
-                   lblJobDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -37),
-                   lblJobDescription.heightAnchor.constraint(greaterThanOrEqualToConstant: 93) // Minimum height
-               ])
+        lblJobDescription.textColor = .darkGray
+        lblJobDescription.numberOfLines = 7  // Limit to 7 lines
+        lblJobDescription.lineBreakMode = .byTruncatingTail  // Add "..." at the end of truncated text
+        NSLayoutConstraint.activate([
+            lblJobDescription.topAnchor.constraint(equalTo: imgJobRec.bottomAnchor, constant: 10),  // Start below the image
+            lblJobDescription.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 37),
+            lblJobDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -37),
+            lblJobDescription.heightAnchor.constraint(greaterThanOrEqualToConstant: 93) // Minimum height
+        ])
         
         // 5. Role, Salary, and Location (dynamic width based on text, fixed height)
         let roleSalaryLocationStack = UIStackView(arrangedSubviews: [lblJobRole, lblJobSalary, lblJobLocation])
@@ -111,20 +113,70 @@ class JobRecCollectionViewCell: UICollectionViewCell {
         ])
         
         // ** Round the Role Label **
-                lblJobRole.layer.cornerRadius = 11
-                lblJobRole.layer.masksToBounds = true
-                lblJobRole.textAlignment = .center
-    
-                
-                // ** Round the Salary Label **
-                lblJobSalary.layer.cornerRadius = 11
-                lblJobSalary.layer.masksToBounds = true
-                lblJobSalary.textAlignment = .center
-                
-                
-                // ** Round the Location Label **
-                lblJobLocation.layer.cornerRadius = 11
-                lblJobLocation.layer.masksToBounds = true
-                lblJobLocation.textAlignment = .center
+        lblJobRole.layer.cornerRadius = 11
+        lblJobRole.layer.masksToBounds = true
+        lblJobRole.textAlignment = .center
+
+        // ** Round the Salary Label **
+        lblJobSalary.layer.cornerRadius = 11
+        lblJobSalary.layer.masksToBounds = true
+        lblJobSalary.textAlignment = .center
+
+        // ** Round the Location Label **
+        lblJobLocation.layer.cornerRadius = 11
+        lblJobLocation.layer.masksToBounds = true
+        lblJobLocation.textAlignment = .center
+        
+        // Add action to the "View Details" button
+                btnViewJobDetails.addTarget(self, action: #selector(viewJobDetailsTapped), for: .touchUpInside)
+
     }
-}
+    // Handle view job details button tap
+        @objc func viewJobDetailsTapped() {
+            guard let job = job else { return }
+            
+            // Check if the user is signed in
+            if AuthManager.shared.currentUser == nil {
+                // Show sign-in alert if the user is not signed in
+                showSignInAlert()
+            } else {
+                // User is signed in, navigate to job details
+                navigateToJobDetails(job)
+            }
+        }
+        
+    func navigateToJobDetails(_ job: JobList) {
+        // Create a view controller for job details and pass the job data
+        let storyboard = UIStoryboard(name: "Mahdi", bundle: nil)
+        if let jobDetailVC = storyboard.instantiateViewController(withIdentifier: "ApplyForJobView") as? ApplyForJobView {
+            jobDetailVC.selectedJob = job  // Assign to `selectedJob` instead of `job`
+
+            // Push or present the JobDetailViewController
+            if let parentVC = parentViewController() {
+                parentVC.navigationController?.pushViewController(jobDetailVC, animated: true)
+            }
+        }
+    }
+
+        
+        func showSignInAlert() {
+            guard let parentVC = parentViewController() else { return }
+            
+            let alertController = UIAlertController(title: "Sign In Required", message: "You need to sign in to view job details.", preferredStyle: .alert)
+        }
+        
+        
+        // Utility method to get the parent view controller
+        func parentViewController() -> UIViewController? {
+            var parentResponder: UIResponder? = self
+            while let responder = parentResponder {
+                if let viewController = responder as? UIViewController {
+                    return viewController
+                }
+                parentResponder = responder.next
+            }
+            return nil
+        }
+    }
+
+
