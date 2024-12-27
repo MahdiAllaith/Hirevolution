@@ -11,6 +11,9 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
     
     
 
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var lblViewMore: UILabel!
     @IBOutlet weak var lblJobStatus: UILabel!
     @IBOutlet var lblRecJobs: UIView!
     @IBOutlet weak var jobStatusCollectionView: UICollectionView!
@@ -43,15 +46,18 @@ class UserMainPageViewController: UIViewController, UICollectionViewDelegate, UI
             layout.minimumLineSpacing = 10  // Space between rows
             layout.minimumInteritemSpacing = 10  // Space between items horizontally
             layout.itemSize = CGSize(width: 269, height: 214)
-//        if AuthManager.shared. {
-//                    // User is signed in, show the elements
-//                    lblJobStatus.isHidden = false
-//                    jobStatusCollectionView.isHidden = false
-//                } else {
-//                    // User is not signed in, hide the elements
-//                    lblJobStatus.isHidden = true
-//                    jobStatusCollectionView.isHidden = true
-//                }
+        if AuthManager.shared.userSession == nil {
+            // User is not signed in, hide the elements
+            lblJobStatus.isHidden = true
+            jobStatusCollectionView.isHidden = true
+            stackView.isHidden = true
+        } else {
+            // User is signed in, show the elements
+            lblJobStatus.isHidden = false
+            jobStatusCollectionView.isHidden = false
+            stackView.isHidden = false
+        }
+
     }
     
     

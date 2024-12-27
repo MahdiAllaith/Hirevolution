@@ -19,9 +19,7 @@ class CardCollectionViewCell: UICollectionViewCell {
             self.layer.masksToBounds = true  // Ensure the content respects the corner radius
                 imgCardLibrary.contentMode = .scaleToFill  // Stretch the image to fill the entire cell
                 imgCardLibrary.clipsToBounds = true
-            // Optionally, you can add a border (if desired)
-            self.layer.borderWidth = 1  // Set border width (optional)
-            self.layer.borderColor = UIColor.black.cgColor  // Set border color (optional)
+    
         // Set corner radius and background color for the label
                 lblCardTitle.layer.cornerRadius = 6  // Apply corner radius to the label
                 lblCardTitle.layer.masksToBounds = true  // Ensure that the corner radius is applied
@@ -40,3 +38,4 @@ class CardCollectionViewCell: UICollectionViewCell {
     
     
 }
+

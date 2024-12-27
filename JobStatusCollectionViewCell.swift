@@ -19,7 +19,6 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
         lblJobCompany.translatesAutoresizingMaskIntoConstraints = false
         lblJobStatus.translatesAutoresizingMaskIntoConstraints = false
         lblJobApplicationDate.translatesAutoresizingMaskIntoConstraints = false
-        btnViewStatusDetails.translatesAutoresizingMaskIntoConstraints = false
 
         // Update font sizes for labels
         lblJobStatus.font = UIFont.systemFont(ofSize: 10)
@@ -85,16 +84,6 @@ class JobStatusCollectionViewCell: UICollectionViewCell {
             applicationDateStackView.topAnchor.constraint(equalTo: statusStackView.bottomAnchor, constant: 8), // Reduced space between "Applied on" and button
             applicationDateStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             applicationDateStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
-        ])
-
-        // 5. Button (Reduced size by 10%)
-        btnViewStatusDetails.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14) // Set font to bold and size 16
-
-        NSLayoutConstraint.activate([
-            btnViewStatusDetails.topAnchor.constraint(equalTo: applicationDateStackView.bottomAnchor, constant: 4), // Reduced space between Application Date and Button
-            btnViewStatusDetails.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            btnViewStatusDetails.widthAnchor.constraint(equalToConstant: 108), // Reduced width by 10%
-            btnViewStatusDetails.heightAnchor.constraint(equalToConstant: 32) // Reduced height by 10%
         ])
 
         // 6. ContentView overall size (Still kept compact)
