@@ -71,7 +71,7 @@ class TabBar: UITabBarController, UITabBarControllerDelegate {
     
     func updateViewControllers() {
         let mahdi = UIStoryboard(name: "Mahdi", bundle: nil)
-        let yhya = UIStoryboard(name: "Yhya", bundle: nil)
+        let yahya = UIStoryboard(name: "Yahya", bundle: nil)
         let hussain = UIStoryboard(name: "Hussain", bundle: nil)
         let mohamed = UIStoryboard(name: "Mohamed", bundle: nil)
         let motader = UIStoryboard(name: "Montader", bundle: nil)
@@ -84,11 +84,11 @@ class TabBar: UITabBarController, UITabBarControllerDelegate {
         let Brows = mohamed.instantiateViewController(withIdentifier: "Browse")
         let Library = hussain.instantiateViewController(withIdentifier: "Library")
         let ApplicationList = motader.instantiateViewController(withIdentifier: "JobsList")
-        let Profile = yhya.instantiateViewController(withIdentifier: "Profile")
+        let Profile = yahya.instantiateViewController(withIdentifier: "Profile")
         
         let MainV2 = hussain.instantiateViewController(withIdentifier: "MainV2")
         let ManageJobs = mahdi.instantiateViewController(withIdentifier: "ManageJobs")
-        let Company = yhya.instantiateViewController(withIdentifier: "Company")
+        let Company = yahya.instantiateViewController(withIdentifier: "Company")
         
         //admin
         let MainV3 = motader.instantiateViewController(withIdentifier: "A_Main")

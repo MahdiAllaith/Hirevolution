@@ -70,7 +70,7 @@ class ApplyForJobView: UIViewController, UITableViewDataSource, UITableViewDeleg
         let companyProfile = selectedJob?.companyProfile
             
         // Instantiate ViewedCompanyProfile from the storyboard
-        let storyboard = UIStoryboard(name: "Yhya", bundle: nil)
+        let storyboard = UIStoryboard(name: "Yahya", bundle: nil)
         guard let ProfileView = storyboard.instantiateViewController(withIdentifier: "ViewedCompanyProfile") as? ViewedCompanyProfile else {
             print("Failed to instantiate ViewedCompanyProfile.")
             return

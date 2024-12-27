@@ -100,7 +100,7 @@ class ManageApplicant: UIViewController {
 
     // View User Profile Button Action
     @IBAction func ViewUserProfileButton(_ sender: Any) {
-        let MassageView = UIStoryboard(name: "Yhya", bundle: nil).instantiateViewController(withIdentifier: "ViewedApplicantProfile")
+        let MassageView = UIStoryboard(name: "Yahya", bundle: nil).instantiateViewController(withIdentifier: "ViewedApplicantProfile")
         self.navigationController?.pushViewController(MassageView, animated: true)
     }
 

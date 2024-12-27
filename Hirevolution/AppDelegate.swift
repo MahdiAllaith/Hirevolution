@@ -8,18 +8,15 @@
 import UIKit
 import Firebase
 
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+
     // AuthManager instance to handle user authentication
     let authManager = AuthManager.shared
-    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
         // Initialize Firebase
         FirebaseApp.configure()
         
@@ -30,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize the AuthManager
         authManager.initialize()
-        
+
         // Fetch all jobs data
         authManager.fetchAllJobs { error in
             if let error = error {
@@ -39,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("AppDelegate: Jobs fetched and stored in UserDefaults successfully.")
             }
         }
-        
+
         // Set initial user type and sign-in state in UserDefaults
         UserDefaults.standard.set("user", forKey: "userType")
         UserDefaults.standard.set(false, forKey: "SignInUser")
@@ -67,14 +64,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Update the main view controller based on the user type
     func updateMainViewController(for userType: String) {
         // Initialize the new set of view controllers based on the user type
-        let newNavController: TabBar
         
+        let newNavController: TabBar
+            
         // Set appropriate navigation controller based on user type
-        if userType == "company" {
-            newNavController = TabBar()  // Create NavController for company
-        } else {
-            newNavController = TabBar()  // Create NavController for other user types
-        }
+            if userType == "company" {
+                newNavController = TabBar()  // Create NavController for company
+            } else {
+                newNavController = TabBar()  // Create NavController for other user types
+            }
         
         // Update the view controllers for the new navigation controller
         newNavController.updateViewControllers()
@@ -87,17 +85,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navController.updateViewControllers()
         }
     }
-
-    // MARK: UISceneSession Lifecycle
     
+    
+    
+
+    
+    // MARK: UISceneSession Lifecycle
+
     // Handle scene session connection
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-    
+
     // Handle discarded scene sessions
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Handle discarded scene sessions (not implemented here)
     }
+
+
 }
 
