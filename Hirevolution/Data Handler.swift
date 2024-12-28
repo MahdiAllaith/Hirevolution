@@ -129,7 +129,13 @@ struct ChatMessage {
 }
 
 
-
+struct JobDataApplicantList {
+    let jobID: String
+    var companyName: String
+    var jobTitle: String
+    var applicantStatus: String
+    var jobDescription: String
+}
 
 class AuthManager {
     static let shared = AuthManager()
@@ -958,6 +964,721 @@ class AuthManager {
             }
         }
     }
+    
+    ////////////////////////////////////////////////////////EEEEEEEE
+    // Function to fetch user data and job applications
+    func getUserDataAndJobApplications(completion: @escaping ([JobDataApplicantList]?) -> Void) {
+        // Get the current user's UID
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("User is not authenticated")
+            completion(nil)
+            return
+        }
+        
+        // Reference to the Firestore database
+        let db = Firestore.firestore()
+        
+        // Reference to the users collection
+        let usersRef = db.collection("users")
+        
+        // Query for the current user's document
+        usersRef.document(userId).getDocument { (document, error) in
+            if let error = error {
+                print("Error getting document: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            // Check if the document exists
+            guard let document = document, document.exists else {
+                print("No document found for user ID: \(userId)")
+                completion(nil)
+                return
+            }
+            
+            // Accessing the userApplicationsList and appliedJobIDLink array
+            var appliedJobIDs: [String] = [] // This will hold all job IDs
+            if let userApplicationsList = document.get("userApplicationsList") as? [String: Any] {
+                for (key, value) in userApplicationsList {
+                    // Check if the map contains appliedJobIDLink field (array)
+                    if let appliedJobIDLinks = value as? [String] {
+                        print("User Applications for key \(key): \(appliedJobIDLinks)")
+                        // Add all job IDs from appliedJobIDLinks to the appliedJobIDs array
+                        appliedJobIDs.append(contentsOf: appliedJobIDLinks)
+                    } else {
+                        print("No appliedJobIDLink array found for key \(key)")
+                    }
+                }
+            } else {
+                print("userApplicationsList map not found")
+            }
+            
+            // Now call the function to search jobs with the array of job IDs
+            if !appliedJobIDs.isEmpty {
+                self.searchJobsForUser(jobIDs: appliedJobIDs, userId: userId, completion: completion)
+            } else {
+                print("No applied job IDs found")
+                completion(nil)
+            }
+        }
+    }
+    
+    
+    func searchJobsForUser(jobIDs: [String], userId: String, completion: @escaping ([JobDataApplicantList]?) -> Void) {
+        let db = Firestore.firestore()
+        let jobsRef = db.collection("jobs")
+        
+        var jobDataList: [JobDataApplicantList] = []
+        let dispatchGroup = DispatchGroup()
+        
+        // Loop through each job ID
+        for jobID in jobIDs {
+            dispatchGroup.enter()
+            
+            jobsRef.document(jobID).getDocument { (document, error) in
+                if let error = error {
+                    print("Error getting job document: \(error.localizedDescription)")
+                    dispatchGroup.leave()
+                    return
+                }
+                
+                // Check if the document exists
+                guard let document = document, document.exists else {
+                    print("No job found with jobID: \(jobID)")
+                    dispatchGroup.leave()
+                    return
+                }
+                
+                // Access the ApplyedUsersApplications array
+                if let appliedUsersApplications = document.get("ApplyedUsersApplications") as? [[String: Any]] {
+                    for application in appliedUsersApplications {
+                        if let applicantUserID = application["applicantUserID"] as? String, applicantUserID == userId {
+                            // Extract the applicantStatus for this application
+                            if let applicantStatus = application["applicantStatus"] as? String {
+                                // Extract companyName and jobTitle
+                                if let companyProfile = document.get("companyProfile") as? [String: Any],
+                                   let companyName = companyProfile["companyName"] as? String,
+                                   let jobTitle = document.get("jobTitle") as? String,
+                                   let jobID = document.get("jobID") as? String,
+                                   let jobDescription = document.get("jobDescription") as? String {
+                                    // Create JobDataApplicantList object and append it
+                                    let jobData = JobDataApplicantList(jobID: jobID, companyName: companyName,
+                                                                       jobTitle: jobTitle,
+                                                                       applicantStatus: applicantStatus,
+                                                                       jobDescription: jobDescription)
+                                    jobDataList.append(jobData)
+                                }
+                            }
+                        }
+                    }
+                }
+                dispatchGroup.leave()
+            }
+        }
+        
+        // Once all job documents are processed, return the data
+        dispatchGroup.notify(queue: .main) {
+            completion(jobDataList)
+        }
+    }
+    // Function to cancel the job application status
+    func cancelJobApplicationStatus(jobData: JobDataApplicantList, completion: @escaping (JobDataApplicantList?, Bool) -> Void) {
+        let db = Firestore.firestore()
+        let jobsRef = db.collection("jobs")
+        let jobDocumentRef = jobsRef.document(jobData.jobID)  // Use jobID to find the job document
+        
+        // Get the current user's ID from Firebase Authentication
+        guard let currentUserID = Auth.auth().currentUser?.uid else {
+            print("No user is logged in.")
+            completion(nil, false)
+            return
+        }
+        
+        // Print the job ID and applicant status to ensure they are correct
+        print("Attempting to update job: \(jobData.jobTitle), Job ID: \(jobData.jobID), Current Status: \(jobData.applicantStatus), Current User ID: \(currentUserID)")
+        
+        jobDocumentRef.getDocument { document, error in
+            if let error = error {
+                print("Error getting document: \(error.localizedDescription)")
+                completion(nil, false)
+                return
+            }
+            
+            guard let document = document, document.exists else {
+                print("Job document not found.")
+                completion(nil, false)
+                return
+            }
+            
+            // Retrieve and update the 'ApplyedUsersApplications' field
+            if var appliedUsersApplications = document.get("ApplyedUsersApplications") as? [[String: Any]] {
+                // Find the application that matches the current user ID
+                if let index = appliedUsersApplications.firstIndex(where: {
+                    ($0["applicantUserID"] as? String) == currentUserID }) {
+                    // Update the applicant's status to "Cancelled"
+                    appliedUsersApplications[index]["applicantStatus"] = "Cancelled"
+                    
+                    // Update Firestore
+                    jobDocumentRef.updateData(["ApplyedUsersApplications": appliedUsersApplications]) { error in
+                        if let error = error {
+                            print("Error updating document: \(error.localizedDescription)")
+                            completion(nil, false)
+                        } else {
+                            // Return the updated job data
+                            var updatedJobData = jobData
+                            updatedJobData.applicantStatus = "Cancelled"
+                            completion(updatedJobData, true)
+                        }
+                    }
+                } else {
+                    print("Application not found for current user.")
+                    completion(nil, false)
+                }
+            } else {
+                print("No 'ApplyedUsersApplications' field found in the document.")
+                completion(nil, false)
+            }
+        }
+    }
+    
+    func fetchUsers(completion: @escaping ([[String: Any]]) -> Void) {
+        let db = Firestore.firestore()
+        let usersRef = db.collection("users")
+
+        // Use addSnapshotListener for real-time updates
+        usersRef.whereField("option", isEqualTo: "user").addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                completion([])  // Return an empty array if there's an error
+                return
+            }
+
+            // Map the documents to an array of dictionaries
+            let users = querySnapshot?.documents.map { $0.data() } ?? []
+            completion(users)  // Return the users data
+        }
+    }
+    
+    func fetchCompanies(completion: @escaping ([[String: Any]]) -> Void) {
+        let db = Firestore.firestore()
+        let companiesRef = db.collection("users") // Assuming your collection is "companies"
+
+        // Adding snapshot listener for real-time updates
+        companiesRef.whereField("option", isEqualTo: "company")
+            .addSnapshotListener { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    completion([]) // Return empty array in case of error
+                    return
+                }
+
+                // If data is retrieved successfully, map the documents to your desired format
+                let companies = querySnapshot!.documents.map { $0.data() }
+                
+                // Pass the fetched companies to the completion handler
+                completion(companies)
+            }
+    }
+
+
+        func fetchJobs(completion: @escaping ([[String: Any]]) -> Void) {
+            let db = Firestore.firestore()
+            let jobsRef = db.collection("jobs")
+
+            jobsRef.getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    completion([])
+                    return
+                }
+
+                let jobs = querySnapshot!.documents.map { $0.data() }
+                completion(jobs)
+            }
+        }
+    
+    
+
+    func deleteUser(withID userID: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("users").document(userID).delete { error in
+            if let error = error {
+                print("Error deleting user: \(error)")
+                completion(false)
+            } else {
+                print("User deleted successfully")
+                completion(true)
+            }
+        }
+    }
+    
+    func deleteCompany(withID companyID: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("users").document(companyID).delete { error in // Use "users" collection
+            if let error = error {
+                print("Error deleting company: \(error)")
+                completion(false)
+            } else {
+                print("Company deleted successfully")
+                completion(true)
+            }
+        }
+    }
+    
+    func deleteJob(withID jobID: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("jobs").document(jobID).delete { error in // Assuming "jobs" is your collection
+            if let error = error {
+                print("Error deleting job: \(error)")
+                completion(false)
+            } else {
+                print("Job deleted successfully")
+                completion(true)
+            }
+        }
+    }
+
+    
+    func updateUserData(userData: [String: Any], fullName: String, email: String, userName: String, userAbout: String, profileImageSelected: Bool, backgroundImageSelected: Bool, profileImage: UIImage?, backgroundImage: UIImage?, completion: @escaping (Bool, String) -> Void) {
+        
+        guard let userId = userData["id"] as? String else {
+            completion(false, "User ID not found.")
+            return
+        }
+        
+        let db = Firestore.firestore()  // Firestore instance inside the method
+        let userRef = db.collection("users").document(userId)
+        
+        // Create a dictionary of updated data
+        var updatedData: [String: Any] = [
+            "fullName": fullName,
+            "eMail": email,
+            "userProfile.userName": userName,
+            "userProfile.userAbout": userAbout
+        ]
+        
+        // Use dispatch group to wait for both image uploads to complete before updating Firestore
+        let dispatchGroup = DispatchGroup()
+        
+        var profileImageName: String?
+        var backgroundImageName: String?
+        var profileImageUrl: String?
+        var backgroundImageUrl: String?
+        
+        // If profile image is selected, upload the new image and update Firestore
+        if profileImageSelected, let profileImage = profileImage {
+            dispatchGroup.enter()  // Enter dispatch group
+            profileImageName = userId + "-profile"  // Use id as the image name
+            profileImageUrl = "gs://hirevolution.firebasestorage.app" + profileImageName!
+            // Check if the old image exists and delete it before uploading the new one
+            deleteImageIfExists(imageName: profileImageName!) {
+                self.uploadImageToStorage(image: profileImage, imageName: profileImageName!) { imageUrl in
+                    if imageUrl != nil {
+                        // Return the image name instead of URL
+                        updatedData["userProfile.userProfileImage"] = profileImageUrl
+                    }
+                    dispatchGroup.leave()  // Leave dispatch group
+                }
+            }
+        }
+        
+        // If background image is selected, upload the new image and update Firestore
+        if backgroundImageSelected, let backgroundImage = backgroundImage {
+            dispatchGroup.enter()  // Enter dispatch group
+            backgroundImageName = userId + "-background"  // Use id as the image name
+            backgroundImageUrl = "gs://hirevolution.firebasestorage.app" + backgroundImageName!
+            // Check if the old image exists and delete it before uploading the new one
+            deleteImageIfExists(imageName: backgroundImageName!) {
+                self.uploadImageToStorage(image: backgroundImage, imageName: backgroundImageName!) { imageUrl in
+                    if imageUrl != nil {
+                        // Return the image name instead of URL
+                        updatedData["userProfile.backgroundPictuer"] = backgroundImageUrl
+                    }
+                    dispatchGroup.leave()  // Leave dispatch group
+                }
+            }
+        }
+        
+        // After both image uploads are completed (or skipped), update Firestore
+        dispatchGroup.notify(queue: .main) {
+            // Perform Firestore update
+            userRef.updateData(updatedData) { error in
+                if let error = error {
+                    print("Error updating document: \(error)")
+                    completion(false, "Failed to update user data.")
+                } else {
+                    completion(true, "User data updated successfully.")
+                }
+            }
+        }
+    }
+
+    
+    
+    func updateCompanyData(companyData: [String: Any], companyId: String, companyName: String, companyDescription: String, yearOfEstablishment: String, numberOfEmployees: String, companyCEOName: String, companyNetworth: String, logoImageSelected: Bool, backgroundImageSelected: Bool, logoImage: UIImage?, backgroundImage: UIImage?, completion: @escaping (Bool, String) -> Void) {
+            
+        // Validate company ID and original data
+        guard let companyId = companyData["id"] as? String else {
+            completion(false, "Company ID not found.")
+            return
+        }
+        
+        let db = Firestore.firestore()  // Firestore instance
+        let companyRef = db.collection("users").document(companyId)
+        
+        // Create a dictionary of updated company data
+        var updatedCompanyData: [String: Any] = [
+            "companyProfile.companyName": companyName,
+            "companyProfile.companyDescription": companyDescription,
+            "companyProfile.yearOfEstablishment": yearOfEstablishment,
+            "companyProfile.numberOfEmployees": numberOfEmployees,
+            "companyProfile.companyCEOName": companyCEOName,
+            "companyProfile.companyNetworth": companyNetworth
+        ]
+        
+        // Dispatch group to handle image uploads asynchronously
+        let dispatchGroup = DispatchGroup()
+        
+        var companyLogoName: String?
+        var companyBackgroundImageName: String?
+        var companyLogoUrl: String?
+        var companyBackgroundUrl: String?
+        
+        // If company logo is selected, upload the new logo image
+        if logoImageSelected, let logoImage = logoImage {
+            dispatchGroup.enter()  // Enter the dispatch group
+            companyLogoName = companyId + "-logo"  // Generate logo image name
+            companyLogoUrl = "gs://hirevolution.firebasestorage.app" + companyLogoName!
+            // Delete existing logo if it exists and upload the new logo image
+            deleteImageIfExists(imageName: companyLogoName!) {
+                self.uploadImageToStorage(image: logoImage, imageName: companyLogoName!) { imageUrl in
+                    if let _ = imageUrl {
+                        updatedCompanyData["companyProfile.companyProfileLogo"] = companyLogoUrl
+                    }
+                    dispatchGroup.leave()  // Leave the dispatch group after upload
+                }
+            }
+        }
+        
+        // If background image is selected, upload the new background image
+        if backgroundImageSelected, let backgroundImage = backgroundImage {
+            dispatchGroup.enter()  // Enter the dispatch group
+            companyBackgroundImageName = companyId + "-background"  // Generate background image name
+            companyBackgroundUrl = "gs://hirevolution.firebasestorage.app" + companyBackgroundImageName!
+            // Delete existing background image if it exists and upload the new background image
+            deleteImageIfExists(imageName: companyBackgroundImageName!) {
+                self.uploadImageToStorage(image: backgroundImage, imageName: companyBackgroundImageName!) { imageUrl in
+                    if let _ = imageUrl {
+                        updatedCompanyData["companyProfile.profilebackgroundPictuer"] = companyBackgroundUrl
+                    }
+                    dispatchGroup.leave()  // Leave the dispatch group after upload
+                }
+            }
+        }
+        
+        // After all image uploads are completed (or skipped), update Firestore
+        dispatchGroup.notify(queue: .main) {
+            companyRef.updateData(updatedCompanyData) { error in
+                if let error = error {
+                    print("Error updating company data: \(error.localizedDescription)")
+                    completion(false, "Failed to update company data.")
+                } else {
+                    completion(true, "Company data updated successfully.")
+                }
+            }
+        }
+    }
+    // Helper method to delete an image if it already exists in Firebase Storage
+    func deleteImageIfExists(imageName: String, completion: @escaping () -> Void) {
+        let storageRef = Storage.storage().reference().child(imageName)
+        
+        // Check if the image already exists in Firebase Storage
+        storageRef.getMetadata { metadata, error in
+            if let error = error {
+                // If image does not exist, continue with the upload
+                print("Image does not exist, proceeding with upload. Error: \(error.localizedDescription)")
+                completion()
+                return
+            }
+            
+            // If metadata exists, it means the image exists, so we delete it
+            storageRef.delete { error in
+                if let error = error {
+                    print("Failed to delete old image: \(error.localizedDescription)")
+                } else {
+                    print("Old image deleted successfully.")
+                }
+                completion()  // Continue with the upload
+            }
+        }
+    }
+
+    // Helper method to upload an image to Firebase Storage
+    func uploadImageToStorage(image: UIImage, imageName: String, completion: @escaping (String?) -> Void) {
+        let storageRef = Storage.storage().reference().child(imageName)
+        
+        // Convert image to data
+        if let imageData = image.jpegData(compressionQuality: 0.8) {
+            storageRef.putData(imageData, metadata: nil) { metadata, error in
+                if let error = error {
+                    print("Error uploading image: \(error.localizedDescription)")
+                    completion(nil)
+                    return
+                }
+                
+                // Get the download URL
+                storageRef.downloadURL { url, error in
+                    if let error = error {
+                        print("Error getting download URL: \(error.localizedDescription)")
+                        completion(nil)
+                        return
+                    }
+                    
+                    if let downloadURL = url {
+                        completion(downloadURL.absoluteString)  // Return the image URL
+                    }
+                }
+            }
+        } else {
+            print("Error converting image to data.")
+            completion(nil)
+        }
+    }
+  
+    // This function gets the next available resourceID from the resources array in Firestore
+    func getNextResourceID(documentID: String, completion: @escaping (String?) -> Void) {
+        let db = Firestore.firestore()
+
+        db.collection("library").document(documentID).getDocument { document, error in
+            if let error = error {
+                print("Error getting document: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let document = document, document.exists else {
+                print("Document does not exist.")
+                completion(nil)
+                return
+            }
+            
+            // Extract the resources array from the document
+            if let resources = document.data()?["resources"] as? [[String: Any]] {
+                // Find the highest resourceID from the resources array, convert it to an integer
+                let maxResourceID = resources.compactMap { resource in
+                    if let resourceID = resource["resourceID"] as? String,
+                       let intResourceID = Int(resourceID) {
+                        return intResourceID
+                    }
+                    return nil
+                }.max() ?? 0  // Default to 0 if no resourceID found
+                
+                // The next resourceID will be the max + 1
+                let nextResourceID = maxResourceID + 1
+                completion("\(nextResourceID)") // Return next resourceID as a string
+            } else {
+                print("No resources array found.")
+                completion("1") // Start with "1" if no resources exist
+            }
+        }
+    }
+
+
+    
+    // Function to add a new resource to the Firestore document
+    func addNewResourceToLibrary(LibraryID: String, resourceTitle: String, resourceImage: UIImage, sectionHeaders: [String], sectionContents: [String], imageName: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+
+        // Step 1: Get the next resource ID
+        getNextResourceID(documentID: LibraryID) { nextResourceID in
+            guard let nextResourceID = nextResourceID else {
+                print("Failed to get next resource ID.")
+                completion(false)
+                return
+            }
+
+            // Step 3: Upload the image to Firebase Storage
+            self.uploadImageToStorage(image: resourceImage, imageName: imageName) { imageURL in
+                guard imageURL != nil else {
+                    print("Failed to upload image.")
+                    completion(false)
+                    return
+                }
+
+                // Construct the image URL in the required format
+                let formattedImageURL = "gs://hirevolution.firebasestorage.app/\(imageName)"
+
+                // Step 4: Prepare the article array (section headers and contents)
+                var articles: [[String: Any]] = []
+                for (index, header) in sectionHeaders.enumerated() {
+                    // Check if sectionContents has a valid value for this index
+                    let content = (index < sectionContents.count) ? sectionContents[index] : ""
+                    
+                    // Use the index to create a string for articleID (e.g., "1", "2", "3", etc.)
+                    let articleIDString = String(index + 1)  // Convert to string
+                    
+                    let article: [String: Any] = [
+                        "articleID": articleIDString,  // Article ID as a string
+                        "header": header,              // Section header
+                        "content": content             // Section content
+                    ]
+                    articles.append(article)  // Append the article map to the array
+                }
+
+                // Step 5: Create the resource data
+                let resourceData: [String: Any] = [
+                    "resourceID": nextResourceID,
+                    "resourceTitle": resourceTitle,
+                    "resourceDate": self.getCurrentDate(), // You should implement this function to return the current date
+                    "resourceImage": formattedImageURL, // Use the formatted image URL
+                    "article": articles
+                ]
+
+                // Step 6: Update Firestore document
+                db.collection("library").document(LibraryID).updateData([
+                    "resources": FieldValue.arrayUnion([resourceData])
+                ]) { error in
+                    if let error = error {
+                        print("Error updating document: \(error.localizedDescription)")
+                        completion(false)
+                    } else {
+                        print("Resource added successfully.")
+                        completion(true)
+                    }
+                }
+            }
+        }
+    }
+
+    // Function to delete a resource from the library document
+    func deleteResource(libraryID: String, resourceID: String, completion: @escaping (Bool, String?) -> Void) {
+        let db = Firestore.firestore()
+        let libraryRef = db.collection("library").document(libraryID)
+        
+        // Fetch the library document to update the resources array
+        libraryRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error getting document: \(error)")
+                completion(false, "Error getting document: \(error.localizedDescription)")
+                return
+            }
+            
+            if let document = document, document.exists {
+                // Fetch the resources array from the document
+                var resourcesArray = document.data()?["resources"] as? [[String: Any]] ?? []
+                
+                // Find the index of the resource with the passed resourceID
+                if let index = resourcesArray.firstIndex(where: { $0["resourceID"] as? String == resourceID }) {
+                    // Remove the resource from the array
+                    resourcesArray.remove(at: index)
+                    
+                    // Update the resources array in Firestore
+                    libraryRef.updateData([
+                        "resources": resourcesArray
+                    ]) { error in
+                        if let error = error {
+                            print("Error updating document: \(error)")
+                            completion(false, "Error updating document: \(error.localizedDescription)")
+                        } else {
+                            // Successfully deleted the resource
+                            completion(true, nil)
+                        }
+                    }
+                } else {
+                    print("Resource with resourceID \(resourceID) not found in resources array.")
+                    completion(false, "Resource not found.")
+                }
+            } else {
+                print("Document does not exist.")
+                completion(false, "Document does not exist.")
+            }
+        }
+    }
+    
+    
+  
+
+
+    func updateResourceInFirestore(libraryID: String, resourceID: String, resourceTitleText: String, sectionData: [[String: Any]], resourceImage: UIImage?, isImageSelected: Bool, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let libraryRef = db.collection("library").document(libraryID)
+        
+        // Prepare the updated article data
+        var updatedArticles: [[String: Any]] = sectionData
+        
+        // Prepare the update data for Firestore
+        let updateData: [String: Any] = [
+            "resourceTitle": resourceTitleText,
+            "article": updatedArticles
+        ]
+        
+        // Fetch the document from Firestore
+        libraryRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                var resources = document.get("resources") as? [[String: Any]] ?? []
+                
+                if let resourceIndex = resources.firstIndex(where: { ($0["resourceID"] as? String) == resourceID }) {
+                    // Resource found, update it
+                    resources[resourceIndex]["resourceTitle"] = resourceTitleText
+                    resources[resourceIndex]["article"] = updatedArticles
+                    
+                    // Check if an image is selected and upload it
+                    if let selectedImage = resourceImage, isImageSelected {
+                        let imageName = "\(resourceTitleText).jpg"  // Image name based on the resource title
+                        
+                        // Delete the old image (if any) and upload the new one
+                        self.deleteImageIfExists(imageName: imageName) {
+                            // Upload the new image
+                            self.uploadImageToStorage(image: selectedImage, imageName: imageName) { imageUrl in
+                                if let imageUrl = imageUrl {
+                                    // Construct the storage URL for the new image
+                                    let storageUrl = "gs://hirevolution.firebasestorage.app/\(imageName)"
+                                    resources[resourceIndex]["resourceImage"] = storageUrl
+                                    
+                                    // Save the updated resources back to Firestore
+                                    self.saveUpdatedResources(libraryRef: libraryRef, resources: resources, completion: completion)
+                                } else {
+                                    print("Failed to upload new image.")
+                                    completion(false)
+                                }
+                            }
+                        }
+                    } else {
+                        // If no image is selected, just save the resource update without the image
+                        self.saveUpdatedResources(libraryRef: libraryRef, resources: resources, completion: completion)
+                    }
+                } else {
+                    print("Resource with ID \(resourceID) not found.")
+                    completion(false)
+                }
+            } else {
+                print("Document does not exist or error fetching document: \(error?.localizedDescription ?? "Unknown error")")
+                completion(false)
+            }
+        }
+    }
+
+    // Function to save updated resources to Firestore
+    func saveUpdatedResources(libraryRef: DocumentReference, resources: [[String: Any]], completion: @escaping (Bool) -> Void) {
+        libraryRef.updateData(["resources": resources]) { error in
+            if let error = error {
+                print("Error updating resource: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                print("Resource updated successfully.")
+                completion(true)
+            }
+        }
+    }
+
+    
+    
+    // Function to get the current date as a string (you can modify the format as needed)
+     func getCurrentDate() -> String {
+         let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "MM/dd/yyyy"  // Adjust the format to your needs
+         return dateFormatter.string(from: Date())
+     }
     
 }
 

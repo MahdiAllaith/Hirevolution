@@ -41,7 +41,7 @@
                                                     <rect key="frame" x="20" y="20" width="353" height="327"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgQ-GH-qhx">
-                                                            <rect key="frame" x="0.0" y="12" width="335" height="32"/>
+                                                            <rect key="frame" x="18" y="12" width="317" height="32"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                             <color key="textColor" name="Blue"/>
                                                             <nil key="highlightedColor"/>

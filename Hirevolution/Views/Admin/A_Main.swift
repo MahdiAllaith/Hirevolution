@@ -9,6 +9,10 @@ import UIKit
 
 class A_Main: UIViewController {
 
+    
+    @IBOutlet weak var btnSearchForUser: UIButton!
+    
+    @IBOutlet weak var btnUpdateLibrary: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,5 +26,19 @@ class A_Main: UIViewController {
         self.present(CreateAccountView, animated: true)
     }
     
-
+    @IBAction func btnSearch(_ sender: Any) {
+        if let tabBarController = self.tabBarController {
+               tabBarController.selectedIndex = 1
+           }
+    }
+    
+    @IBAction func btnLibrary(_ sender: Any) {
+        
+        if let tabBarController = self.tabBarController {
+               tabBarController.selectedIndex = 2
+           }
+        
+    }
+    
+    
 }
