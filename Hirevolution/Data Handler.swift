@@ -62,10 +62,11 @@ struct UserProfile: Codable {
     var backgroundPictuer: String
     var userProfileImage: String
     var userName: String
+    var userRole: String
     var userAbout: String
     var userWorkExperience: [WorkExperience]
     var userSkills: [String]
-//    var cv
+    var cvs: [CVForm.CV]?
 }
 
 struct UserApplicationsStuff: Codable {
@@ -90,6 +91,45 @@ struct User: Identifiable, Codable {
     var userProfile: UserProfile?
     var userApplicationsList: UserApplicationsList?
 }
+
+//mohamed woek
+struct ScheduledInterview: Codable {
+    var interviewDate: Date
+    var userID: String
+    var jobID: String
+    
+    // Initializer
+    init(interviewDate: Date, userID: String, jobID: String) {
+        self.interviewDate = interviewDate
+        self.userID = userID
+        self.jobID = jobID
+    }
+}
+
+
+struct ScheduledInterviewWithJob {
+    var interviewDate: Date
+    var userID: String
+    var jobID: String
+    var job: JobList?  // This will store the associated job details
+    
+    // Initializer
+    init(interviewDate: Date, userID: String, jobID: String, job: JobList? = nil) {
+        self.interviewDate = interviewDate
+        self.userID = userID
+        self.jobID = jobID
+        self.job = job
+    }
+}
+
+
+struct ChatMessage {
+    let userID: String
+    let message: String
+}
+
+
+
 
 class AuthManager {
     static let shared = AuthManager()
@@ -148,7 +188,7 @@ class AuthManager {
                 let companyProfile = CompanyProfile(profilebackgroundPictuer: "", companyProfileLogo: "", companyName: "", companyDescription: "", yearOfEstablishment: "", numberOfEmployees: "", companyCEOName: "", companyNetworth: "")
                 userData["companyProfile"] = try? Firestore.Encoder().encode(companyProfile)
             } else if option == "user" {
-                let userProfile = UserProfile(backgroundPictuer: "", userProfileImage: "", userName: "", userAbout: "", userWorkExperience: [], userSkills: [])
+                let userProfile = UserProfile(backgroundPictuer: "", userProfileImage: "", userName: "", userRole: "", userAbout: "", userWorkExperience: [], userSkills: [])
                 let userApplicationsList = UserApplicationsList(appliedJobIDLink: [])
                 userData["userProfile"] = try? Firestore.Encoder().encode(userProfile)
                 userData["userApplicationsList"] = try? Firestore.Encoder().encode(userApplicationsList)
@@ -190,7 +230,7 @@ class AuthManager {
                 let companyProfile = CompanyProfile(profilebackgroundPictuer: "", companyProfileLogo: "", companyName: "", companyDescription: "", yearOfEstablishment: "", numberOfEmployees: "", companyCEOName: "", companyNetworth: "")
                 userData["companyProfile"] = try? Firestore.Encoder().encode(companyProfile)
             } else if option == "user" {
-                let userProfile = UserProfile(backgroundPictuer: "", userProfileImage: "", userName: "", userAbout: "", userWorkExperience: [], userSkills: [])
+                let userProfile = UserProfile(backgroundPictuer: "", userProfileImage: "", userName: "", userRole: "", userAbout: "", userWorkExperience: [], userSkills: [])
                 let userApplicationsList = UserApplicationsList(appliedJobIDLink: [])
                 userData["userProfile"] = try? Firestore.Encoder().encode(userProfile)
                 userData["userApplicationsList"] = try? Firestore.Encoder().encode(userApplicationsList)
@@ -919,6 +959,38 @@ class AuthManager {
         }
     }
     
+}
+
+class TimeHandler {
+    
+    // Singleton pattern
+    static let shared = TimeHandler()
+    
+    private init() {}
+    
+    // Firestore reference
+    private let db = Firestore.firestore()
+    
+    // Method to save interview to Firestore
+    func saveInterviewToFirebase(_ interview: ScheduledInterview, completion: @escaping (Bool) -> Void) {
+        // Convert the interview date to a Firestore-compatible format (timestamps are typically stored as seconds)
+        let interviewData: [String: Any] = [
+            "interviewDate": Timestamp(date: interview.interviewDate), // Convert Date to Firestore Timestamp
+            "userID": interview.userID, // Link interview with the user's UID
+            "jobID": interview.jobID   // Associate interview with the job ID
+        ]
+        
+        // Add the interview to the Firestore collection "users" under the user's UID
+        db.collection("users").document(interview.userID).collection("interviews").addDocument(data: interviewData) { error in
+            if let error = error {
+                print("Error saving interview to Firestore: \(error.localizedDescription)")
+                completion(false) // Return false in case of an error
+            } else {
+                print("Interview successfully saved to Firestore!")
+                completion(true) // Return true on success
+            }
+        }
+    }
 }
 
 

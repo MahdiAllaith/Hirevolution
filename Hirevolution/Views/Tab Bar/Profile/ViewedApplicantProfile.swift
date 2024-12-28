@@ -1,13 +1,13 @@
 //
-//  SechaduleInterviewPopUp.swift
+//  ViewedApplicantProfile.swift
 //  Hirevolution
 //
-//  Created by Mac 14 on 14/12/2024.
+//  Created by Mac 14 on 13/12/2024.
 //
 
 import UIKit
 
-class SechaduleInterviewPopUp: UIViewController {
+class ViewedApplicantProfile: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +15,10 @@ class SechaduleInterviewPopUp: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func BackButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

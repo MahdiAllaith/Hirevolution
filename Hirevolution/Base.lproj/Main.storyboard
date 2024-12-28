@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iX0-2u-tnr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iX0-2u-tnr">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -45,7 +45,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZJ-PU-bZe">
                                 <rect key="frame" x="16" y="180" width="350" height="638"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <mutableString key="text">Welcome to Hirevolution, the platform dedicated to revolutionizing the hiring process. Our mission is to connect top talent with leading companies through a seamless and innovative experience.
+                                <string key="text">Welcome to Hirevolution, the platform dedicated to revolutionizing the hiring process. Our mission is to connect top talent with leading companies through a seamless and innovative experience.
 
 Our Vision
 We aim to make the job search and recruitment process faster, easier, and more efficient for both job seekers and employers. By leveraging technology, we simplify the process of finding the perfect job or candidate.
@@ -57,7 +57,7 @@ Why Choose Hirevolution?
 User-Friendly Interface: Easy navigation and intuitive features to make your experience smooth.
 Personalized Job Matches: Get job recommendations based on your skills and preferences.
 Reliable Support: Our team is always here to help with any issues you might encounter.
-At Hirevolution, we believe that finding the right job or candidate should be a simple and stress-free experience. Join us today and take your career or business to the next level!</mutableString>
+At Hirevolution, we believe that finding the right job or candidate should be a simple and stress-free experience. Join us today and take your career or business to the next level!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -241,7 +241,7 @@ At Hirevolution, we believe that finding the right job or candidate should be a 
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQY-C1-3WL">
                                 <rect key="frame" x="15" y="171" width="363" height="638"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <mutableString key="text">Welcome to Hirevolution! By using our platform, you agree to the following policies.
+                                <string key="text">Welcome to Hirevolution! By using our platform, you agree to the following policies.
 
 1. Privacy
 We respect your privacy and only use your data to provide job recommendations and process applications. We do not share your information without your consent, except as required by law.
@@ -269,7 +269,7 @@ For any questions or concerns, contact us at:
 
 Email: support@hirevolution.com
 Phone: (123) 456-7890
-Thank you for using Hirevolution!</mutableString>
+Thank you for using Hirevolution!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -306,7 +306,7 @@ Thank you for using Hirevolution!</mutableString>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2m6-Zq-cEc">
                                 <rect key="frame" x="15" y="180" width="362" height="638"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <mutableString key="text">Welcome to the Hirevolution Help Center! We're here to assist you.
+                                <string key="text">Welcome to the Hirevolution Help Center! We're here to assist you.
 
 1. Account Issues
 If you're having trouble with your account, ensure you’re using the correct login credentials. If you’ve forgotten your password, click “Forgot Password” on the login page to reset it.
@@ -328,7 +328,7 @@ Phone: (123) 456-7890
 6. Troubleshooting
 If you encounter issues using the platform, try clearing your browser cache or updating your app. For further assistance, contact our support team.
 
-Thank you for using Hirevolution!</mutableString>
+Thank you for using Hirevolution!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -351,10 +351,10 @@ Thank you for using Hirevolution!</mutableString>
     </scenes>
     <resources>
         <image name="arrowshape.left.circle" catalog="system" width="128" height="123"/>
-        <image name="exclamationmark.circle" catalog="system" width="128" height="123"/>
-        <image name="moonphase.waxing.gibbous" catalog="system" width="128" height="123"/>
-        <image name="point.3.filled.connected.trianglepath.dotted" catalog="system" width="128" height="96"/>
-        <image name="questionmark.circle.ar" catalog="system" width="128" height="123"/>
+        <image name="exclamationmark.circle" catalog="system" width="32" height="32"/>
+        <image name="moonphase.waxing.gibbous" catalog="system" width="32" height="32"/>
+        <image name="point.3.filled.connected.trianglepath.dotted" catalog="system" width="32" height="32"/>
+        <image name="questionmark.circle.ar" catalog="system" width="32" height="32"/>
         <namedColor name="BaseApp">
             <color red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

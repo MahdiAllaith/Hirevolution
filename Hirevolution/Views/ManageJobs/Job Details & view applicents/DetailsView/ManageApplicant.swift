@@ -35,7 +35,7 @@ class ManageApplicant: UIViewController {
         setDateToView()
         
         
-        if let hiredUser = theSelectedJob?.jobHiredUser {
+        if (theSelectedJob?.jobHiredUser) != nil {
             setCandidateButton.isEnabled = false
             scheduleInterViewButton.isEnabled = false
             RejectButton.isEnabled = false
@@ -66,7 +66,7 @@ class ManageApplicant: UIViewController {
         super.viewWillAppear(animated)
         setDateToView() // Refresh the view whenever it is shown
         
-        if let hiredUser = theSelectedJob?.jobHiredUser {
+        if (theSelectedJob?.jobHiredUser) != nil {
             setCandidateButton.isEnabled = false
             scheduleInterViewButton.isEnabled = false
             RejectButton.isEnabled = false
@@ -107,8 +107,8 @@ class ManageApplicant: UIViewController {
     // View Message Button Action (Currently not implemented)
     @IBAction func ViewMassageButton(_ sender: Any) {
         // Uncomment and implement if needed
-        // let MassageView = UIStoryboard(name: "Mohamed", bundle: nil).instantiateViewController(withIdentifier: "some")
-        // self.present(MassageView, animated: true)
+         let MassageView = UIStoryboard(name: "Mohamed", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController")
+         self.present(MassageView, animated: true)
     }
 
     // Schedule Interview Button Action
@@ -184,7 +184,7 @@ class ManageApplicant: UIViewController {
 
     // Make Candidate Button Action
     @IBAction func MakeCAndidateButton(_ sender: Any) {
-        guard var selectedJob = self.theSelectedJob else {
+        guard self.theSelectedJob != nil else {
             print("Error: No selected job available.")
             return
         }
