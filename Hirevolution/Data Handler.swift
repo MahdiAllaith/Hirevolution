@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 struct JobList: Codable {
     let jobID: String // Updated from previous field name
@@ -811,6 +812,51 @@ class AuthManager {
         }
     }
     
+    // General image loading function for any image reference
+        func loadImage(from imageName: String, into imageView: UIImageView) {
+            let storage = Storage.storage()
+            let storageRef = storage.reference(forURL: "gs://hirevolution.firebasestorage.app")
+            let imageRef = storageRef.child(imageName.replacingOccurrences(of: "gs://hirevolution.firebasestorage.app/", with: ""))
+
+            imageRef.getData(maxSize: 3 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print("Error downloading image data: \(error)")
+                    imageView.image = UIImage(systemName: "person.fill") // Set to default system image if error
+                    return
+                }
+                
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        imageView.image = image
+                    }
+                } else {
+                    print("Invalid image data")
+                    imageView.image = UIImage(systemName: "person.fill") // Set to default system image if invalid data
+                }
+            }
+        }
+        
+        
+        func fetchLibrary(completion: @escaping ([[String: Any]]) -> Void) {
+            let db = Firestore.firestore()
+            let libraryRef = db.collection("library")
+
+            // Use addSnapshotListener for real-time updates
+            libraryRef.addSnapshotListener { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    completion([])  // Return an empty array if there's an error
+                    return
+                }
+
+                // Map the documents to an array of dictionaries
+                let libraryData = querySnapshot?.documents.map { $0.data() } ?? []
+                completion(libraryData)  // Return the library data
+            }
+            
+            
+        }
+    
     //This function updates the applicant's status to "Hired" and adds the applicant's profile to the job's hired user information.
     func hireApplicant(jobID: String, applicantID: String, completion: @escaping (Error?) -> Void) {
         // Firestore reference to the 'jobs' collection
@@ -872,6 +918,7 @@ class AuthManager {
             }
         }
     }
+    
 }
 
 

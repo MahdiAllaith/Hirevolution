@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "C2968312-C034-4763-B556-3DB020BABCBC"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "347B0813-722F-4734-894F-31E7411B63A4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Hirevolution/Views/Library/LibraryViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "LibraryViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "347B0813-722F-4734-894F-31E7411B63A4 - f8293a6eb09ecfdc"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.LibraryViewController.collectionViewCard.getter : Swift.Optional&lt;__C.UICollectionView&gt;"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bp-36-201-20/Desktop/202203451/Hirevolution-main/Hirevolution/Views/Library/LibraryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  uuid = "347B0813-722F-4734-894F-31E7411B63A4 - 6fd5771a052c0740"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.LibraryViewController.collectionViewCard.setter : Swift.Optional&lt;__C.UICollectionView&gt;"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bp-36-201-20/Desktop/202203451/Hirevolution-main/Hirevolution/Views/Library/LibraryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "347B0813-722F-4734-894F-31E7411B63A4 - 143eb7fcaa4eaf35"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.LibraryViewController.collectionViewCard.modify : Swift.Optional&lt;__C.UICollectionView&gt;"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bp-36-201-20/Desktop/202203451/Hirevolution-main/Hirevolution/Views/Library/LibraryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "347B0813-722F-4734-894F-31E7411B63A4 - 9f76d12282eef80d"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.LibraryViewController.collectionViewCard.modify : Swift.Optional&lt;__C.UICollectionView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bp-36-201-20/Desktop/202203451/Hirevolution-main/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "347B0813-722F-4734-894F-31E7411B63A4 - 7193b8e5c6d03f0"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.LibraryViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Hirevolution.LibraryViewController"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bp-36-201-20/Desktop/202203451/Hirevolution-main/Hirevolution/Views/Library/LibraryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "127">
+               </Location>
+               <Location
+                  uuid = "347B0813-722F-4734-894F-31E7411B63A4 - 88936ef09f0d51a5"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hirevolution.LibraryViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Hirevolution.LibraryViewController&gt;"
+                  moduleName = "Hirevolution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bp-36-201-20/Desktop/202203451/Hirevolution-main/Hirevolution/Views/Library/LibraryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
