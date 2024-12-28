@@ -48,10 +48,10 @@
 		68252E302D1FDE6900279F83 /* NoitificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E2A2D1FDE6800279F83 /* NoitificationViewController.swift */; };
 		68252E312D1FDE6900279F83 /* SechaduleInterviewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E2B2D1FDE6800279F83 /* SechaduleInterviewPopUp.swift */; };
 		68252E322D1FDE6900279F83 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E2C2D1FDE6800279F83 /* ChatMessageCell.swift */; };
-		68252E392D1FDE8D00279F83 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E342D1FDE8D00279F83 /* BrowseCell.swift */; };
-		68252E3A2D1FDE8D00279F83 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E352D1FDE8D00279F83 /* BrowseViewController.swift */; };
-		68252E3C2D1FDE8D00279F83 /* JobFilterPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E372D1FDE8D00279F83 /* JobFilterPopup.swift */; };
-		68252E3D2D1FDE8D00279F83 /* ApplyForJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E382D1FDE8D00279F83 /* ApplyForJobView.swift */; };
+		68252E4A2D1FF11D00279F83 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E452D1FF11C00279F83 /* BrowseCell.swift */; };
+		68252E4B2D1FF11D00279F83 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E462D1FF11C00279F83 /* BrowseViewController.swift */; };
+		68252E4D2D1FF11D00279F83 /* JobFiledPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E482D1FF11C00279F83 /* JobFiledPopup.swift */; };
+		68252E4E2D1FF11D00279F83 /* ApplyForJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68252E492D1FF11C00279F83 /* ApplyForJobView.swift */; };
 		6834E9092CED36010028BCD3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6834E9082CED36010028BCD3 /* GoogleService-Info.plist */; };
 		6834E9732CED5A060028BCD3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6834E9722CED5A060028BCD3 /* FirebaseAuth */; };
 		6834E9752CED5A070028BCD3 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6834E9742CED5A070028BCD3 /* FirebaseDatabase */; };
@@ -143,10 +143,10 @@
 		68252E2A2D1FDE6800279F83 /* NoitificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoitificationViewController.swift; sourceTree = "<group>"; };
 		68252E2B2D1FDE6800279F83 /* SechaduleInterviewPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SechaduleInterviewPopUp.swift; sourceTree = "<group>"; };
 		68252E2C2D1FDE6800279F83 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
-		68252E342D1FDE8D00279F83 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseCell.swift; sourceTree = "<group>"; };
-		68252E352D1FDE8D00279F83 /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
-		68252E372D1FDE8D00279F83 /* JobFilterPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobFilterPopup.swift; sourceTree = "<group>"; };
-		68252E382D1FDE8D00279F83 /* ApplyForJobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyForJobView.swift; sourceTree = "<group>"; };
+		68252E452D1FF11C00279F83 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseCell.swift; sourceTree = "<group>"; };
+		68252E462D1FF11C00279F83 /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
+		68252E482D1FF11C00279F83 /* JobFiledPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobFiledPopup.swift; sourceTree = "<group>"; };
+		68252E492D1FF11C00279F83 /* ApplyForJobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyForJobView.swift; sourceTree = "<group>"; };
 		6834E9082CED36010028BCD3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6834E97C2CED64D00028BCD3 /* Data Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data Handler.swift"; sourceTree = "<group>"; };
 		6881D6182D090565002D441C /* AdminRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRegistrationController.swift; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 				CF6807242D0EF97A00D78E18 /* Library */,
 				C3F6A36C2D0036C100F40FED /* Admin */,
 				68D86F7D2CEAFBF40084A32D /* UpperBar */,
-				68252E332D1FDE8D00279F83 /* Browse */,
+				68252E442D1FF11C00279F83 /* Browse */,
 				68D86F722CEAED1B0084A32D /* Regstration */,
 				68046F312CEAE9AA00DB29CF /* ManageJobs */,
 				68046F302CEAE9A000DB29CF /* Settings */,
@@ -360,16 +360,15 @@
 			path = Main/Massages;
 			sourceTree = "<group>";
 		};
-		68252E332D1FDE8D00279F83 /* Browse */ = {
+		68252E442D1FF11C00279F83 /* Browse */ = {
 			isa = PBXGroup;
 			children = (
-				68252E342D1FDE8D00279F83 /* BrowseCell.swift */,
-				68252E352D1FDE8D00279F83 /* BrowseViewController.swift */,
-				68252E372D1FDE8D00279F83 /* JobFilterPopup.swift */,
-				68252E382D1FDE8D00279F83 /* ApplyForJobView.swift */,
+				68252E452D1FF11C00279F83 /* BrowseCell.swift */,
+				68252E462D1FF11C00279F83 /* BrowseViewController.swift */,
+				68252E482D1FF11C00279F83 /* JobFiledPopup.swift */,
+				68252E492D1FF11C00279F83 /* ApplyForJobView.swift */,
 			);
-			name = Browse;
-			path = ../../../TackerWork/Hirevolution/Views/Browse;
+			path = Browse;
 			sourceTree = "<group>";
 		};
 		68A7DEB42CF7220F00584086 /* Storybords */ = {
@@ -621,14 +620,14 @@
 				6645BFF62D1C36F80027B5A2 /* CompanyCardCollectionViewCell.swift in Sources */,
 				68252E1E2D1FD2D600279F83 /* CVItemView.swift in Sources */,
 				6834E97D2CED64D00028BCD3 /* Data Handler.swift in Sources */,
-				68252E3C2D1FDE8D00279F83 /* JobFilterPopup.swift in Sources */,
+				68252E4D2D1FF11D00279F83 /* JobFiledPopup.swift in Sources */,
 				68252E222D1FD2D600279F83 /* CompanyProfileViewController.swift in Sources */,
 				68D86F6F2CEAEC1C0084A32D /* Account CellTableViewCell.swift in Sources */,
 				68252E122D1FD2D600279F83 /* Company_Profile.swift in Sources */,
 				68E9EFCE2D0CDF9A00D741FC /* ManageApplicant.swift in Sources */,
 				68D86F782CEAF7E10084A32D /* SettingsTableView.swift in Sources */,
-				68252E392D1FDE8D00279F83 /* BrowseCell.swift in Sources */,
-				68252E3A2D1FDE8D00279F83 /* BrowseViewController.swift in Sources */,
+				68252E4A2D1FF11D00279F83 /* BrowseCell.swift in Sources */,
+				68252E4B2D1FF11D00279F83 /* BrowseViewController.swift in Sources */,
 				68252E312D1FDE6900279F83 /* SechaduleInterviewPopUp.swift in Sources */,
 				68252DF32D1FCD9D00279F83 /* Skill.swift in Sources */,
 				CF68072E2D0F544200D78E18 /* ArticleViewController.swift in Sources */,
@@ -637,7 +636,7 @@
 				6645BFF42D1C36020027B5A2 /* CompanyMainViewController.swift in Sources */,
 				68E9EFC92D0CC7E500D741FC /* ApplicantsView.swift in Sources */,
 				68A7DEC02CF72B0E00584086 /* SettingsButton.swift in Sources */,
-				68252E3D2D1FDE8D00279F83 /* ApplyForJobView.swift in Sources */,
+				68252E4E2D1FF11D00279F83 /* ApplyForJobView.swift in Sources */,
 				68D86F762CEAF0B20084A32D /* RegistrationController.swift in Sources */,
 				68046F1A2CEAC1AD00DB29CF /* SceneDelegate.swift in Sources */,
 				68252E182D1FD2D600279F83 /* EditProfileViewController.swift in Sources */,
