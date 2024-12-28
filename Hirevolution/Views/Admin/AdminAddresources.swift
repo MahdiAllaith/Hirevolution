@@ -87,7 +87,6 @@ class AdminAddresources: UIViewController, UIImagePickerControllerDelegate, UINa
             
             // Add a "Confirm" action to proceed with uploading the resource
             confirmationAlert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
-                // Proceed with uploading the image and adding the resource to Firestore
                 self.uploadAndAddResource()
             }))
             
