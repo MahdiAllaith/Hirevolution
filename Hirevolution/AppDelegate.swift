@@ -8,17 +8,24 @@
 import UIKit
 import Firebase
 
+// Protocol to handle Dark Mode button setting
+protocol DarkModeButton: AnyObject {
+    func setDarkModeButton()
+}
 
-@main class AppDelegate: UIResponder, UIApplicationDelegate {
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+
     // AuthManager instance to handle user authentication
     let authManager = AuthManager.shared
     
+    // Delegate for DarkModeButton protocol
+    weak var delegate: DarkModeButton?
 
+    // Called when the app finishes launching
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
         // Initialize Firebase
         FirebaseApp.configure()
         
@@ -29,6 +36,9 @@ import Firebase
         
         // Initialize the AuthManager
         authManager.initialize()
+        
+        // Set dark mode if on
+        delegate?.setDarkModeButton()
         
         // Fetch all jobs data
         authManager.fetchAllJobs { error in

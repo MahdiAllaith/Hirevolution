@@ -1,113 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "63515168-45E8-4523-847D-5E9225647DDE"
+   uuid = "62A899BF-A5E2-4238-9CBC-A5D865B01A9A"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "74FDF4FD-78B4-4934-8477-B7222589CC63"
+            uuid = "D1EF0666-EE4C-4239-B337-CFED552D5E85"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Hirevolution/Views/Browse/ApplyForJobView.swift"
+            filePath = "Hirevolution/Data Handler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "ApplyForJobView"
-            landmarkType = "3">
+            startingLineNumber = "917"
+            endingLineNumber = "917"
+            landmarkName = "saveInterviewToFirebase(_:completion:)"
+            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "74FDF4FD-78B4-4934-8477-B7222589CC63 - e38129570d20989c"
+                  uuid = "D1EF0666-EE4C-4239-B337-CFED552D5E85 - 5e18aed5f53b4a2d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Hirevolution.ApplyForJobView.selectedJob.getter : Swift.Optional&lt;Hirevolution.JobList&gt;"
+                  symbolName = "Hirevolution.TimeHandler.deinit"
                   moduleName = "Hirevolution"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bp-36-201-06/Desktop/Hirevolution/Hirevolution/Views/Browse/ApplyForJobView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "74FDF4FD-78B4-4934-8477-B7222589CC63 - ddc479ed8ec34df5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Hirevolution.ApplyForJobView.selectedJob.setter : Swift.Optional&lt;Hirevolution.JobList&gt;"
-                  moduleName = "Hirevolution"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bp-36-201-06/Desktop/Hirevolution/%3Ccompiler-generated%3E"
+                  urlString = "file:///Users/bp-36-201-06/Desktop/Hirevolution/Hirevolution/Data%20Handler.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "32">
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
-                  uuid = "74FDF4FD-78B4-4934-8477-B7222589CC63 - bf50826daf2f2c99"
+                  uuid = "D1EF0666-EE4C-4239-B337-CFED552D5E85 - ab273c4e0106da00"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Hirevolution.ApplyForJobView.selectedJob.modify : Swift.Optional&lt;Hirevolution.JobList&gt;"
+                  symbolName = "Hirevolution.TimeHandler.__deallocating_deinit"
                   moduleName = "Hirevolution"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bp-36-201-06/Desktop/Hirevolution/Hirevolution/Views/Browse/ApplyForJobView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "74FDF4FD-78B4-4934-8477-B7222589CC63 - ad10b788aa30e8af"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Hirevolution.ApplyForJobView.selectedJob.modify : Swift.Optional&lt;Hirevolution.JobList&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Hirevolution"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bp-36-201-06/Desktop/Hirevolution/%3Ccompiler-generated%3E"
+                  urlString = "file:///Users/bp-36-201-06/Desktop/Hirevolution/Hirevolution/Data%20Handler.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "15">
-               </Location>
-               <Location
-                  uuid = "74FDF4FD-78B4-4934-8477-B7222589CC63 - 3954db31deb7edad"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Hirevolution.ApplyForJobView.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Hirevolution.ApplyForJobView"
-                  moduleName = "Hirevolution"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bp-36-201-06/Desktop/Hirevolution/Hirevolution/Views/Browse/ApplyForJobView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "323">
-               </Location>
-               <Location
-                  uuid = "74FDF4FD-78B4-4934-8477-B7222589CC63 - 89dcfd07335f9272"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Hirevolution.ApplyForJobView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Hirevolution.ApplyForJobView&gt;"
-                  moduleName = "Hirevolution"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bp-36-201-06/Desktop/Hirevolution/Hirevolution/Views/Browse/ApplyForJobView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "274">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>

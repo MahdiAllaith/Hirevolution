@@ -1,10 +1,3 @@
-//
-//  ManageApplicant.swift
-//  Hirevolution
-//
-//  Created by Mac 14 on 14/12/2024.
-//
-
 import UIKit
 import FirebaseStorage
 
@@ -27,101 +20,48 @@ class ManageApplicant: UIViewController {
     @IBOutlet weak var RejectButton: UIButton!
     @IBOutlet weak var HireButton: UIButton!
     @IBOutlet weak var MassageButton: UIButton!
-    
+    var  userID1 = ""
+    var jobID1 = ""
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setDateToView()
-        
-        
-        if let hiredUser = theSelectedJob?.jobHiredUser {
-            setCandidateButton.isEnabled = false
-            scheduleInterViewButton.isEnabled = false
-            RejectButton.isEnabled = false
-            HireButton.isEnabled = false
-        }else if theUserApplicantionDetails?.applicantStatus == "Canceled" {
-            setCandidateButton.isEnabled = false
-            scheduleInterViewButton.isEnabled = false
-            RejectButton.isEnabled = false
-            HireButton.isEnabled = false
-            MassageButton.isEnabled = false
-        }else if theUserApplicantionDetails?.applicantStatus == "Rejected"{
-            setCandidateButton.isEnabled = false
-            scheduleInterViewButton.isEnabled = false
-            RejectButton.isEnabled = false
-            HireButton.isEnabled = false
-        }else{
-            setCandidateButton.isEnabled = true
-            scheduleInterViewButton.isEnabled = true
-            RejectButton.isEnabled = true
-            HireButton.isEnabled = true
-            MassageButton.isEnabled = true
-        }
-        
+        updateButtonStates()
     }
-    
-    // Update the view each time it appears
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setDateToView() // Refresh the view whenever it is shown
-        
-        if let hiredUser = theSelectedJob?.jobHiredUser {
-            setCandidateButton.isEnabled = false
-            scheduleInterViewButton.isEnabled = false
-            RejectButton.isEnabled = false
-            HireButton.isEnabled = false
-        }else if theUserApplicantionDetails?.applicantStatus == "Canceled" {
-            setCandidateButton.isEnabled = false
-            scheduleInterViewButton.isEnabled = false
-            RejectButton.isEnabled = false
-            HireButton.isEnabled = false
-            MassageButton.isEnabled = false
-        }else if theUserApplicantionDetails?.applicantStatus == "Rejected"{
-            setCandidateButton.isEnabled = false
-            scheduleInterViewButton.isEnabled = false
-            RejectButton.isEnabled = false
-            HireButton.isEnabled = false
-        }else{
-            setCandidateButton.isEnabled = true
-            scheduleInterViewButton.isEnabled = true
-            RejectButton.isEnabled = true
-            HireButton.isEnabled = true
-            MassageButton.isEnabled = true
-        }
+        setDateToView()
+        updateButtonStates()
     }
-    
+
     // MARK: - Actions
 
-    // Back Button Action
     @IBAction func BackButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
 
-    // View User Profile Button Action
     @IBAction func ViewUserProfileButton(_ sender: Any) {
         let MassageView = UIStoryboard(name: "Yhya", bundle: nil).instantiateViewController(withIdentifier: "ViewedApplicantProfile")
         self.navigationController?.pushViewController(MassageView, animated: true)
     }
 
-    // View Message Button Action (Currently not implemented)
-    @IBAction func ViewMassageButton(_ sender: Any) {
-        // Uncomment and implement if needed
-        // let MassageView = UIStoryboard(name: "Mohamed", bundle: nil).instantiateViewController(withIdentifier: "some")
-        // self.present(MassageView, animated: true)
-    }
-
-    // Schedule Interview Button Action
     @IBAction func viewSchaduleInterViewToMassageButton(_ sender: Any) {
-        if let popupSchadule = UIStoryboard(name: "Mohamed", bundle: nil).instantiateViewController(withIdentifier: "SechaduleInterviewPopUp") as? SechaduleInterviewPopUp {
-            popupSchadule.modalPresentationStyle = .pageSheet
-            popupSchadule.sheetPresentationController?.detents = [.medium()]
-            popupSchadule.sheetPresentationController?.prefersGrabberVisible = true
-            present(popupSchadule, animated: true)
+        // Ensure that applicantUserID and jobID are available
+        guard let userID = theUserApplicantionDetails?.applicantUserID,
+              let jobID = theSelectedJob?.jobID else {
+            print("Error: Missing userID or jobID.")
+            return
         }
+        
+        userID1 = userID
+        jobID1 = jobID
+        performSegue(withIdentifier: "toInterview", sender: nil)
+
     }
 
-    // Reject Application Button Action
     @IBAction func RejectApplciationButton(_ sender: Any) {
         showCustomAlert(
             title: "Reject Application",
@@ -129,7 +69,6 @@ class ManageApplicant: UIViewController {
             confirmTitle: "Reject",
             confirmStyle: .destructive
         ) {
-            // Update job in the database
             self.authManager.rejectApplicantStatus(jobID: self.theSelectedJob!.jobID, applicantID: self.theUserApplicantionDetails!.applicantUserID) { error in
                 if let error = error {
                     print("Error updating job: \(error.localizedDescription)")
@@ -137,14 +76,10 @@ class ManageApplicant: UIViewController {
                     print("Job updated successfully.")
                 }
             }
-
-            // Fetch user data again
             self.authManager.fetchUserData(uid: self.authManager.userSession!.uid)
-
         }
     }
 
-    // Hire Applicant Button Action
     @IBAction func HireApplicantButton(_ sender: Any) {
         showCustomAlert(
             title: "Hire Application",
@@ -156,8 +91,6 @@ class ManageApplicant: UIViewController {
                     message: "All other applicants will be subjected to rejection. Are you sure you want to continue and hire?",
                     confirmTitle: "Hire",
                     confirmHandler: {
-
-                        // Update job in the database
                         self.authManager.hireApplicant(jobID: self.theSelectedJob!.jobID, applicantID: self.theUserApplicantionDetails!.applicantUserID) { error in
                             if let error = error {
                                 print("Error updating job: \(error.localizedDescription)")
@@ -166,164 +99,113 @@ class ManageApplicant: UIViewController {
                             }
                         }
 
-                        // Fetch user data again
                         self.authManager.fetchUserData(uid: self.authManager.userSession!.uid)
 
-                        // Show success alert
                         let alertController = UIAlertController(title: "Success", message: "\(self.theUserApplicantionDetails?.applicantProfile.userName ?? "") is hired.", preferredStyle: .alert)
                         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alertController.addAction(okAction)
                         self.present(alertController, animated: true, completion: nil)
 
-                        // Go back to the root view
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                 )
-            })
+            }
+        )
     }
 
-    // Make Candidate Button Action
     @IBAction func MakeCAndidateButton(_ sender: Any) {
-        guard var selectedJob = self.theSelectedJob else {
+        guard let selectedJob = self.theSelectedJob else {
             print("Error: No selected job available.")
             return
         }
 
-        if self.theUserApplicantionDetails!.isCandidate {
-                showCustomAlert(
-                    title: "Already Candidate",
-                    message: "This applicant is already set as a candidate, do you want to unselect him?",
-                    confirmTitle: "Unselect",
-                    confirmStyle: .destructive
-                ) {
-                    self.isCandidateImage.image = UIImage(systemName: "star.fill") // Change image if selected as candidate
-                    
-                    // update the job in the database
-                    self.authManager.updateCandidateStatus(jobID: self.theSelectedJob!.jobID, isCandidate: false, applicantID: self.theUserApplicantionDetails!.applicantUserID) { error in
-                        if let error = error {
-                            print("Error updating job: \(error.localizedDescription)")
-                        } else {
-                            print("Job updated successfully.")
-                        }
+        let isCandidate = self.theUserApplicantionDetails?.applicantStatus == "Candidate"
+
+        if isCandidate {
+            showCustomAlert(
+                title: "Already Candidate",
+                message: "This applicant is already set as a candidate, do you want to unselect him?",
+                confirmTitle: "Unselect",
+                confirmStyle: .destructive
+            ) {
+                self.isCandidateImage.image = UIImage(systemName: "star") // Change image if unselected
+                self.authManager.updateCandidateStatus(jobID: selectedJob.jobID, isCandidate: false, applicantID: self.theUserApplicantionDetails!.applicantUserID) { error in
+                    if let error = error {
+                        print("Error updating job: \(error.localizedDescription)")
+                    } else {
+                        print("Job updated successfully.")
                     }
-                    
-                    self.authManager.fetchUserData(uid: self.authManager.userSession!.uid)
                 }
-            } else {
-                showCustomAlert(
-                    title: "Make Candidate",
-                    message: "Are you sure you want to select this applicant as a candidate?",
-                    confirmTitle: "Select"
-                ) {
-                    
-                    self.authManager.updateCandidateStatus(jobID: self.theSelectedJob!.jobID, isCandidate: true, applicantID: self.theUserApplicantionDetails!.applicantUserID) { error in
-                        if let error = error {
-                            print("Error updating job: \(error.localizedDescription)")
-                        } else {
-                            print("Job updated successfully.")
-                        }
+                self.authManager.fetchUserData(uid: self.authManager.userSession!.uid)
+            }
+        } else {
+            showCustomAlert(
+                title: "Make Candidate",
+                message: "Are you sure you want to select this applicant as a candidate?",
+                confirmTitle: "Select"
+            ) {
+                self.authManager.updateCandidateStatus(jobID: selectedJob.jobID, isCandidate: true, applicantID: self.theUserApplicantionDetails!.applicantUserID) { error in
+                    if let error = error {
+                        print("Error updating job: \(error.localizedDescription)")
+                    } else {
+                        print("Job updated successfully.")
                     }
-                    self.authManager.fetchUserData(uid: self.authManager.userSession!.uid)
                 }
+                self.authManager.fetchUserData(uid: self.authManager.userSession!.uid)
+            }
         }
     }
 
-    // Set Data to View
     func setDateToView() {
-        let userProfile = theUserApplicantionDetails!.applicantProfile
+        guard let userProfile = theUserApplicantionDetails?.applicantProfile else { return }
 
-        // Find the main job experience
-        let WorkExperince = userProfile.userWorkExperience
-        var MainWork: WorkExperience?
-        for workExperience in WorkExperince {
-            if workExperience.mainJob {
-                MainWork = workExperience
-                break
-            }
-        }
-
-        // Update candidate image
-        if theUserApplicantionDetails!.isCandidate {
-            isCandidateImage.image = UIImage(systemName: "star.fill")
-        } else {
-            isCandidateImage.image = UIImage(systemName: "star")
-        }
-
-        // Set user profile information
+        isCandidateImage.image = userProfile.userWorkExperience.contains(where: { $0.jobTitle.contains("Candidate") }) ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+        
         userName.text = userProfile.userName
-        userMainFiled.text = MainWork?.jobFiled
+        userMainFiled.text = userProfile.userWorkExperience.first(where: { $0.mainJob })?.jobFiled
         userProfileAbout.text = userProfile.userAbout
         userApplicationStatus.text = theUserApplicantionDetails?.applicantStatus
 
-        // Update application status color
         switch theUserApplicantionDetails?.applicantStatus {
-            case "On-going":
-                userApplicationStatus.textColor = UIColor.orange
-            case "Rejected":
-                userApplicationStatus.textColor = UIColor(named: "Red")
-            case "Canceled":
-                userApplicationStatus.textColor = UIColor(named: "Red")
-            case "Hired":
-                userApplicationStatus.textColor = UIColor.green
-            default:
-                break
+        case "On-going":
+            userApplicationStatus.textColor = UIColor.orange
+        case "Rejected", "Canceled":
+            userApplicationStatus.textColor = UIColor(named: "Red")
+        case "Hired":
+            userApplicationStatus.textColor = UIColor.green
+        default:
+            break
         }
 
-        // Download user profile image from Firebase Storage
-        let imageURL = userProfile.userProfileImage
-        let imageBAckgroundURL = userProfile.backgroundPictuer
+        downloadProfileImage(from: userProfile.userProfileImage, for: userProfileImage)
+        downloadProfileImage(from: userProfile.backgroundPictuer, for: userProfileBackground)
+    }
 
-        let storage = Storage.storage()
+    private func downloadProfileImage(from url: String, for imageView: UIImageView) {
+        guard !url.isEmpty else {
+            imageView.backgroundColor = UIColor.gray
+            return
+        }
 
-        // Validate imageURL for profile image
-        if imageURL.isEmpty {
-            self.userProfileImage.backgroundColor = UIColor.gray
-        } else {
-            let reference = storage.reference(forURL: imageURL)
-            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                if let error = error {
-                    print("Error downloading image: \(error)")
-                    return
-                }
-
-                if let data = data {
-                    let imagee = UIImage(data: data)
-                    let newSize = CGSize(width: 100, height: 100)
-                    let resizedImage = self.resizeImage(imagee!, to: newSize)
-
-                    // Set the resized image to the UIImageView
-                    self.userProfileImage.image = resizedImage
-                    self.userProfileImage.layer.borderWidth = 1
-                    self.userProfileImage.layer.borderColor = UIColor(named: "Blue")?.cgColor
-                    self.userProfileImage.layer.cornerRadius = 50
-                }
+        let reference = Storage.storage().reference(forURL: url)
+        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                print("Error downloading image: \(error)")
+                return
             }
-        }
 
-        // Validate background image
-        if imageBAckgroundURL.isEmpty {
-            self.userProfileBackground.backgroundColor = UIColor.gray
-        } else {
-            let reference2 = storage.reference(forURL: imageBAckgroundURL)
-            reference2.getData(maxSize: 1 * 8024 * 8024) { data, error in
-                if let error = error {
-                    print("Error downloading image: \(error)")
-                    return
-                }
-
-                if let data = data {
-                    let imagee = UIImage(data: data)
-                    let newSize = CGSize(width: 393, height: 160)
-                    let resizedImage = self.resizeImage(imagee!, to: newSize)
-
-                    // Set the resized image to the UIImageView
-                    self.userProfileBackground.image = resizedImage
+            if let data = data, let image = UIImage(data: data) {
+                let resizedImage = self.resizeImage(image, to: CGSize(width: 100, height: 100))
+                DispatchQueue.main.async {
+                    imageView.image = resizedImage
+                    imageView.layer.borderWidth = 1
+                    imageView.layer.borderColor = UIColor(named: "Blue")?.cgColor
+                    imageView.layer.cornerRadius = imageView.frame.size.width / 2
                 }
             }
         }
     }
 
-    // Resize image method
     func resizeImage(_ image: UIImage, to newSize: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: newSize)
         return renderer.image { _ in
@@ -331,7 +213,6 @@ class ManageApplicant: UIViewController {
         }
     }
 
-    // Custom Alert method
     func showCustomAlert(
         title: String,
         message: String,
@@ -340,24 +221,56 @@ class ManageApplicant: UIViewController {
         confirmStyle: UIAlertAction.Style = .default,
         confirmHandler: @escaping () -> Void
     ) {
-        // Create the alert controller
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        // Cancel Button
         alertController.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
-
-        // Confirm Button with custom handler
-        let confirmAction = UIAlertAction(title: confirmTitle, style: confirmStyle, handler: { _ in
-            confirmHandler()
-        })
+        let confirmAction = UIAlertAction(title: confirmTitle, style: confirmStyle, handler: { _ in confirmHandler() })
         alertController.addAction(confirmAction)
 
-        // Present the alert from the current view controller
         DispatchQueue.main.async {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-    
-    @IBAction func unwindToManage(_ sender: UIStoryboardSegue) {}
 
+    private func updateButtonStates() {
+        if let hiredUser = theSelectedJob?.jobHiredUser {
+            setCandidateButton.isEnabled = false
+            scheduleInterViewButton.isEnabled = false
+            RejectButton.isEnabled = false
+            HireButton.isEnabled = false
+            MassageButton.isEnabled = false
+        } else if let status = theUserApplicantionDetails?.applicantStatus,
+                  ["Canceled", "Rejected"].contains(status) {
+            setCandidateButton.isEnabled = false
+            scheduleInterViewButton.isEnabled = false
+            RejectButton.isEnabled = false
+            HireButton.isEnabled = false
+            MassageButton.isEnabled = false
+        } else {
+            setCandidateButton.isEnabled = true
+            scheduleInterViewButton.isEnabled = true
+            RejectButton.isEnabled = true
+            HireButton.isEnabled = true
+            MassageButton.isEnabled = true
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toInterview" {
+            let vc = segue.destination as! SechaduleInterviewPopUp
+            print(userID1)
+            vc.userID = userID1
+            vc.jobID = jobID1
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

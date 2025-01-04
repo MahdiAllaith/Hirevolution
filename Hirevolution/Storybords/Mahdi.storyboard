@@ -337,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mh6-t2-JqF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1153" y="161"/>
+            <point key="canvasLocation" x="-1167" y="161"/>
         </scene>
         <!--Jobs Details View-->
         <scene sceneID="Mvu-8g-gvO">
@@ -585,7 +585,7 @@
                                                                                 </label>
                                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syo-uU-RAL">
                                                                                     <rect key="frame" x="25" y="100" width="284" height="75"/>
-                                                                                    <color key="backgroundColor" name="White"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                                     <color key="textColor" systemColor="labelColor"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -787,7 +787,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" name="White"/>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="trailing" secondItem="UQE-cK-7SW" secondAttribute="trailing" constant="25" id="0Xv-7I-r4M"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="rI5-XS-9Tb" secondAttribute="bottom" constant="20" symbolic="YES" id="1vy-Ue-B3u"/>
@@ -1200,7 +1200,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItQ-2J-IIW">
                                 <rect key="frame" x="21" y="408" width="351" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="White"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1255,7 +1255,7 @@
                                 <connections>
                                     <action selector="ListJobButtonClicked:" destination="Vvg-dw-rOs" eventType="touchUpInside" id="RBx-ph-cDE"/>
                                     <action selector="viewSchaduleInterViewToMassageButton:" destination="KCg-tW-Fw2" eventType="touchUpInside" id="XIp-7Q-NZ7"/>
-                                    <segue destination="0aM-6F-NuN" kind="show" id="ffQ-ep-eWp"/>
+                                    <segue destination="Prq-88-AKx" kind="show" identifier="toInterview" id="Rye-fi-dUv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k20-Se-0vR">
@@ -1384,7 +1384,7 @@
                                                         </label>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2v-3c-tXi">
                                                             <rect key="frame" x="24" y="101" width="293" height="75"/>
-                                                            <color key="backgroundColor" name="White"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                             <color key="textColor" systemColor="labelColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2852,25 +2852,25 @@
             <point key="canvasLocation" x="-1152" y="877"/>
         </scene>
         <!--Sechadule Interview Pop Up-->
-        <scene sceneID="kvu-VA-KJe">
+        <scene sceneID="YrZ-Im-qFF">
             <objects>
-                <viewController storyboardIdentifier="SechaduleInterviewPopUp" id="0aM-6F-NuN" customClass="SechaduleInterviewPopUp" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qat-Jc-c2n">
+                <viewController storyboardIdentifier="SechaduleInterviewPopUp" id="Prq-88-AKx" customClass="SechaduleInterviewPopUp" customModule="Hirevolution" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WdS-D5-8ET">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgZ-Ud-NpT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gc-E2-aTj">
                                 <rect key="frame" x="146" y="91" width="101.33333333333331" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AQH-Rc-pLu">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w75-8F-qH6">
                                 <rect key="frame" x="39.333333333333343" y="145" width="314.33333333333326" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbe-gf-IWi">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vF-2t-wNL">
                                 <rect key="frame" x="55" y="530" width="283" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" name="Blue"/>
@@ -2882,31 +2882,31 @@
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="25"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="sendButtonTapped:" destination="0aM-6F-NuN" eventType="touchDragInside" id="42s-bq-UzH"/>
-                                    <segue destination="w6O-uu-dWD" kind="unwind" unwindAction="unwindToManage:" id="xDn-v9-grV"/>
+                                    <action selector="sendButtonTapped:" destination="Prq-88-AKx" eventType="touchDragInside" id="l8l-8Z-yFk"/>
+                                    <segue destination="Dhd-bY-2NK" kind="unwind" unwindAction="unwindToManage:" id="3oW-Zn-ZDB"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="Nwv-Tr-2ee"/>
+                        <viewLayoutGuide key="safeArea" id="TsQ-4n-asP"/>
                         <color key="backgroundColor" name="Settings"/>
                         <constraints>
-                            <constraint firstItem="PgZ-Ud-NpT" firstAttribute="centerX" secondItem="Nwv-Tr-2ee" secondAttribute="centerX" id="Erq-o4-YPm"/>
-                            <constraint firstItem="AQH-Rc-pLu" firstAttribute="top" secondItem="PgZ-Ud-NpT" secondAttribute="bottom" constant="30" id="MEo-YC-UDp"/>
-                            <constraint firstItem="AQH-Rc-pLu" firstAttribute="width" secondItem="qat-Jc-c2n" secondAttribute="width" multiplier="0.8" id="O6F-WC-95e"/>
-                            <constraint firstItem="AQH-Rc-pLu" firstAttribute="centerX" secondItem="PgZ-Ud-NpT" secondAttribute="centerX" id="Pna-aU-PRd"/>
-                            <constraint firstItem="PgZ-Ud-NpT" firstAttribute="top" secondItem="Nwv-Tr-2ee" secondAttribute="top" constant="91" id="bhR-wB-S7N"/>
+                            <constraint firstItem="w75-8F-qH6" firstAttribute="width" secondItem="WdS-D5-8ET" secondAttribute="width" multiplier="0.8" id="Ntj-zn-BNq"/>
+                            <constraint firstItem="w75-8F-qH6" firstAttribute="top" secondItem="4Gc-E2-aTj" secondAttribute="bottom" constant="30" id="NwR-w9-Tl0"/>
+                            <constraint firstItem="4Gc-E2-aTj" firstAttribute="centerX" secondItem="TsQ-4n-asP" secondAttribute="centerX" id="XTt-VZ-1jm"/>
+                            <constraint firstItem="w75-8F-qH6" firstAttribute="centerX" secondItem="4Gc-E2-aTj" secondAttribute="centerX" id="d8W-oG-1Tv"/>
+                            <constraint firstItem="4Gc-E2-aTj" firstAttribute="top" secondItem="TsQ-4n-asP" secondAttribute="top" constant="91" id="lGy-en-0eU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Iec-Hr-Fjn"/>
+                    <navigationItem key="navigationItem" id="1iZ-4z-ZKS"/>
                     <connections>
-                        <outlet property="dateTF" destination="AQH-Rc-pLu" id="XgJ-9f-6CR"/>
-                        <outlet property="sendButton" destination="Vbe-gf-IWi" id="I2Y-xi-l53"/>
+                        <outlet property="dateTF" destination="w75-8F-qH6" id="ijI-38-cGw"/>
+                        <outlet property="sendButton" destination="2vF-2t-wNL" id="GYj-6t-wDB"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="53H-wq-tpk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="w6O-uu-dWD" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A8B-35-QdL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Dhd-bY-2NK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1317" y="2288"/>
+            <point key="canvasLocation" x="1671" y="1558"/>
         </scene>
     </scenes>
     <resources>
@@ -2952,7 +2952,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

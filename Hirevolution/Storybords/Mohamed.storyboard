@@ -257,7 +257,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Filter"/>
                                         <connections>
-                                            <segue destination="06Q-Ub-en6" kind="show" id="yEz-Dy-mUU"/>
+                                            <segue destination="06Q-Ub-en6" kind="show" id="aUi-8B-Jfc"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -490,7 +490,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Filter"/>
                                 <connections>
-                                    <segue destination="AcL-Bh-jsI" kind="unwind" unwindAction="unwindToBrowse:" id="b3h-vz-Wmd"/>
+                                    <segue destination="AcL-Bh-jsI" kind="unwind" unwindAction="unwindToBrowse:" id="PgH-30-mTL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -731,10 +731,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tableCellBlueTextColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
