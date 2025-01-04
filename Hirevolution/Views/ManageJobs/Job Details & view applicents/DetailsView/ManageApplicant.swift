@@ -2,11 +2,11 @@ import UIKit
 import FirebaseStorage
 
 class ManageApplicant: UIViewController {
-
+    
     let authManager = AuthManager.shared
     var theSelectedJob: JobList? // Holds the selected job details
     var theUserApplicantionDetails: UserApplicationsStuff? // Holds the user applications
-
+    
     @IBOutlet weak var userProfileBackground: UIImageView!
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var isCandidateImage: UIImageView!
@@ -22,32 +22,32 @@ class ManageApplicant: UIViewController {
     @IBOutlet weak var MassageButton: UIButton!
     var  userID1 = ""
     var jobID1 = ""
-
+    
     // MARK: - View Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDateToView()
         updateButtonStates()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setDateToView()
         updateButtonStates()
     }
-
+    
     // MARK: - Actions
-
+    
     @IBAction func BackButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-
+    
     @IBAction func ViewUserProfileButton(_ sender: Any) {
         let MassageView = UIStoryboard(name: "Yhya", bundle: nil).instantiateViewController(withIdentifier: "ViewedApplicantProfile")
         self.navigationController?.pushViewController(MassageView, animated: true)
     }
-
+    
     @IBAction func viewSchaduleInterViewToMassageButton(_ sender: Any) {
         // Ensure that applicantUserID and jobID are available
         guard let userID = theUserApplicantionDetails?.applicantUserID,
@@ -59,9 +59,9 @@ class ManageApplicant: UIViewController {
         userID1 = userID
         jobID1 = jobID
         performSegue(withIdentifier: "toInterview", sender: nil)
-
+        
     }
-
+    
     @IBAction func RejectApplciationButton(_ sender: Any) {
         showCustomAlert(
             title: "Reject Application",
@@ -79,7 +79,7 @@ class ManageApplicant: UIViewController {
             self.authManager.fetchUserData(uid: self.authManager.userSession!.uid)
         }
     }
-
+    
     @IBAction func HireApplicantButton(_ sender: Any) {
         showCustomAlert(
             title: "Hire Application",
@@ -98,29 +98,29 @@ class ManageApplicant: UIViewController {
                                 print("Job updated successfully.")
                             }
                         }
-
+                        
                         self.authManager.fetchUserData(uid: self.authManager.userSession!.uid)
-
+                        
                         let alertController = UIAlertController(title: "Success", message: "\(self.theUserApplicantionDetails?.applicantProfile.userName ?? "") is hired.", preferredStyle: .alert)
                         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alertController.addAction(okAction)
                         self.present(alertController, animated: true, completion: nil)
-
+                        
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                 )
             }
         )
     }
-
+    
     @IBAction func MakeCAndidateButton(_ sender: Any) {
         guard let selectedJob = self.theSelectedJob else {
             print("Error: No selected job available.")
             return
         }
-
+        
         let isCandidate = self.theUserApplicantionDetails?.applicantStatus == "Candidate"
-
+        
         if isCandidate {
             showCustomAlert(
                 title: "Already Candidate",
@@ -155,17 +155,17 @@ class ManageApplicant: UIViewController {
             }
         }
     }
-
+    
     func setDateToView() {
         guard let userProfile = theUserApplicantionDetails?.applicantProfile else { return }
-
+        
         isCandidateImage.image = userProfile.userWorkExperience.contains(where: { $0.jobTitle.contains("Candidate") }) ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
         
         userName.text = userProfile.userName
         userMainFiled.text = userProfile.userWorkExperience.first(where: { $0.mainJob })?.jobFiled
         userProfileAbout.text = userProfile.userAbout
         userApplicationStatus.text = theUserApplicantionDetails?.applicantStatus
-
+        
         switch theUserApplicantionDetails?.applicantStatus {
         case "On-going":
             userApplicationStatus.textColor = UIColor.orange
@@ -176,24 +176,24 @@ class ManageApplicant: UIViewController {
         default:
             break
         }
-
+        
         downloadProfileImage(from: userProfile.userProfileImage, for: userProfileImage)
         downloadProfileImage(from: userProfile.backgroundPictuer, for: userProfileBackground)
     }
-
+    
     private func downloadProfileImage(from url: String, for imageView: UIImageView) {
         guard !url.isEmpty else {
             imageView.backgroundColor = UIColor.gray
             return
         }
-
+        
         let reference = Storage.storage().reference(forURL: url)
         reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
                 print("Error downloading image: \(error)")
                 return
             }
-
+            
             if let data = data, let image = UIImage(data: data) {
                 let resizedImage = self.resizeImage(image, to: CGSize(width: 100, height: 100))
                 DispatchQueue.main.async {
@@ -205,14 +205,14 @@ class ManageApplicant: UIViewController {
             }
         }
     }
-
+    
     func resizeImage(_ image: UIImage, to newSize: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: newSize)
         return renderer.image { _ in
             image.draw(in: CGRect(origin: .zero, size: newSize))
         }
     }
-
+    
     func showCustomAlert(
         title: String,
         message: String,
@@ -225,12 +225,12 @@ class ManageApplicant: UIViewController {
         alertController.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
         let confirmAction = UIAlertAction(title: confirmTitle, style: confirmStyle, handler: { _ in confirmHandler() })
         alertController.addAction(confirmAction)
-
+        
         DispatchQueue.main.async {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
+    
     private func updateButtonStates() {
         if let hiredUser = theSelectedJob?.jobHiredUser {
             setCandidateButton.isEnabled = false
@@ -264,13 +264,6 @@ class ManageApplicant: UIViewController {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+    @IBAction func unwindToManger(_ segue: UIStoryboardSegue) {}
     
 }
