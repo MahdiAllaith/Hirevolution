@@ -1,22 +1,24 @@
 import UIKit
 import FirebaseFirestore
 
-class NoitificationViewController: UIViewController, UITableViewDataSource {
+class NotificationViewController: UIViewController, UITableViewDataSource {
 
-    @IBOutlet weak var NotificationView: UITableView!
     var TimeSech: [ScheduledInterviewWithJob] = []
+    @IBOutlet weak var NotificationView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationView.dataSource = self
+        
+        // Fetch scheduled interviews from Firestore
         fetchScheduledInterviews()
     }
 
-    // Fetches schedul from the Firebase
+    // Fetch scheduled interviews from Firestore
     func fetchScheduledInterviews() {
         let db = Firestore.firestore()
-        let userID = "currentUserID"
+        let userID = "currentUserID" // Replace with the actual current user ID.
         
         db.collection("users").document(userID).collection("interviews")
             .getDocuments { (snapshot, error) in
@@ -25,33 +27,42 @@ class NoitificationViewController: UIViewController, UITableViewDataSource {
                     return
                 }
                 
-               
                 self.TimeSech.removeAll()
+                let group = DispatchGroup() // To wait for all job fetches to complete
 
-                // Parse the documents into Schedule
                 for document in snapshot!.documents {
                     if let interviewDate = document["interviewDate"] as? Timestamp,
                        let jobID = document["jobID"] as? String {
+                        
+                        group.enter() // Enter the group for each job fetch
 
                         // Fetch the job associated with this interview
                         self.fetchJobDetails(jobID: jobID) { job in
-                            let scheduledInterview = ScheduledInterview(
-                                interviewDate: interviewDate.dateValue(),
-                                userID: userID,
-                                jobID: jobID
-                            )
-                            
-                            let interviewWithJob = ScheduledInterviewWithJob(
-                                interviewDate: scheduledInterview.interviewDate,
-                                userID: scheduledInterview.userID,
-                                jobID: scheduledInterview.jobID,
-                                job: job
-                            )
-                            
-                            self.TimeSech.append(interviewWithJob)
-                            self.NotificationView.reloadData() // Reload table view with the new data
+                            // Only proceed if job is not nil
+                            if let job = job {
+                                let scheduledInterview = ScheduledInterview(
+                                    interviewDate: interviewDate.dateValue(),
+                                    userID: userID,
+                                    jobID: jobID
+                                )
+                                
+                                let interviewWithJob = ScheduledInterviewWithJob(
+                                    interviewDate: scheduledInterview.interviewDate,
+                                    userID: scheduledInterview.userID,
+                                    jobID: scheduledInterview.jobID,
+                                    job: job
+                                )
+                                
+                                self.TimeSech.append(interviewWithJob)
+                            }
+                            group.leave() // Leave the group once this job fetch is complete
                         }
                     }
+                }
+                
+                // Notify when all fetches are complete
+                group.notify(queue: .main) {
+                    self.NotificationView.reloadData() // Reload table view with the new data
                 }
             }
     }
@@ -94,13 +105,14 @@ class NoitificationViewController: UIViewController, UITableViewDataSource {
         
         let interviewWithJob = TimeSech[indexPath.row]
         
-        // Ensure we have the job and interview date to pass to the cell
         if let job = interviewWithJob.job {
             cell.configureCollectionCells(jobList: job, interviewDate: interviewWithJob.interviewDate)
+        } else {
+            cell.textLabel?.text = "Job details unavailable"
         }
         
         return cell
     }
 
-    @IBAction func unwindToManage(_ send: UIStoryboardSegue) {}
+    @IBAction func unwindToManage(_ sender: UIStoryboardSegue) {}
 }

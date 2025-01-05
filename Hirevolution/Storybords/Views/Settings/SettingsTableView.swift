@@ -7,54 +7,53 @@
 
 import UIKit
 
-class SettingsTableView: UITableViewController, DarkModeButton {
-    
-    func setDarkModeButton() {
-        let isDarkModeEnabled = UserDefaults.standard.bool(forKey: "isDarkMode")
-        
-        // Set the interface style for the key window based on stored setting
-        if let window = UIApplication.shared.connectedScenes
-            .compactMap({ ($0 as? UIWindowScene)?.windows.first })
-            .first {
-            window.overrideUserInterfaceStyle = isDarkModeEnabled ? .dark : .light
-        }
-        
-        // Set the UISwitch to reflect the current dark mode state from UserDefaults
-        DarkModeButtonStat.isOn = isDarkModeEnabled
-    }
-
-    
+class SettingsTableView: UITableViewController {
     // AuthManager instance to handle user authentication
-    let authManager = AuthManager.shared
+      let authManager = AuthManager.shared
 
-    // IBOutlet for the Signout button cell
-    @IBOutlet weak var SignoutButton: UITableViewCell!
-    
-    // IBOutlet for the Dark Mode toggle switch
-    @IBOutlet weak var DarkModeButtonStat: UISwitch!
+      // IBOutlet for the Signout button cell
+      @IBOutlet weak var SignoutButton: UITableViewCell!
+      
+      // IBOutlet for the Dark Mode toggle switch
+      @IBOutlet weak var DarkModeButtonStat: UISwitch!
 
-    // Action method for Dark Mode toggle switch
-    @IBAction func DarkModeButton(_ sender: UISwitch) {
-        // Check the switch state and toggle dark mode
-        let isDarkModeEnabled = sender.isOn
-        
-        // Set the interface style for the key window based on the toggle state
-        if let window = UIApplication.shared.connectedScenes
-            .compactMap({ ($0 as? UIWindowScene)?.windows.first })
-            .first {
-            window.overrideUserInterfaceStyle = isDarkModeEnabled ? .dark : .light
-        }
-        
-        // Save the new state in UserDefaults to persist the dark mode setting
-        UserDefaults.standard.set(isDarkModeEnabled, forKey: "isDarkMode")
-        print("Dark mode toggled to \(isDarkModeEnabled ? "ON" : "OFF")")
-    }
+      // Method to implement dark mode functionality
 
-    // Called when the view is loaded
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+      
+      // Action for Dark Mode toggle switch
+      @IBAction func DarkModeButton(_ sender: UISwitch) {
+          let isDarkModeEnabled = sender.isOn
+          if let window = UIApplication.shared.connectedScenes
+              .compactMap({ $0 as? UIWindowScene })
+              .first?.windows.first {
+              window.overrideUserInterfaceStyle = isDarkModeEnabled ? .dark : .light
+          }
+          UserDefaults.standard.set(isDarkModeEnabled ? "ON" : "OFF", forKey: "isDarkMode")
+          print("Dark mode toggled to \(isDarkModeEnabled ? "ON" : "OFF")")
+      }
+
+      override func viewDidLoad() {
+          super.viewDidLoad()
+          let isDarkModeEnabled = UserDefaults.standard.string(forKey: "isDarkMode")
+          
+          if isDarkModeEnabled == "ON"{
+              // Set the interface style for the key window based on stored setting
+              if let darkMode = DarkModeButtonStat{
+                  darkMode.isOn = true
+                  print("its true")
+              }
+              
+          }else{
+              
+              if let darkMode = DarkModeButtonStat{
+                  darkMode.isOn = false
+                  print("its false")
+              }
+          }
+          
+          // Additional setup if needed
+      }
+
 
     // Set the spacing between sections in the table view
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

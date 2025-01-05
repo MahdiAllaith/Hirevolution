@@ -10,6 +10,55 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
+
+// Sample data for testing
+func addSampleData() {
+    let db = Firestore.firestore()
+    let userID = "currentUserID" // Replace with the actual current user ID.
+    
+    // Sample Company Profiles
+//    let companyProfiles: [CompanyProfile] = [
+//        CompanyProfile(profilebackgroundPictuer: "googleBackground", companyProfileLogo: "googleLogo", companyName: "Google", companyDescription: "Technology company specializing in Internet-related services and products.", yearOfEstablishment: "1998", numberOfEmployees: "156,500", companyCEOName: "Sundar Pichai", companyNetworth: "$1.9 Trillion"),
+//        CompanyProfile(profilebackgroundPictuer: "microsoftBackground", companyProfileLogo: "microsoftLogo", companyName: "Microsoft", companyDescription: "Multinational technology company that develops software, hardware, and services.", yearOfEstablishment: "1975", numberOfEmployees: "181,000", companyCEOName: "Satya Nadella", companyNetworth: "$2.5 Trillion"),
+//        CompanyProfile(profilebackgroundPictuer: "appleBackground", companyProfileLogo: "appleLogo", companyName: "Apple", companyDescription: "Designs, manufactures, and markets consumer electronics and software.", yearOfEstablishment: "1976", numberOfEmployees: "147,000", companyCEOName: "Tim Cook", companyNetworth: "$2.1 Trillion")
+//    ]
+//
+//    // Sample Jobs
+//    let jobs: [JobList] = [
+//        JobList(jobID: "jobID1", CompanyID: "companyID1", companyProfile: companyProfiles[0], jobTitle: "Software Engineer", jobDescription: "Develop and maintain software applications.", jobNotes: "Strong skills required.", jobPotentialSalary: "$120,000", jobType: "Full-time", jobSkills: ["Swift", "iOS"], jobFields: ["Technology"], jobApplyedApplicationsCount: 10, jobApplicationsCanceledCount: 2, jobRejectedApplicaintsCount: 1, jobInterViewedApplicaintsCount: 5, jobScheduledForInterviewCount: 3, jobHiredUser: nil, jobViewsCount: 100, jobDatePublished: Date(), ApplyedUsersApplications: [], jobStatus: "Open"),
+//        JobList(jobID: "jobID2", CompanyID: "companyID2", companyProfile: companyProfiles[1], jobTitle: "Cloud Engineer", jobDescription: "Design and manage cloud infrastructure.", jobNotes: "Looking for a team player.", jobPotentialSalary: "$110,000", jobType: "Full-time", jobSkills: ["Azure", "Networking"], jobFields: ["Cloud Computing"], jobApplyedApplicationsCount: 8, jobApplicationsCanceledCount: 1, jobRejectedApplicaintsCount: 2, jobInterViewedApplicaintsCount: 4, jobScheduledForInterviewCount: 2, jobHiredUser: nil, jobViewsCount: 80, jobDatePublished: Date(), ApplyedUsersApplications: [], jobStatus: "Open"),
+//        JobList(jobID: "jobID3", CompanyID: "companyID3", companyProfile: companyProfiles[2], jobTitle: "iOS Developer", jobDescription: "Create and maintain iOS applications.", jobNotes: "Passionate developers only.", jobPotentialSalary: "$115,000", jobType: "Full-time", jobSkills: ["Objective-C", "Swift"], jobFields: ["Mobile Development"], jobApplyedApplicationsCount: 12, jobApplicationsCanceledCount: 3, jobRejectedApplicaintsCount: 1, jobInterViewedApplicaintsCount: 7, jobScheduledForInterviewCount: 5, jobHiredUser: nil, jobViewsCount: 120, jobDatePublished: Date(), ApplyedUsersApplications: [], jobStatus: "Open")
+//    ]
+//
+//    // Insert Jobs into Firestore
+//    for job in jobs {
+//        do {
+//            let _ = try db.collection("jobs").document(job.jobID).setData(from: job)
+//            print("Job \(job.jobTitle) added successfully.")
+//        } catch {
+//            print("Error adding job: \(error.localizedDescription)")
+//        }
+//    }
+//
+//    // Sample Interviews
+//    let interviews = [
+//        ["interviewDate": Timestamp(date: Date().addingTimeInterval(7 * 24 * 60 * 60)), "jobID": "jobID1"],
+//        ["interviewDate": Timestamp(date: Date().addingTimeInterval(14 * 24 * 60 * 60)), "jobID": "jobID2"],
+//        ["interviewDate": Timestamp(date: Date().addingTimeInterval(21 * 24 * 60 * 60)), "jobID": "jobID3"]
+//    ]
+//
+//    // Insert Interviews into Firestore
+//    for interview in interviews {
+//        db.collection("users").document(userID).collection("interviews").addDocument(data: interview) { error in
+//            if let error = error {
+//                print("Error adding sample interview: \(error.localizedDescription)")
+//            } else {
+//                print("Sample interview added successfully.")
+//            }
+//        }
+//    }
+}
+
 struct JobList: Codable {
     let jobID: String // Updated from previous field name
     let CompanyID: String
@@ -90,12 +139,12 @@ struct User: Identifiable, Codable {
     var userApplicationsList: UserApplicationsList?
 }
 
+// Struct for Scheduled Interview
 struct ScheduledInterview: Codable {
     var interviewDate: Date
     var userID: String
     var jobID: String
     
-    // Initializer
     init(interviewDate: Date, userID: String, jobID: String) {
         self.interviewDate = interviewDate
         self.userID = userID
@@ -103,16 +152,13 @@ struct ScheduledInterview: Codable {
     }
 }
 
-
-
-
+// Struct for Scheduled Interview with Job details
 struct ScheduledInterviewWithJob {
     var interviewDate: Date
     var userID: String
     var jobID: String
     var job: JobList?  // This will store the associated job details
     
-    // Initializer
     init(interviewDate: Date, userID: String, jobID: String, job: JobList? = nil) {
         self.interviewDate = interviewDate
         self.userID = userID
@@ -313,7 +359,7 @@ class AuthManager {
                     }
                 } else if user.option == "user"{
                     UserDefaults.standard.set("user", forKey: "userType")
-                }else{                    
+                }else{
                     UserDefaults.standard.set("admin", forKey: "userType")
                 }
             } catch {
@@ -926,7 +972,14 @@ class TimeHandler {
     
     // Method to save interview to Firestore
     func saveInterviewToFirebase(_ interview: ScheduledInterview, completion: @escaping (Bool) -> Void) {
-        // Convert the interview date to a Firestore-compatible format (timestamps are typically stored as seconds)
+        // Ensure userID and jobID are valid
+        guard !interview.userID.isEmpty, !interview.jobID.isEmpty else {
+            print("Error: userID or jobID is empty.")
+            completion(false)
+            return
+        }
+        
+        // Prepare the interview data for Firestore
         let interviewData: [String: Any] = [
             "interviewDate": Timestamp(date: interview.interviewDate), // Convert Date to Firestore Timestamp
             "userID": interview.userID, // Link interview with the user's UID

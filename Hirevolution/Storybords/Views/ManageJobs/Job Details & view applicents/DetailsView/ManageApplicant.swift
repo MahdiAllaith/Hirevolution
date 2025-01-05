@@ -232,7 +232,7 @@ class ManageApplicant: UIViewController {
     }
     
     private func updateButtonStates() {
-        if let hiredUser = theSelectedJob?.jobHiredUser {
+        if (theSelectedJob?.jobHiredUser) != nil {
             setCandidateButton.isEnabled = false
             scheduleInterViewButton.isEnabled = false
             RejectButton.isEnabled = false
@@ -250,7 +250,6 @@ class ManageApplicant: UIViewController {
             scheduleInterViewButton.isEnabled = true
             RejectButton.isEnabled = true
             HireButton.isEnabled = true
-            MassageButton.isEnabled = true
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
